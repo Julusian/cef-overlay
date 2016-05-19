@@ -29,11 +29,6 @@ namespace SettingsInformation
         /// </summary>
         public int defaultOpacity;
 
-        /// <summary>
-        /// Opacity of the LogoProperties image in pixels.
-        /// </summary>
-        public int scaleImagesFactor;
-
         public MultiMonitorDisplayModes multiMonitorDisplayMode;
 
         public int xOffset;

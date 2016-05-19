@@ -240,17 +240,6 @@ namespace CustomDesktopLogo
             xOffsetNumericUpDown.Value = settingsINI.LogoProperties.xOffset;
             yOffsetNumericUpDown.Value = settingsINI.LogoProperties.yOffset;
 
-            // Size tab
-            try
-            {
-                scaleImageFactorTrackBar.Value = settingsINI.LogoProperties.scaleImagesFactor;
-            }
-            catch (Exception)
-            {
-                scaleImageFactorTrackBar.Value = 0;
-            }
-            scaleImageFactorValueLabel.Text = ((double)(settingsINI.LogoProperties.scaleImagesFactor + 100) / 100.0).ToString();
-
             // Animation/Graphics tab
             try
             {
@@ -350,8 +339,6 @@ namespace CustomDesktopLogo
                         try
                         {
                             anImage = new Bitmap(aFile);
-                            anImage = BitmapOperations.ScaleByFactors(ref anImage, (float)(settingsINI.LogoProperties.scaleImagesFactor + 100) / 100.0f,
-                                (float)(settingsINI.LogoProperties.scaleImagesFactor + 100) / 100.0f);
                             imageBitmaps.Add(anImage);
                             imagesListBox.Items.Add(aFile);
                             counter++;
@@ -794,7 +781,6 @@ namespace CustomDesktopLogo
             
             // Size tab
             sizeTabPage.Text = language.general.size;
-            scaleImagesFactorGroupBox.Text = language.general.scaleImagesByFactorOf;
 
             // Animation / Graphics tab
             animationTabPage.Text = language.general.animationAndGraphics;
@@ -989,18 +975,6 @@ namespace CustomDesktopLogo
                 AnimationTimer.Interval = 1000 / settingsINI.GeneralAnimation.framesPerSecond;
                 AnimationTimer.Start();
             }
-        }
-
-        private void scaleImageFactorTrackBar_Scroll(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "scaleImagesFactor", scaleImageFactorTrackBar.Value.ToString());
-            settingsINI.LogoProperties.scaleImagesFactor = scaleImageFactorTrackBar.Value;
-            scaleImageFactorValueLabel.Text = ((double)(settingsINI.LogoProperties.scaleImagesFactor + 100) / 100.0).ToString();
-
-            scaleImageFactorChanged = true;
         }
 
         private void scaleImageFactorTrackBar_MouseUp(object sender, MouseEventArgs e)

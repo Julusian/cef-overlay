@@ -57,9 +57,6 @@
             this.primaryOnlyRadioButton = new System.Windows.Forms.RadioButton();
             this.allSameRadioButton = new System.Windows.Forms.RadioButton();
             this.sizeTabPage = new System.Windows.Forms.TabPage();
-            this.scaleImagesFactorGroupBox = new System.Windows.Forms.GroupBox();
-            this.scaleImageFactorValueLabel = new System.Windows.Forms.Label();
-            this.scaleImageFactorTrackBar = new System.Windows.Forms.TrackBar();
             this.animationTabPage = new System.Windows.Forms.TabPage();
             this.opacityGroupBox = new System.Windows.Forms.GroupBox();
             this.opacityValueLabel = new System.Windows.Forms.Label();
@@ -100,8 +97,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.xOffsetNumericUpDown)).BeginInit();
             this.multiMonitorDisplayModsGroupBox.SuspendLayout();
             this.sizeTabPage.SuspendLayout();
-            this.scaleImagesFactorGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scaleImageFactorTrackBar)).BeginInit();
             this.animationTabPage.SuspendLayout();
             this.opacityGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.opacityTrackBar)).BeginInit();
@@ -395,7 +390,6 @@
             // 
             // sizeTabPage
             // 
-            this.sizeTabPage.Controls.Add(this.scaleImagesFactorGroupBox);
             this.sizeTabPage.Location = new System.Drawing.Point(4, 22);
             this.sizeTabPage.Name = "sizeTabPage";
             this.sizeTabPage.Size = new System.Drawing.Size(520, 526);
@@ -403,42 +397,6 @@
             this.sizeTabPage.Text = "Size";
             this.sizeTabPage.UseVisualStyleBackColor = true;
             this.sizeTabPage.Click += new System.EventHandler(this.sizeTabPage_Click);
-            // 
-            // scaleImagesFactorGroupBox
-            // 
-            this.scaleImagesFactorGroupBox.BackColor = System.Drawing.SystemColors.Window;
-            this.scaleImagesFactorGroupBox.Controls.Add(this.scaleImageFactorValueLabel);
-            this.scaleImagesFactorGroupBox.Controls.Add(this.scaleImageFactorTrackBar);
-            this.scaleImagesFactorGroupBox.Location = new System.Drawing.Point(9, 13);
-            this.scaleImagesFactorGroupBox.Name = "scaleImagesFactorGroupBox";
-            this.scaleImagesFactorGroupBox.Size = new System.Drawing.Size(503, 98);
-            this.scaleImagesFactorGroupBox.TabIndex = 2;
-            this.scaleImagesFactorGroupBox.TabStop = false;
-            this.scaleImagesFactorGroupBox.Text = "Scale Images By A Factor Of:";
-            // 
-            // scaleImageFactorValueLabel
-            // 
-            this.scaleImageFactorValueLabel.AutoSize = true;
-            this.scaleImageFactorValueLabel.Location = new System.Drawing.Point(241, 75);
-            this.scaleImageFactorValueLabel.Name = "scaleImageFactorValueLabel";
-            this.scaleImageFactorValueLabel.Size = new System.Drawing.Size(22, 13);
-            this.scaleImageFactorValueLabel.TabIndex = 1;
-            this.scaleImageFactorValueLabel.Text = "1.0";
-            // 
-            // scaleImageFactorTrackBar
-            // 
-            this.scaleImageFactorTrackBar.BackColor = System.Drawing.SystemColors.Window;
-            this.scaleImageFactorTrackBar.Location = new System.Drawing.Point(10, 27);
-            this.scaleImageFactorTrackBar.Maximum = 100;
-            this.scaleImageFactorTrackBar.Minimum = -100;
-            this.scaleImageFactorTrackBar.Name = "scaleImageFactorTrackBar";
-            this.scaleImageFactorTrackBar.Size = new System.Drawing.Size(483, 45);
-            this.scaleImageFactorTrackBar.TabIndex = 0;
-            this.scaleImageFactorTrackBar.TickFrequency = 10;
-            this.scaleImageFactorTrackBar.Value = 1;
-            this.scaleImageFactorTrackBar.Leave += new System.EventHandler(this.scaleImageFactorTrackBar_Leave);
-            this.scaleImageFactorTrackBar.Scroll += new System.EventHandler(this.scaleImageFactorTrackBar_Scroll);
-            this.scaleImageFactorTrackBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.scaleImageFactorTrackBar_MouseUp);
             // 
             // animationTabPage
             // 
@@ -764,9 +722,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.xOffsetNumericUpDown)).EndInit();
             this.multiMonitorDisplayModsGroupBox.ResumeLayout(false);
             this.sizeTabPage.ResumeLayout(false);
-            this.scaleImagesFactorGroupBox.ResumeLayout(false);
-            this.scaleImagesFactorGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scaleImageFactorTrackBar)).EndInit();
             this.animationTabPage.ResumeLayout(false);
             this.opacityGroupBox.ResumeLayout(false);
             this.opacityGroupBox.PerformLayout();
@@ -811,9 +766,6 @@
         private System.Windows.Forms.RadioButton primaryOnlyRadioButton;
         private System.Windows.Forms.RadioButton allSameRadioButton;
         private System.Windows.Forms.Label selectImagesInstructionsLabel;
-        private System.Windows.Forms.Label scaleImageFactorValueLabel;
-        private System.Windows.Forms.TrackBar scaleImageFactorTrackBar;
-        private System.Windows.Forms.GroupBox scaleImagesFactorGroupBox;
         private System.Windows.Forms.GroupBox framesPerSecondGroupBox;
         private System.Windows.Forms.Label fpsValueLabel;
         private System.Windows.Forms.TrackBar fpsTrackBar;

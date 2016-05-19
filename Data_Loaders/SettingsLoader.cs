@@ -223,40 +223,6 @@ namespace SettingsLoader
 
             #endregion
 
-            #region scaleImagesFactor
-
-            DataVerifier = null;
-            DataVerifier = GetEntry(theSection, "scaleImagesFactor");
-
-            if (DataVerifier == null)
-            {
-                DataVerifier = @"0";
-                SetEntry(theSection, "scaleImagesFactor", DataVerifier);
-            }
-
-            try
-            {
-                LogoProperties.scaleImagesFactor = int.Parse(DataVerifier);
-            }
-            catch (Exception)
-            {
-                LogoProperties.scaleImagesFactor = 0;
-                SetEntry(theSection, "scaleImagesFactor", @"0");
-            }
-
-            if (LogoProperties.scaleImagesFactor < -100)
-            {
-                LogoProperties.scaleImagesFactor = -100;
-                SetEntry(theSection, "scaleImagesFactor", @"-100");
-            }
-            else if (LogoProperties.scaleImagesFactor > 100)
-            {
-                LogoProperties.scaleImagesFactor = 100;
-                SetEntry(theSection, "scaleImagesFactor", @"100");
-            }
-
-            #endregion
-
             #region multiMonitorDisplayMode
 
             TypeConverter multiMonitorDisplayModeConverter = TypeDescriptor.GetConverter(typeof(MultiMonitorDisplayModes));

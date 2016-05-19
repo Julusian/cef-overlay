@@ -32,40 +32,6 @@ namespace ImageOperations
     /// </summary>
     class BitmapOperations
     {
-        /// <summary> 
-        /// Returns a bitmap scaled by a factor of ScaleFactorX and ScaleFactorY. Uses high quality scaling.
-        /// Returns null if an error is encountered.
-        /// </summary>
-        /// <param name="Bitmap">Image to scale.</param>
-        /// <param name="ScaleFactorX">Factor to scale the x-size by.</param>
-        /// <param name="ScaleFactorY">Factor to scale the y-size by.</param>
-        public static Bitmap ScaleByFactors(ref Bitmap Bitmap, float ScaleFactorX, float ScaleFactorY)
-        {
-            try
-            {
-                int scaleWidth = (int)Math.Max(Bitmap.Width * ScaleFactorX, 1.0f);
-                int scaleHeight = (int)Math.Max(Bitmap.Height * ScaleFactorY, 1.0f);
-
-                Bitmap scaledBitmap = new Bitmap(scaleWidth, scaleHeight);
-
-                // Scale the bitmap in high quality mode.
-                using (Graphics gr = Graphics.FromImage(scaledBitmap))
-                {
-                    gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
-                    gr.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighSpeed;
-                    gr.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed;
-                    gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
-
-                    gr.DrawImage(Bitmap, new Rectangle(0, 0, scaleWidth, scaleHeight), new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), GraphicsUnit.Pixel);
-                }
-
-                return scaledBitmap;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
 
 
         /// <summary> 
