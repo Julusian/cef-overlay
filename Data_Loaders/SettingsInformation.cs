@@ -6,11 +6,7 @@
 // This file contains the structs used to hold the settings information for the dock.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Drawing;
-using System.Text;
 using CustomDesktopLogo;
 
 /// <summary>
@@ -39,8 +35,6 @@ namespace SettingsInformation
         public int scaleImagesFactor;
 
         public MultiMonitorDisplayModes multiMonitorDisplayMode;
-
-        public LocationTypes displayLocation;
 
         public int xOffset;
         public int yOffset;

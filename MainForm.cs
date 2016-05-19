@@ -39,20 +39,6 @@ using Hook;
 namespace CustomDesktopLogo
 {
 
-    public enum LocationTypes
-    {
-        CustomPosition,
-        Centre,
-        BottomMiddle,
-        TopMiddle,
-        LeftMiddle,
-        RightMiddle,
-        BottomRightCorner,
-        BottomLeftCorner,
-        TopRightCorner,
-        TopLeftCorner
-    }
-
     public enum MultiMonitorDisplayModes
     {
         AllSame,
@@ -248,13 +234,6 @@ namespace CustomDesktopLogo
             {
                 default:
                     allSameRadioButton.Checked = true;
-                    break;
-            }
-
-            switch (settingsINI.LogoProperties.displayLocation)
-            {
-                default:
-                    bottomRightRadioButton.Checked = true;
                     break;
             }
 
@@ -809,18 +788,6 @@ namespace CustomDesktopLogo
             allButPrimaryRadioButton.Text = language.general.allButPrimary;
             virtualMonitorRadioButton.Text = language.general.virtualMonitor;
 
-            displayLocationGroupBox.Text = language.general.displayLocation;
-            centreRadioButton.Text = language.general.centre;
-            bottomLeftRadioButton.Text = language.general.bottomLeft;
-            bottomMiddleRadioButton.Text = language.general.bottomMiddle;
-            bottomRightRadioButton.Text = language.general.bottomRight;
-            leftMiddleRadioButton.Text = language.general.leftMiddle;
-            displayAtLocationOffsetRadioButton.Text = language.general.displayAtLocationOffset;
-            topLeftRadioButton.Text = language.general.topLeft;
-            topMiddleRadioButton.Text = language.general.topMiddle;
-            topRightRadioButton.Text = language.general.topRight;
-            rightMiddleRadioButton.Text = language.general.rightMiddle;
-
             locationOffsetGroupBox.Text = language.general.locationOffset;
             xLabel.Text = language.general.xCoordinate;
             yLabel.Text = language.general.yCoordinate;
@@ -964,147 +931,7 @@ namespace CustomDesktopLogo
         #endregion
 
         #region Display Location Radio Buttons
-
-        private void centreRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (centreRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "displayLocation", LocationTypes.Centre.ToString());
-            settingsINI.LogoProperties.displayLocation = LocationTypes.Centre;
-
-            loadLogos();
-        }
-
-        private void bottomLeftRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (bottomLeftRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "displayLocation", LocationTypes.BottomLeftCorner.ToString());
-            settingsINI.LogoProperties.displayLocation = LocationTypes.BottomLeftCorner;
-
-            loadLogos();
-        }
-
-        private void bottomMiddleRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (bottomMiddleRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "displayLocation", LocationTypes.BottomMiddle.ToString());
-            settingsINI.LogoProperties.displayLocation = LocationTypes.BottomMiddle;
-
-            loadLogos();
-        }
-
-        private void bottomRightRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (bottomRightRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "displayLocation", LocationTypes.BottomRightCorner.ToString());
-            settingsINI.LogoProperties.displayLocation = LocationTypes.BottomRightCorner;
-
-            loadLogos();
-        }
-
-        private void leftMiddleRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (leftMiddleRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "displayLocation", LocationTypes.LeftMiddle.ToString());
-            settingsINI.LogoProperties.displayLocation = LocationTypes.LeftMiddle;
-
-            loadLogos();
-        }
-
-        private void displayAtLocationOffsetRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (displayAtLocationOffsetRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "displayLocation", LocationTypes.CustomPosition.ToString());
-            settingsINI.LogoProperties.displayLocation = LocationTypes.CustomPosition;
-
-            loadLogos();
-        }
-
-        private void topLeftRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (topLeftRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "displayLocation", LocationTypes.TopLeftCorner.ToString());
-            settingsINI.LogoProperties.displayLocation = LocationTypes.TopLeftCorner;
-
-            loadLogos();
-        }
-
-        private void topMiddleRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (topMiddleRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "displayLocation", LocationTypes.TopMiddle.ToString());
-            settingsINI.LogoProperties.displayLocation = LocationTypes.TopMiddle;
-
-            loadLogos();
-        }
-
-        private void topRightRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (topRightRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "displayLocation", LocationTypes.TopRightCorner.ToString());
-            settingsINI.LogoProperties.displayLocation = LocationTypes.TopRightCorner;
-
-            loadLogos();
-        }
-
-        private void rightMiddleRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (rightMiddleRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "displayLocation", LocationTypes.RightMiddle.ToString());
-            settingsINI.LogoProperties.displayLocation = LocationTypes.RightMiddle;
-
-            loadLogos();
-        }
-
+        
         private void xOffsetNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             if (loaded == false)

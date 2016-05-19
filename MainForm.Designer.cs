@@ -56,17 +56,6 @@
             this.allButPrimaryRadioButton = new System.Windows.Forms.RadioButton();
             this.primaryOnlyRadioButton = new System.Windows.Forms.RadioButton();
             this.allSameRadioButton = new System.Windows.Forms.RadioButton();
-            this.displayLocationGroupBox = new System.Windows.Forms.GroupBox();
-            this.displayAtLocationOffsetRadioButton = new System.Windows.Forms.RadioButton();
-            this.rightMiddleRadioButton = new System.Windows.Forms.RadioButton();
-            this.leftMiddleRadioButton = new System.Windows.Forms.RadioButton();
-            this.topRightRadioButton = new System.Windows.Forms.RadioButton();
-            this.topMiddleRadioButton = new System.Windows.Forms.RadioButton();
-            this.topLeftRadioButton = new System.Windows.Forms.RadioButton();
-            this.bottomRightRadioButton = new System.Windows.Forms.RadioButton();
-            this.bottomMiddleRadioButton = new System.Windows.Forms.RadioButton();
-            this.bottomLeftRadioButton = new System.Windows.Forms.RadioButton();
-            this.centreRadioButton = new System.Windows.Forms.RadioButton();
             this.sizeTabPage = new System.Windows.Forms.TabPage();
             this.scaleImagesFactorGroupBox = new System.Windows.Forms.GroupBox();
             this.scaleImageFactorValueLabel = new System.Windows.Forms.Label();
@@ -110,7 +99,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.yOffsetNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xOffsetNumericUpDown)).BeginInit();
             this.multiMonitorDisplayModsGroupBox.SuspendLayout();
-            this.displayLocationGroupBox.SuspendLayout();
             this.sizeTabPage.SuspendLayout();
             this.scaleImagesFactorGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scaleImageFactorTrackBar)).BeginInit();
@@ -273,7 +261,6 @@
             // 
             this.locationTabPage.Controls.Add(this.locationOffsetGroupBox);
             this.locationTabPage.Controls.Add(this.multiMonitorDisplayModsGroupBox);
-            this.locationTabPage.Controls.Add(this.displayLocationGroupBox);
             this.locationTabPage.Location = new System.Drawing.Point(4, 22);
             this.locationTabPage.Name = "locationTabPage";
             this.locationTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -405,135 +392,6 @@
             this.allSameRadioButton.Text = "All Same";
             this.allSameRadioButton.UseVisualStyleBackColor = true;
             this.allSameRadioButton.CheckedChanged += new System.EventHandler(this.allSameRadioButton_CheckedChanged);
-            // 
-            // displayLocationGroupBox
-            // 
-            this.displayLocationGroupBox.Controls.Add(this.displayAtLocationOffsetRadioButton);
-            this.displayLocationGroupBox.Controls.Add(this.rightMiddleRadioButton);
-            this.displayLocationGroupBox.Controls.Add(this.leftMiddleRadioButton);
-            this.displayLocationGroupBox.Controls.Add(this.topRightRadioButton);
-            this.displayLocationGroupBox.Controls.Add(this.topMiddleRadioButton);
-            this.displayLocationGroupBox.Controls.Add(this.topLeftRadioButton);
-            this.displayLocationGroupBox.Controls.Add(this.bottomRightRadioButton);
-            this.displayLocationGroupBox.Controls.Add(this.bottomMiddleRadioButton);
-            this.displayLocationGroupBox.Controls.Add(this.bottomLeftRadioButton);
-            this.displayLocationGroupBox.Controls.Add(this.centreRadioButton);
-            this.displayLocationGroupBox.Location = new System.Drawing.Point(14, 148);
-            this.displayLocationGroupBox.Name = "displayLocationGroupBox";
-            this.displayLocationGroupBox.Size = new System.Drawing.Size(483, 266);
-            this.displayLocationGroupBox.TabIndex = 1;
-            this.displayLocationGroupBox.TabStop = false;
-            this.displayLocationGroupBox.Text = "Display Location";
-            // 
-            // displayAtLocationOffsetRadioButton
-            // 
-            this.displayAtLocationOffsetRadioButton.Location = new System.Drawing.Point(247, 19);
-            this.displayAtLocationOffsetRadioButton.Name = "displayAtLocationOffsetRadioButton";
-            this.displayAtLocationOffsetRadioButton.Size = new System.Drawing.Size(180, 37);
-            this.displayAtLocationOffsetRadioButton.TabIndex = 12;
-            this.displayAtLocationOffsetRadioButton.TabStop = true;
-            this.displayAtLocationOffsetRadioButton.Text = "Display At Location Offset";
-            this.displayAtLocationOffsetRadioButton.UseVisualStyleBackColor = true;
-            this.displayAtLocationOffsetRadioButton.CheckedChanged += new System.EventHandler(this.displayAtLocationOffsetRadioButton_CheckedChanged);
-            // 
-            // rightMiddleRadioButton
-            // 
-            this.rightMiddleRadioButton.Location = new System.Drawing.Point(247, 223);
-            this.rightMiddleRadioButton.Name = "rightMiddleRadioButton";
-            this.rightMiddleRadioButton.Size = new System.Drawing.Size(180, 37);
-            this.rightMiddleRadioButton.TabIndex = 11;
-            this.rightMiddleRadioButton.TabStop = true;
-            this.rightMiddleRadioButton.Text = "Right Middle";
-            this.rightMiddleRadioButton.UseVisualStyleBackColor = true;
-            this.rightMiddleRadioButton.CheckedChanged += new System.EventHandler(this.rightMiddleRadioButton_CheckedChanged);
-            // 
-            // leftMiddleRadioButton
-            // 
-            this.leftMiddleRadioButton.Location = new System.Drawing.Point(56, 223);
-            this.leftMiddleRadioButton.Name = "leftMiddleRadioButton";
-            this.leftMiddleRadioButton.Size = new System.Drawing.Size(180, 37);
-            this.leftMiddleRadioButton.TabIndex = 10;
-            this.leftMiddleRadioButton.TabStop = true;
-            this.leftMiddleRadioButton.Text = "Left Middle";
-            this.leftMiddleRadioButton.UseVisualStyleBackColor = true;
-            this.leftMiddleRadioButton.CheckedChanged += new System.EventHandler(this.leftMiddleRadioButton_CheckedChanged);
-            // 
-            // topRightRadioButton
-            // 
-            this.topRightRadioButton.Location = new System.Drawing.Point(247, 169);
-            this.topRightRadioButton.Name = "topRightRadioButton";
-            this.topRightRadioButton.Size = new System.Drawing.Size(180, 37);
-            this.topRightRadioButton.TabIndex = 9;
-            this.topRightRadioButton.TabStop = true;
-            this.topRightRadioButton.Text = "Top Right";
-            this.topRightRadioButton.UseVisualStyleBackColor = true;
-            this.topRightRadioButton.CheckedChanged += new System.EventHandler(this.topRightRadioButton_CheckedChanged);
-            // 
-            // topMiddleRadioButton
-            // 
-            this.topMiddleRadioButton.Location = new System.Drawing.Point(247, 114);
-            this.topMiddleRadioButton.Name = "topMiddleRadioButton";
-            this.topMiddleRadioButton.Size = new System.Drawing.Size(180, 37);
-            this.topMiddleRadioButton.TabIndex = 8;
-            this.topMiddleRadioButton.TabStop = true;
-            this.topMiddleRadioButton.Text = "Top Middle";
-            this.topMiddleRadioButton.UseVisualStyleBackColor = true;
-            this.topMiddleRadioButton.CheckedChanged += new System.EventHandler(this.topMiddleRadioButton_CheckedChanged);
-            // 
-            // topLeftRadioButton
-            // 
-            this.topLeftRadioButton.Location = new System.Drawing.Point(247, 62);
-            this.topLeftRadioButton.Name = "topLeftRadioButton";
-            this.topLeftRadioButton.Size = new System.Drawing.Size(180, 37);
-            this.topLeftRadioButton.TabIndex = 7;
-            this.topLeftRadioButton.TabStop = true;
-            this.topLeftRadioButton.Text = "Top Left";
-            this.topLeftRadioButton.UseVisualStyleBackColor = true;
-            this.topLeftRadioButton.CheckedChanged += new System.EventHandler(this.topLeftRadioButton_CheckedChanged);
-            // 
-            // bottomRightRadioButton
-            // 
-            this.bottomRightRadioButton.Location = new System.Drawing.Point(56, 169);
-            this.bottomRightRadioButton.Name = "bottomRightRadioButton";
-            this.bottomRightRadioButton.Size = new System.Drawing.Size(180, 37);
-            this.bottomRightRadioButton.TabIndex = 6;
-            this.bottomRightRadioButton.TabStop = true;
-            this.bottomRightRadioButton.Text = "Bottom Right";
-            this.bottomRightRadioButton.UseVisualStyleBackColor = true;
-            this.bottomRightRadioButton.CheckedChanged += new System.EventHandler(this.bottomRightRadioButton_CheckedChanged);
-            // 
-            // bottomMiddleRadioButton
-            // 
-            this.bottomMiddleRadioButton.Location = new System.Drawing.Point(56, 114);
-            this.bottomMiddleRadioButton.Name = "bottomMiddleRadioButton";
-            this.bottomMiddleRadioButton.Size = new System.Drawing.Size(180, 37);
-            this.bottomMiddleRadioButton.TabIndex = 5;
-            this.bottomMiddleRadioButton.TabStop = true;
-            this.bottomMiddleRadioButton.Text = "Bottom Middle";
-            this.bottomMiddleRadioButton.UseVisualStyleBackColor = true;
-            this.bottomMiddleRadioButton.CheckedChanged += new System.EventHandler(this.bottomMiddleRadioButton_CheckedChanged);
-            // 
-            // bottomLeftRadioButton
-            // 
-            this.bottomLeftRadioButton.Location = new System.Drawing.Point(56, 62);
-            this.bottomLeftRadioButton.Name = "bottomLeftRadioButton";
-            this.bottomLeftRadioButton.Size = new System.Drawing.Size(180, 37);
-            this.bottomLeftRadioButton.TabIndex = 4;
-            this.bottomLeftRadioButton.TabStop = true;
-            this.bottomLeftRadioButton.Text = "Bottom Left";
-            this.bottomLeftRadioButton.UseVisualStyleBackColor = true;
-            this.bottomLeftRadioButton.CheckedChanged += new System.EventHandler(this.bottomLeftRadioButton_CheckedChanged);
-            // 
-            // centreRadioButton
-            // 
-            this.centreRadioButton.Location = new System.Drawing.Point(56, 19);
-            this.centreRadioButton.Name = "centreRadioButton";
-            this.centreRadioButton.Size = new System.Drawing.Size(180, 37);
-            this.centreRadioButton.TabIndex = 3;
-            this.centreRadioButton.TabStop = true;
-            this.centreRadioButton.Text = "Centre";
-            this.centreRadioButton.UseVisualStyleBackColor = true;
-            this.centreRadioButton.CheckedChanged += new System.EventHandler(this.centreRadioButton_CheckedChanged);
             // 
             // sizeTabPage
             // 
@@ -905,7 +763,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.yOffsetNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xOffsetNumericUpDown)).EndInit();
             this.multiMonitorDisplayModsGroupBox.ResumeLayout(false);
-            this.displayLocationGroupBox.ResumeLayout(false);
             this.sizeTabPage.ResumeLayout(false);
             this.scaleImagesFactorGroupBox.ResumeLayout(false);
             this.scaleImagesFactorGroupBox.PerformLayout();
@@ -942,7 +799,6 @@
         private System.Windows.Forms.Button changeImagesButton;
         private System.Windows.Forms.TabPage animationTabPage;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
-        private System.Windows.Forms.GroupBox displayLocationGroupBox;
         private System.Windows.Forms.GroupBox multiMonitorDisplayModsGroupBox;
         private System.Windows.Forms.TabPage sizeTabPage;
         private System.Windows.Forms.GroupBox locationOffsetGroupBox;
@@ -954,17 +810,7 @@
         private System.Windows.Forms.RadioButton allButPrimaryRadioButton;
         private System.Windows.Forms.RadioButton primaryOnlyRadioButton;
         private System.Windows.Forms.RadioButton allSameRadioButton;
-        private System.Windows.Forms.RadioButton centreRadioButton;
         private System.Windows.Forms.Label selectImagesInstructionsLabel;
-        private System.Windows.Forms.RadioButton rightMiddleRadioButton;
-        private System.Windows.Forms.RadioButton leftMiddleRadioButton;
-        private System.Windows.Forms.RadioButton topRightRadioButton;
-        private System.Windows.Forms.RadioButton topMiddleRadioButton;
-        private System.Windows.Forms.RadioButton topLeftRadioButton;
-        private System.Windows.Forms.RadioButton bottomRightRadioButton;
-        private System.Windows.Forms.RadioButton bottomMiddleRadioButton;
-        private System.Windows.Forms.RadioButton bottomLeftRadioButton;
-        private System.Windows.Forms.RadioButton displayAtLocationOffsetRadioButton;
         private System.Windows.Forms.Label scaleImageFactorValueLabel;
         private System.Windows.Forms.TrackBar scaleImageFactorTrackBar;
         private System.Windows.Forms.GroupBox scaleImagesFactorGroupBox;

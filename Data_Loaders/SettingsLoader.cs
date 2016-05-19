@@ -281,32 +281,7 @@ namespace SettingsLoader
             }
 
             #endregion
-
-            #region displayLocation
-
-            TypeConverter displayLocationConverter = TypeDescriptor.GetConverter(typeof(LocationTypes));
-
-            DataVerifier = null;
-            DataVerifier = GetEntry(theSection, "displayLocation");
-
-            if (DataVerifier == null)
-            {
-                DataVerifier = LocationTypes.BottomRightCorner.ToString();
-                SetEntry(theSection, "displayLocation", DataVerifier);
-            }
-
-            try
-            {
-                LogoProperties.displayLocation = (LocationTypes)displayLocationConverter.ConvertFromString(DataVerifier);
-            }
-            catch (Exception)
-            {
-                LogoProperties.displayLocation = LocationTypes.BottomRightCorner;
-                SetEntry(theSection, "displayLocation", LocationTypes.BottomRightCorner.ToString());
-            }
-
-            #endregion
-
+            
             #region xOffset
 
             DataVerifier = null;

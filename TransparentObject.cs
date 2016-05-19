@@ -89,8 +89,8 @@ namespace CustomDesktopLogo
 
         #region Constructor
 
-        private ChromiumWebBrowser browser;
-        private System.Timers.Timer timer;
+        private readonly ChromiumWebBrowser browser;
+        private readonly System.Timers.Timer timer;
 
         /// <summary> 
         /// Create an alpha blended form with a transparent background.
