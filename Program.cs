@@ -72,21 +72,6 @@ namespace CustomDesktopLogo
                     settings.BrowserSubprocessPath = "..\\..\\..\\..\\CefSharp.BrowserSubprocess\\bin\\" + architecture + "\\Debug\\CefSharp.BrowserSubprocess.exe";
                 }
 
-                /*settings.RegisterScheme(new CefCustomScheme
-                {
-                    SchemeName = CefSharpSchemeHandlerFactory.SchemeName,
-                    SchemeHandlerFactory = new CefSharpSchemeHandlerFactory()
-                    //SchemeHandlerFactory = new InMemorySchemeAndResourceHandlerFactory()
-                });
-
-                settings.RegisterScheme(new CefCustomScheme
-                {
-                    SchemeName = CefSharpSchemeHandlerFactory.SchemeNameTest,
-                    SchemeHandlerFactory = new CefSharpSchemeHandlerFactory()
-                });*/
-
-                //settings.RegisterExtension(new CefExtension("cefsharp/example", Resources.extension));
-
                 settings.FocusedNodeChangedEnabled = true;
 
                 //The Request Context has been initialized, you can now set preferences, like proxy server settings
@@ -110,8 +95,7 @@ namespace CustomDesktopLogo
                 {
                     throw new Exception("Unable to Initialize Cef");
                 }
-
-                return;
+                
             }
         }
 

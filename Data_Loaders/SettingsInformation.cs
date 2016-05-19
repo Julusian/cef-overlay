@@ -23,8 +23,6 @@ namespace SettingsInformation
         /// File path to the image for the LogoProperties.
         /// </summary>
         public string path;
-
-        public MultiMonitorDisplayModes multiMonitorDisplayMode;
     }
     
 }

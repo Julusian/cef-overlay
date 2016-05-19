@@ -32,15 +32,6 @@ using Hook;
 
 namespace CustomDesktopLogo
 {
-
-    public enum MultiMonitorDisplayModes
-    {
-        AllSame,
-        DisplayOnPrimaryOnly,
-        DisplayOnAllButPrimary,
-        TreatMonitorsAsOneScreen
-    }
-
     public partial class MainForm : Form
     {
         #region Variables
@@ -62,8 +53,6 @@ namespace CustomDesktopLogo
         static List<LogoObject> allLogos = new List<LogoObject>();
         
        
-        static bool loaded = false;
-
         static Hooks windowsHook = new Hooks();
 
         // These delegates enables asynchronous calls 
@@ -177,15 +166,6 @@ namespace CustomDesktopLogo
 
             loadLanguage();
             loadLogos();
-
-            switch (settingsINI.LogoProperties.multiMonitorDisplayMode)
-            {
-                default:
-                    allSameRadioButton.Checked = true;
-                    break;
-            }
-            
-            loaded = true;
         }
         
 
@@ -211,15 +191,9 @@ namespace CustomDesktopLogo
         {
             closeAllLogos();
             
-            switch (settingsINI.LogoProperties.multiMonitorDisplayMode)
-            {
-                default:
-                    allLogos.Add(new LogoObject());
-                    break;
-            }
+            allLogos.Add(new LogoObject());
 
             hideLogosToolStripMenuItem.Checked = false;
-
         }
 
         private void window_ForegroundChanged(IntPtr hWnd)
@@ -321,12 +295,6 @@ namespace CustomDesktopLogo
             }
         }
 
-        private void MainFormContextMenuStrip_Opening(object sender, CancelEventArgs e)
-        {
-            //if (AnimationTimer.Enabled == false)
-            //    MemoryUtility.ClearUnusedMemory();
-        }
-
         private void MainFormContextMenuStrip_Closed(object sender, ToolStripDropDownClosedEventArgs e)
         {
         }
@@ -343,7 +311,6 @@ namespace CustomDesktopLogo
             Cef.Shutdown();
             MainFormTrayIcon.Dispose();
             Environment.Exit(0);
-            //closeAllLogos();
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
@@ -352,7 +319,6 @@ namespace CustomDesktopLogo
             {
                 this.Select(true, true);
                 this.Hide();
-                
             }
         }
 
@@ -371,82 +337,8 @@ namespace CustomDesktopLogo
             
             // Location tab
             locationTabPage.Text = "Locations";
-            multiMonitorDisplayModsGroupBox.Text = "Monitor modes";
-            allSameRadioButton.Text = "All same";
-            primaryOnlyRadioButton.Text = "Primary only";
-            allButPrimaryRadioButton.Text = "All but primary";
-            virtualMonitorRadioButton.Text = "Virtual monitor";
         }
         
-        #endregion
-        
-        #region Window Level and Multi-Monitor Display Modes
-        
-        private void allSameRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (allSameRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "multiMonitorDisplayMode", MultiMonitorDisplayModes.AllSame.ToString());
-            settingsINI.LogoProperties.multiMonitorDisplayMode = MultiMonitorDisplayModes.AllSame;
-
-            loadLogos();
-        }
-
-        private void allButPrimaryRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (allButPrimaryRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "multiMonitorDisplayMode", MultiMonitorDisplayModes.DisplayOnAllButPrimary.ToString());
-            settingsINI.LogoProperties.multiMonitorDisplayMode = MultiMonitorDisplayModes.DisplayOnAllButPrimary;
-
-            loadLogos();
-        }
-
-        private void primaryOnlyRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (primaryOnlyRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "multiMonitorDisplayMode", MultiMonitorDisplayModes.DisplayOnPrimaryOnly.ToString());
-            settingsINI.LogoProperties.multiMonitorDisplayMode = MultiMonitorDisplayModes.DisplayOnPrimaryOnly;
-
-            loadLogos();
-        }
-
-        private void virtualMonitorRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (virtualMonitorRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "multiMonitorDisplayMode", MultiMonitorDisplayModes.TreatMonitorsAsOneScreen.ToString());
-            settingsINI.LogoProperties.multiMonitorDisplayMode = MultiMonitorDisplayModes.TreatMonitorsAsOneScreen;
-
-            loadLogos();
-        }
-
-        #endregion
-
-        #region Animation / Graphics Settings
-        
-        private void sizeTabPage_Click(object sender, EventArgs e)
-        {
-            this.Select(true, true);
-        }
-
         #endregion
         
     }

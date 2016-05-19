@@ -37,15 +37,9 @@
             this.MainFormTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.settingsTabControl = new System.Windows.Forms.TabControl();
             this.locationTabPage = new System.Windows.Forms.TabPage();
-            this.multiMonitorDisplayModsGroupBox = new System.Windows.Forms.GroupBox();
-            this.virtualMonitorRadioButton = new System.Windows.Forms.RadioButton();
-            this.allButPrimaryRadioButton = new System.Windows.Forms.RadioButton();
-            this.primaryOnlyRadioButton = new System.Windows.Forms.RadioButton();
-            this.allSameRadioButton = new System.Windows.Forms.RadioButton();
             this.MainFormContextMenuStrip.SuspendLayout();
             this.settingsTabControl.SuspendLayout();
             this.locationTabPage.SuspendLayout();
-            this.multiMonitorDisplayModsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainFormContextMenuStrip
@@ -57,7 +51,6 @@
             this.MainFormContextMenuStrip.Name = "MainFormContextMenuStrip";
             this.MainFormContextMenuStrip.Size = new System.Drawing.Size(174, 136);
             this.MainFormContextMenuStrip.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.MainFormContextMenuStrip_Closed);
-            this.MainFormContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.MainFormContextMenuStrip_Opening);
             // 
             // hideLogosToolStripMenuItem
             // 
@@ -100,7 +93,6 @@
             // 
             // locationTabPage
             // 
-            this.locationTabPage.Controls.Add(this.multiMonitorDisplayModsGroupBox);
             this.locationTabPage.Location = new System.Drawing.Point(4, 22);
             this.locationTabPage.Name = "locationTabPage";
             this.locationTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -108,63 +100,6 @@
             this.locationTabPage.TabIndex = 1;
             this.locationTabPage.Text = "Location";
             this.locationTabPage.UseVisualStyleBackColor = true;
-            // 
-            // multiMonitorDisplayModsGroupBox
-            // 
-            this.multiMonitorDisplayModsGroupBox.Controls.Add(this.virtualMonitorRadioButton);
-            this.multiMonitorDisplayModsGroupBox.Controls.Add(this.allButPrimaryRadioButton);
-            this.multiMonitorDisplayModsGroupBox.Controls.Add(this.primaryOnlyRadioButton);
-            this.multiMonitorDisplayModsGroupBox.Controls.Add(this.allSameRadioButton);
-            this.multiMonitorDisplayModsGroupBox.Location = new System.Drawing.Point(202, 11);
-            this.multiMonitorDisplayModsGroupBox.Name = "multiMonitorDisplayModsGroupBox";
-            this.multiMonitorDisplayModsGroupBox.Size = new System.Drawing.Size(295, 120);
-            this.multiMonitorDisplayModsGroupBox.TabIndex = 2;
-            this.multiMonitorDisplayModsGroupBox.TabStop = false;
-            this.multiMonitorDisplayModsGroupBox.Text = "Multi-Monitor Display Modes";
-            // 
-            // virtualMonitorRadioButton
-            // 
-            this.virtualMonitorRadioButton.Location = new System.Drawing.Point(146, 62);
-            this.virtualMonitorRadioButton.Name = "virtualMonitorRadioButton";
-            this.virtualMonitorRadioButton.Size = new System.Drawing.Size(134, 37);
-            this.virtualMonitorRadioButton.TabIndex = 4;
-            this.virtualMonitorRadioButton.TabStop = true;
-            this.virtualMonitorRadioButton.Text = "Virtual Monitor";
-            this.virtualMonitorRadioButton.UseVisualStyleBackColor = true;
-            this.virtualMonitorRadioButton.CheckedChanged += new System.EventHandler(this.virtualMonitorRadioButton_CheckedChanged);
-            // 
-            // allButPrimaryRadioButton
-            // 
-            this.allButPrimaryRadioButton.Location = new System.Drawing.Point(146, 19);
-            this.allButPrimaryRadioButton.Name = "allButPrimaryRadioButton";
-            this.allButPrimaryRadioButton.Size = new System.Drawing.Size(134, 37);
-            this.allButPrimaryRadioButton.TabIndex = 3;
-            this.allButPrimaryRadioButton.TabStop = true;
-            this.allButPrimaryRadioButton.Text = "All But Primary";
-            this.allButPrimaryRadioButton.UseVisualStyleBackColor = true;
-            this.allButPrimaryRadioButton.CheckedChanged += new System.EventHandler(this.allButPrimaryRadioButton_CheckedChanged);
-            // 
-            // primaryOnlyRadioButton
-            // 
-            this.primaryOnlyRadioButton.Location = new System.Drawing.Point(6, 62);
-            this.primaryOnlyRadioButton.Name = "primaryOnlyRadioButton";
-            this.primaryOnlyRadioButton.Size = new System.Drawing.Size(134, 37);
-            this.primaryOnlyRadioButton.TabIndex = 2;
-            this.primaryOnlyRadioButton.TabStop = true;
-            this.primaryOnlyRadioButton.Text = "Primary Only";
-            this.primaryOnlyRadioButton.UseVisualStyleBackColor = true;
-            this.primaryOnlyRadioButton.CheckedChanged += new System.EventHandler(this.primaryOnlyRadioButton_CheckedChanged);
-            // 
-            // allSameRadioButton
-            // 
-            this.allSameRadioButton.Location = new System.Drawing.Point(6, 19);
-            this.allSameRadioButton.Name = "allSameRadioButton";
-            this.allSameRadioButton.Size = new System.Drawing.Size(134, 37);
-            this.allSameRadioButton.TabIndex = 1;
-            this.allSameRadioButton.TabStop = true;
-            this.allSameRadioButton.Text = "All Same";
-            this.allSameRadioButton.UseVisualStyleBackColor = true;
-            this.allSameRadioButton.CheckedChanged += new System.EventHandler(this.allSameRadioButton_CheckedChanged);
             // 
             // MainForm
             // 
@@ -188,7 +123,6 @@
             this.MainFormContextMenuStrip.ResumeLayout(false);
             this.settingsTabControl.ResumeLayout(false);
             this.locationTabPage.ResumeLayout(false);
-            this.multiMonitorDisplayModsGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -200,11 +134,6 @@
         private System.Windows.Forms.TabControl settingsTabControl;
         private System.Windows.Forms.TabPage locationTabPage;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
-        private System.Windows.Forms.GroupBox multiMonitorDisplayModsGroupBox;
-        private System.Windows.Forms.RadioButton virtualMonitorRadioButton;
-        private System.Windows.Forms.RadioButton allButPrimaryRadioButton;
-        private System.Windows.Forms.RadioButton primaryOnlyRadioButton;
-        private System.Windows.Forms.RadioButton allSameRadioButton;
         private System.Windows.Forms.ToolStripMenuItem hideLogosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     }

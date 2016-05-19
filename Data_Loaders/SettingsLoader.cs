@@ -8,7 +8,6 @@
 
 using System;
 using System.Windows.Forms;
-using System.Collections.Generic;
 using System.IO;
 using System.ComponentModel;
 
@@ -171,31 +170,6 @@ namespace SettingsLoader
             }
 
             LogoProperties.path = DataVerifier;
-
-            #endregion
-            
-            #region multiMonitorDisplayMode
-
-            TypeConverter multiMonitorDisplayModeConverter = TypeDescriptor.GetConverter(typeof(MultiMonitorDisplayModes));
-
-            DataVerifier = null;
-            DataVerifier = GetEntry(theSection, "multiMonitorDisplayMode");
-
-            if (DataVerifier == null)
-            {
-                DataVerifier = MultiMonitorDisplayModes.AllSame.ToString();
-                SetEntry(theSection, "multiMonitorDisplayMode", DataVerifier);
-            }
-
-            try
-            {
-                LogoProperties.multiMonitorDisplayMode = (MultiMonitorDisplayModes)multiMonitorDisplayModeConverter.ConvertFromString(DataVerifier);
-            }
-            catch (Exception)
-            {
-                LogoProperties.multiMonitorDisplayMode = MultiMonitorDisplayModes.AllSame;
-                SetEntry(theSection, "multiMonitorDisplayMode", MultiMonitorDisplayModes.AllSame.ToString());
-            }
 
             #endregion
             
