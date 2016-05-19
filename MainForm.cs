@@ -237,9 +237,6 @@ namespace CustomDesktopLogo
                     break;
             }
 
-            xOffsetNumericUpDown.Value = settingsINI.LogoProperties.xOffset;
-            yOffsetNumericUpDown.Value = settingsINI.LogoProperties.yOffset;
-
             // Animation/Graphics tab
             try
             {
@@ -417,8 +414,7 @@ namespace CustomDesktopLogo
             {
                 default:
                     allLogos.Add(new LogoObject(imageBitmaps[0], 
-                        new Point(Screen.PrimaryScreen.Bounds.Right - (int)(imageBitmaps[0].Width) + settingsINI.LogoProperties.xOffset,
-                            Screen.PrimaryScreen.Bounds.Bottom - (int)(imageBitmaps[0].Height) + settingsINI.LogoProperties.yOffset),
+                        new Point(0,0),
                         settingsINI.LogoProperties.defaultOpacity));
                     break;
             }
@@ -774,10 +770,6 @@ namespace CustomDesktopLogo
             primaryOnlyRadioButton.Text = language.general.primaryOnly;
             allButPrimaryRadioButton.Text = language.general.allButPrimary;
             virtualMonitorRadioButton.Text = language.general.virtualMonitor;
-
-            locationOffsetGroupBox.Text = language.general.locationOffset;
-            xLabel.Text = language.general.xCoordinate;
-            yLabel.Text = language.general.yCoordinate;
             
             // Size tab
             sizeTabPage.Text = language.general.size;
@@ -910,32 +902,6 @@ namespace CustomDesktopLogo
 
             settingsINI.SetEntry("LogoProperties", "multiMonitorDisplayMode", MultiMonitorDisplayModes.TreatMonitorsAsOneScreen.ToString());
             settingsINI.LogoProperties.multiMonitorDisplayMode = MultiMonitorDisplayModes.TreatMonitorsAsOneScreen;
-
-            loadLogos();
-        }
-
-        #endregion
-
-        #region Display Location Radio Buttons
-        
-        private void xOffsetNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "xOffset", xOffsetNumericUpDown.Value.ToString());
-            settingsINI.LogoProperties.xOffset = (int)xOffsetNumericUpDown.Value;
-
-            loadLogos();
-        }
-
-        private void yOffsetNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "yOffset", yOffsetNumericUpDown.Value.ToString());
-            settingsINI.LogoProperties.yOffset = (int)yOffsetNumericUpDown.Value;
 
             loadLogos();
         }

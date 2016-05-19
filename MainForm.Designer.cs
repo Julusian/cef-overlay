@@ -46,11 +46,6 @@
             this.changeImagesButton = new System.Windows.Forms.Button();
             this.imagesListBox = new System.Windows.Forms.ListBox();
             this.locationTabPage = new System.Windows.Forms.TabPage();
-            this.locationOffsetGroupBox = new System.Windows.Forms.GroupBox();
-            this.yLabel = new System.Windows.Forms.Label();
-            this.xLabel = new System.Windows.Forms.Label();
-            this.yOffsetNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.xOffsetNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.multiMonitorDisplayModsGroupBox = new System.Windows.Forms.GroupBox();
             this.virtualMonitorRadioButton = new System.Windows.Forms.RadioButton();
             this.allButPrimaryRadioButton = new System.Windows.Forms.RadioButton();
@@ -92,9 +87,6 @@
             this.settingsTabControl.SuspendLayout();
             this.selectImagesTabPage.SuspendLayout();
             this.locationTabPage.SuspendLayout();
-            this.locationOffsetGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.yOffsetNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xOffsetNumericUpDown)).BeginInit();
             this.multiMonitorDisplayModsGroupBox.SuspendLayout();
             this.sizeTabPage.SuspendLayout();
             this.animationTabPage.SuspendLayout();
@@ -254,7 +246,6 @@
             // 
             // locationTabPage
             // 
-            this.locationTabPage.Controls.Add(this.locationOffsetGroupBox);
             this.locationTabPage.Controls.Add(this.multiMonitorDisplayModsGroupBox);
             this.locationTabPage.Location = new System.Drawing.Point(4, 22);
             this.locationTabPage.Name = "locationTabPage";
@@ -263,73 +254,6 @@
             this.locationTabPage.TabIndex = 1;
             this.locationTabPage.Text = "Location";
             this.locationTabPage.UseVisualStyleBackColor = true;
-            // 
-            // locationOffsetGroupBox
-            // 
-            this.locationOffsetGroupBox.Controls.Add(this.yLabel);
-            this.locationOffsetGroupBox.Controls.Add(this.xLabel);
-            this.locationOffsetGroupBox.Controls.Add(this.yOffsetNumericUpDown);
-            this.locationOffsetGroupBox.Controls.Add(this.xOffsetNumericUpDown);
-            this.locationOffsetGroupBox.Location = new System.Drawing.Point(14, 436);
-            this.locationOffsetGroupBox.Name = "locationOffsetGroupBox";
-            this.locationOffsetGroupBox.Size = new System.Drawing.Size(482, 73);
-            this.locationOffsetGroupBox.TabIndex = 3;
-            this.locationOffsetGroupBox.TabStop = false;
-            this.locationOffsetGroupBox.Text = "Location Offset";
-            // 
-            // yLabel
-            // 
-            this.yLabel.Location = new System.Drawing.Point(241, 18);
-            this.yLabel.Name = "yLabel";
-            this.yLabel.Size = new System.Drawing.Size(58, 47);
-            this.yLabel.TabIndex = 4;
-            this.yLabel.Text = "Y";
-            this.yLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // xLabel
-            // 
-            this.xLabel.Location = new System.Drawing.Point(9, 18);
-            this.xLabel.Name = "xLabel";
-            this.xLabel.Size = new System.Drawing.Size(58, 47);
-            this.xLabel.TabIndex = 2;
-            this.xLabel.Text = "X";
-            this.xLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // yOffsetNumericUpDown
-            // 
-            this.yOffsetNumericUpDown.Location = new System.Drawing.Point(305, 32);
-            this.yOffsetNumericUpDown.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-            this.yOffsetNumericUpDown.Minimum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            -2147483648});
-            this.yOffsetNumericUpDown.Name = "yOffsetNumericUpDown";
-            this.yOffsetNumericUpDown.Size = new System.Drawing.Size(124, 20);
-            this.yOffsetNumericUpDown.TabIndex = 1;
-            this.yOffsetNumericUpDown.ValueChanged += new System.EventHandler(this.yOffsetNumericUpDown_ValueChanged);
-            // 
-            // xOffsetNumericUpDown
-            // 
-            this.xOffsetNumericUpDown.Location = new System.Drawing.Point(77, 32);
-            this.xOffsetNumericUpDown.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-            this.xOffsetNumericUpDown.Minimum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            -2147483648});
-            this.xOffsetNumericUpDown.Name = "xOffsetNumericUpDown";
-            this.xOffsetNumericUpDown.Size = new System.Drawing.Size(124, 20);
-            this.xOffsetNumericUpDown.TabIndex = 0;
-            this.xOffsetNumericUpDown.ValueChanged += new System.EventHandler(this.xOffsetNumericUpDown_ValueChanged);
             // 
             // multiMonitorDisplayModsGroupBox
             // 
@@ -717,9 +641,6 @@
             this.settingsTabControl.ResumeLayout(false);
             this.selectImagesTabPage.ResumeLayout(false);
             this.locationTabPage.ResumeLayout(false);
-            this.locationOffsetGroupBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.yOffsetNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xOffsetNumericUpDown)).EndInit();
             this.multiMonitorDisplayModsGroupBox.ResumeLayout(false);
             this.sizeTabPage.ResumeLayout(false);
             this.animationTabPage.ResumeLayout(false);
@@ -756,11 +677,6 @@
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.GroupBox multiMonitorDisplayModsGroupBox;
         private System.Windows.Forms.TabPage sizeTabPage;
-        private System.Windows.Forms.GroupBox locationOffsetGroupBox;
-        private System.Windows.Forms.Label yLabel;
-        private System.Windows.Forms.Label xLabel;
-        private System.Windows.Forms.NumericUpDown yOffsetNumericUpDown;
-        private System.Windows.Forms.NumericUpDown xOffsetNumericUpDown;
         private System.Windows.Forms.RadioButton virtualMonitorRadioButton;
         private System.Windows.Forms.RadioButton allButPrimaryRadioButton;
         private System.Windows.Forms.RadioButton primaryOnlyRadioButton;

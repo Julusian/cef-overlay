@@ -31,9 +31,6 @@ namespace SettingsInformation
 
         public MultiMonitorDisplayModes multiMonitorDisplayMode;
 
-        public int xOffset;
-        public int yOffset;
-
         public bool disableMovement;
     }
 

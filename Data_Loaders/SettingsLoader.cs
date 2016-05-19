@@ -248,52 +248,6 @@ namespace SettingsLoader
 
             #endregion
             
-            #region xOffset
-
-            DataVerifier = null;
-            DataVerifier = GetEntry(theSection, "xOffset");
-
-            if (DataVerifier == null)
-            {
-                DataVerifier = @"30";
-                SetEntry(theSection, "xOffset", DataVerifier);
-            }
-
-            try
-            {
-                LogoProperties.xOffset = int.Parse(DataVerifier);
-            }
-            catch (Exception)
-            {
-                LogoProperties.xOffset = 30;
-                SetEntry(theSection, "xOffset", @"30");
-            }
-
-            #endregion
-
-            #region yOffset
-
-            DataVerifier = null;
-            DataVerifier = GetEntry(theSection, "YOffset");
-
-            if (DataVerifier == null)
-            {
-                DataVerifier = @"30";
-                SetEntry(theSection, "YOffset", DataVerifier);
-            }
-
-            try
-            {
-                LogoProperties.yOffset = int.Parse(DataVerifier);
-            }
-            catch (Exception)
-            {
-                LogoProperties.yOffset = 30;
-                SetEntry(theSection, "YOffset", @"30");
-            }
-
-            #endregion
-
             #region disableMovement
 
             DataVerifier = null;
