@@ -93,12 +93,12 @@ namespace CustomDesktopLogo
         /// <summary> 
         /// Create an alpha blended form with a transparent background.
         /// </summary>
-        public LogoObject(Bitmap images, Point initialLocation, int initialOpacity)
+        public LogoObject()
         {
             InitializeComponent();
             AllowDrop = false;
             this.Show();
-            SetBitmap(true, images, true, (byte)initialOpacity, true, initialLocation.X, initialLocation.Y);
+            SetBitmap(true, new Bitmap(1,1), true, (byte)255, true, 0, 0);
             SetZLevel();
             SetTransparencyToInput(MainForm.settingsINI.FolderPaths.useAsDropFolder);
 
@@ -197,15 +197,7 @@ namespace CustomDesktopLogo
                 settingsToolStripMenuItem.Tag = "Settings";
                 settingsToolStripMenuItem.Click += new System.EventHandler(this.filePathToolStripMenuItem_Click);
                 filePathsContextMenuStrip.Items.Add(settingsToolStripMenuItem);
-
-                ToolStripMenuItem helpAboutToolStripMenuItem = new ToolStripMenuItem();
-                helpAboutToolStripMenuItem.Name = "helpAboutToolStripMenuItem";
-                helpAboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-                helpAboutToolStripMenuItem.Text = "Help/About";
-                helpAboutToolStripMenuItem.Tag = "HelpAbout";
-                helpAboutToolStripMenuItem.Click += new System.EventHandler(this.filePathToolStripMenuItem_Click);
-                filePathsContextMenuStrip.Items.Add(helpAboutToolStripMenuItem);
-
+                
                 ToolStripMenuItem quitToolStripMenuItem = new ToolStripMenuItem();
                 quitToolStripMenuItem.Name = "quitToolStripMenuItem";
                 quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);

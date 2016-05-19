@@ -36,30 +36,16 @@
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainFormTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.settingsTabControl = new System.Windows.Forms.TabControl();
-            this.selectImagesTabPage = new System.Windows.Forms.TabPage();
-            this.refreshImageListButton = new System.Windows.Forms.Button();
-            this.selectImagesInstructionsLabel = new System.Windows.Forms.Label();
-            this.changeImagesButton = new System.Windows.Forms.Button();
-            this.imagesListBox = new System.Windows.Forms.ListBox();
             this.locationTabPage = new System.Windows.Forms.TabPage();
             this.multiMonitorDisplayModsGroupBox = new System.Windows.Forms.GroupBox();
             this.virtualMonitorRadioButton = new System.Windows.Forms.RadioButton();
             this.allButPrimaryRadioButton = new System.Windows.Forms.RadioButton();
             this.primaryOnlyRadioButton = new System.Windows.Forms.RadioButton();
             this.allSameRadioButton = new System.Windows.Forms.RadioButton();
-            this.sizeTabPage = new System.Windows.Forms.TabPage();
-            this.animationTabPage = new System.Windows.Forms.TabPage();
-            this.LanguageTabPage = new System.Windows.Forms.TabPage();
-            this.dropFolderTab = new System.Windows.Forms.TabPage();
             this.MainFormContextMenuStrip.SuspendLayout();
             this.settingsTabControl.SuspendLayout();
-            this.selectImagesTabPage.SuspendLayout();
             this.locationTabPage.SuspendLayout();
             this.multiMonitorDisplayModsGroupBox.SuspendLayout();
-            this.sizeTabPage.SuspendLayout();
-            this.animationTabPage.SuspendLayout();
-            this.LanguageTabPage.SuspendLayout();
-            this.dropFolderTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainFormContextMenuStrip
@@ -104,69 +90,13 @@
             // 
             // settingsTabControl
             // 
-            this.settingsTabControl.Controls.Add(this.selectImagesTabPage);
             this.settingsTabControl.Controls.Add(this.locationTabPage);
-            this.settingsTabControl.Controls.Add(this.sizeTabPage);
-            this.settingsTabControl.Controls.Add(this.animationTabPage);
-            this.settingsTabControl.Controls.Add(this.LanguageTabPage);
-            this.settingsTabControl.Controls.Add(this.dropFolderTab);
             this.settingsTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.settingsTabControl.Location = new System.Drawing.Point(0, 0);
             this.settingsTabControl.Name = "settingsTabControl";
             this.settingsTabControl.SelectedIndex = 0;
             this.settingsTabControl.Size = new System.Drawing.Size(528, 552);
             this.settingsTabControl.TabIndex = 1;
-            // 
-            // selectImagesTabPage
-            // 
-            this.selectImagesTabPage.Controls.Add(this.refreshImageListButton);
-            this.selectImagesTabPage.Controls.Add(this.selectImagesInstructionsLabel);
-            this.selectImagesTabPage.Controls.Add(this.changeImagesButton);
-            this.selectImagesTabPage.Controls.Add(this.imagesListBox);
-            this.selectImagesTabPage.Location = new System.Drawing.Point(4, 22);
-            this.selectImagesTabPage.Name = "selectImagesTabPage";
-            this.selectImagesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.selectImagesTabPage.Size = new System.Drawing.Size(520, 526);
-            this.selectImagesTabPage.TabIndex = 0;
-            this.selectImagesTabPage.Text = "Select Images";
-            this.selectImagesTabPage.UseVisualStyleBackColor = true;
-            // 
-            // refreshImageListButton
-            // 
-            this.refreshImageListButton.Location = new System.Drawing.Point(280, 204);
-            this.refreshImageListButton.Name = "refreshImageListButton";
-            this.refreshImageListButton.Size = new System.Drawing.Size(232, 44);
-            this.refreshImageListButton.TabIndex = 3;
-            this.refreshImageListButton.Text = "Refresh Image List";
-            this.refreshImageListButton.UseVisualStyleBackColor = true;
-            this.refreshImageListButton.Click += new System.EventHandler(this.refreshImageListButton_Click);
-            // 
-            // selectImagesInstructionsLabel
-            // 
-            this.selectImagesInstructionsLabel.Location = new System.Drawing.Point(8, 273);
-            this.selectImagesInstructionsLabel.Name = "selectImagesInstructionsLabel";
-            this.selectImagesInstructionsLabel.Size = new System.Drawing.Size(504, 210);
-            this.selectImagesInstructionsLabel.TabIndex = 2;
-            this.selectImagesInstructionsLabel.Text = resources.GetString("selectImagesInstructionsLabel.Text");
-            // 
-            // changeImagesButton
-            // 
-            this.changeImagesButton.Location = new System.Drawing.Point(8, 204);
-            this.changeImagesButton.Name = "changeImagesButton";
-            this.changeImagesButton.Size = new System.Drawing.Size(232, 44);
-            this.changeImagesButton.TabIndex = 1;
-            this.changeImagesButton.Text = "Change Image Folder";
-            this.changeImagesButton.UseVisualStyleBackColor = true;
-            this.changeImagesButton.Click += new System.EventHandler(this.changeImagesButton_Click);
-            // 
-            // imagesListBox
-            // 
-            this.imagesListBox.FormattingEnabled = true;
-            this.imagesListBox.HorizontalScrollbar = true;
-            this.imagesListBox.Location = new System.Drawing.Point(8, 16);
-            this.imagesListBox.Name = "imagesListBox";
-            this.imagesListBox.Size = new System.Drawing.Size(504, 173);
-            this.imagesListBox.TabIndex = 0;
             // 
             // locationTabPage
             // 
@@ -236,43 +166,6 @@
             this.allSameRadioButton.UseVisualStyleBackColor = true;
             this.allSameRadioButton.CheckedChanged += new System.EventHandler(this.allSameRadioButton_CheckedChanged);
             // 
-            // sizeTabPage
-            // 
-            this.sizeTabPage.Location = new System.Drawing.Point(4, 22);
-            this.sizeTabPage.Name = "sizeTabPage";
-            this.sizeTabPage.Size = new System.Drawing.Size(520, 526);
-            this.sizeTabPage.TabIndex = 3;
-            this.sizeTabPage.Text = "Size";
-            this.sizeTabPage.UseVisualStyleBackColor = true;
-            this.sizeTabPage.Click += new System.EventHandler(this.sizeTabPage_Click);
-            // 
-            // animationTabPage
-            // 
-            this.animationTabPage.Location = new System.Drawing.Point(4, 22);
-            this.animationTabPage.Name = "animationTabPage";
-            this.animationTabPage.Size = new System.Drawing.Size(520, 526);
-            this.animationTabPage.TabIndex = 2;
-            this.animationTabPage.Text = "Animation / Graphics";
-            this.animationTabPage.UseVisualStyleBackColor = true;
-            // 
-            // LanguageTabPage
-            // 
-            this.LanguageTabPage.Location = new System.Drawing.Point(4, 22);
-            this.LanguageTabPage.Name = "LanguageTabPage";
-            this.LanguageTabPage.Size = new System.Drawing.Size(520, 526);
-            this.LanguageTabPage.TabIndex = 5;
-            this.LanguageTabPage.Text = "Language";
-            this.LanguageTabPage.UseVisualStyleBackColor = true;
-            // 
-            // dropFolderTab
-            // 
-            this.dropFolderTab.Location = new System.Drawing.Point(4, 22);
-            this.dropFolderTab.Name = "dropFolderTab";
-            this.dropFolderTab.Size = new System.Drawing.Size(520, 526);
-            this.dropFolderTab.TabIndex = 6;
-            this.dropFolderTab.Text = "Drop Folder";
-            this.dropFolderTab.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,14 +187,8 @@
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.MainFormContextMenuStrip.ResumeLayout(false);
             this.settingsTabControl.ResumeLayout(false);
-            this.selectImagesTabPage.ResumeLayout(false);
             this.locationTabPage.ResumeLayout(false);
             this.multiMonitorDisplayModsGroupBox.ResumeLayout(false);
-            this.sizeTabPage.ResumeLayout(false);
-            this.animationTabPage.ResumeLayout(false);
-            this.LanguageTabPage.ResumeLayout(false);
-            this.dropFolderTab.ResumeLayout(false);
-            this.dropFolderTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -311,23 +198,14 @@
         private System.Windows.Forms.ContextMenuStrip MainFormContextMenuStrip;
         private System.Windows.Forms.NotifyIcon MainFormTrayIcon;
         private System.Windows.Forms.TabControl settingsTabControl;
-        private System.Windows.Forms.TabPage selectImagesTabPage;
         private System.Windows.Forms.TabPage locationTabPage;
-        private System.Windows.Forms.ListBox imagesListBox;
-        private System.Windows.Forms.Button changeImagesButton;
-        private System.Windows.Forms.TabPage animationTabPage;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.GroupBox multiMonitorDisplayModsGroupBox;
-        private System.Windows.Forms.TabPage sizeTabPage;
         private System.Windows.Forms.RadioButton virtualMonitorRadioButton;
         private System.Windows.Forms.RadioButton allButPrimaryRadioButton;
         private System.Windows.Forms.RadioButton primaryOnlyRadioButton;
         private System.Windows.Forms.RadioButton allSameRadioButton;
-        private System.Windows.Forms.Label selectImagesInstructionsLabel;
-        private System.Windows.Forms.Button refreshImageListButton;
-        private System.Windows.Forms.TabPage LanguageTabPage;
         private System.Windows.Forms.ToolStripMenuItem hideLogosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.TabPage dropFolderTab;
     }
 }

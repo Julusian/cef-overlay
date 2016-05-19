@@ -22,16 +22,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Threading;
-using System.Runtime.InteropServices;
 using System.IO;
-using System.Diagnostics;
 
 using CefSharp;
-using ImageOperations;
 using MemoryManagement;
 using Hook;
 
@@ -56,7 +50,6 @@ namespace CustomDesktopLogo
         static readonly string systemFilesDirectoryName = @"System";
         static readonly string settingsDirectoryName = @"Settings";
         static readonly string configINIFileName = @"Config.ini";
-        static readonly int numFolderPaths = 20;
 
         /// <summary>
         /// The general settings for the program.
@@ -67,12 +60,7 @@ namespace CustomDesktopLogo
         /// The list of all the logos currently active.
         /// </summary>
         static List<LogoObject> allLogos = new List<LogoObject>();
-
-        /// <summary>
-        /// Stores all the images used for the logos.
-        /// </summary>
-        static List<Bitmap> imageBitmaps = new List<Bitmap>();
-
+        
        
         static bool loaded = false;
 
@@ -80,10 +68,7 @@ namespace CustomDesktopLogo
 
         // These delegates enables asynchronous calls 
         delegate void ShowHideCallback();
-        delegate void UpdatePositionsCallback();
-        delegate void AnimationCallback();
         delegate void CloseLogoCallback();
-        delegate void UpdateSizeOpacityCallback();
 
         private static MainForm instance;
         public static MainForm Instance
@@ -191,7 +176,7 @@ namespace CustomDesktopLogo
             MainFormTrayIcon.Visible = true;
 
             loadLanguage();
-            loadImageList();
+            loadLogos();
 
             switch (settingsINI.LogoProperties.multiMonitorDisplayMode)
             {
@@ -202,74 +187,7 @@ namespace CustomDesktopLogo
             
             loaded = true;
         }
-
-        private void loadImageList()
-        {
-            imagesListBox.Items.Clear();
-            imageBitmaps.Clear();
-
-            try
-            {
-                string[] imageFileDirectory;
-                if (settingsINI.LogoProperties.path.StartsWith(@"." + Path.DirectorySeparatorChar))
-                    imageFileDirectory = System.IO.Directory.GetFiles(Application.StartupPath + settingsINI.LogoProperties.path.Substring(1));
-                else
-                    imageFileDirectory = System.IO.Directory.GetFiles(settingsINI.LogoProperties.path);
-
-                int counter = 0;
-                foreach (string aFile in imageFileDirectory)
-                {
-                    if (aFile.ToUpper().EndsWith(@"PNG"))
-                    {
-                        Bitmap anImage;
-
-                        try
-                        {
-                            anImage = new Bitmap(aFile);
-                            imageBitmaps.Add(anImage);
-                            imagesListBox.Items.Add(aFile);
-                            counter++;
-                        }
-                        catch (Exception)
-                        { }
-                    }
-
-                    // Prevent the program from freezing the computer and taking too much memory.
-                    if (counter > 20)
-                    {
-                        counter = 0;
-                        GC.Collect();
-                        Pinvoke.Win32.PROCESS_MEMORY_COUNTERS memoryCounter = new Pinvoke.Win32.PROCESS_MEMORY_COUNTERS();
-                        Pinvoke.Win32.GetProcessMemoryInfo(Pinvoke.Win32.GetCurrentProcess(), out memoryCounter, Marshal.SizeOf(memoryCounter));
-
-                        if (memoryCounter.WorkingSetSize > 100000000)
-                        {
-                            if (MessageBox.Show("Too much memory. Continue?", "Error custom logo", MessageBoxButtons.YesNo) == DialogResult.No)
-                            {
-                                imagesListBox.Items.Clear();
-                                imageBitmaps.Clear();
-                                GC.Collect();
-
-                                settingsINI.LogoProperties.path = @"";
-                                settingsINI.SetEntry("LogoProperties", "path", @"");
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception)
-            { 
-            }
-
-            if (imageBitmaps.Count <= 0)
-                imageBitmaps.Add((Bitmap)FancyText.ImageFromText(@"?????", new Font(System.Drawing.FontFamily.GenericSansSerif, 20, FontStyle.Bold), Color.Black, Color.White, 6, 10));
-            
-            loadLogos();
-
-            GC.Collect();
-            MemoryManagement.MemoryUtility.ClearUnusedMemory();
-        }
+        
 
         private void closeAllLogos()
         {
@@ -292,14 +210,11 @@ namespace CustomDesktopLogo
         private void loadLogos()
         {
             closeAllLogos();
-
-            if (imageBitmaps == null || imageBitmaps.Count <= 0)
-                return;
-
+            
             switch (settingsINI.LogoProperties.multiMonitorDisplayMode)
             {
                 default:
-                    allLogos.Add(new LogoObject(imageBitmaps[0], new Point(0, 0), 255));
+                    allLogos.Add(new LogoObject());
                     break;
             }
 
@@ -448,9 +363,7 @@ namespace CustomDesktopLogo
             {
                 this.Select(true, true);
                 this.Hide();
-
-                //if (AnimationTimer.Enabled == false)
-                //    MemoryUtility.ClearUnusedMemory();
+                
             }
         }
 
@@ -466,13 +379,7 @@ namespace CustomDesktopLogo
             quitToolStripMenuItem.Text = "Quit";
             hideLogosToolStripMenuItem.Text = "Hide Logo";
             settingsToolStripMenuItem.Text = "Settings";
-
-            // Select Images tab
-            selectImagesTabPage.Text = "Select images";
-            changeImagesButton.Text = "Change folder";
-            refreshImageListButton.Text = "Refresh list";
-            selectImagesInstructionsLabel.Text = "SELECT";
-
+            
             // Location tab
             locationTabPage.Text = "Locations";
             multiMonitorDisplayModsGroupBox.Text = "Monitor modes";
@@ -480,33 +387,10 @@ namespace CustomDesktopLogo
             primaryOnlyRadioButton.Text = "Primary only";
             allButPrimaryRadioButton.Text = "All but primary";
             virtualMonitorRadioButton.Text = "Virtual monitor";
-            
-            // Size tab
-            sizeTabPage.Text = "Size";
-
-            // Animation / Graphics tab
-            animationTabPage.Text = "Animation";
         }
         
         #endregion
-
-        #region Change Image List
-
-        private void changeImagesButton_Click(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-           
-        }
-
-        private void refreshImageListButton_Click(object sender, EventArgs e)
-        {
-            loadImageList();
-        }
-
-        #endregion
-
+        
         #region Window Level and Multi-Monitor Display Modes
         
         private void allSameRadioButton_CheckedChanged(object sender, EventArgs e)
