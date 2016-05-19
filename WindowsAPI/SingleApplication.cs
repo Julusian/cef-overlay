@@ -12,11 +12,7 @@
 using System;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Diagnostics;
-using System.Threading;
-using System.Reflection;
-using System.IO;
 
 namespace SingleInstance
 {
