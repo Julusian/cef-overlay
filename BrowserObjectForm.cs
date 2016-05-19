@@ -1,55 +1,22 @@
-// Custom Desktop Logo 2.0 - By: 2008 Eric Wong
-// September 20th, 2008
-// Custom Desktop Logo is open source software licensed under GNU GENERAL PUBLIC LICENSE V3. 
-// Use it as you wish, but you must share your source code under the terms of use of the license.
-
-// Uses AMS.Profile from http://www.codeproject.com/KB/cs/readwritexmlini.aspx for .ini file operations (Open source, non-specific license)
-// Uses hotkey selector component from http://www.codeproject.com/KB/miscctrl/systemhotkey.aspx (Open source, non-specific license)
-
-// This file contains the alpha blending methods that allow for good looking graphics generated from a .PNG image.
-
 using System;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
-namespace PerPixelAlphaForms
+namespace CEFOverlay
 {
     /// <summary>
-    /// This is the basic class that other dock items/objects inherits. 
-    /// Essentially, it contains methods that manage the setting of the image bitmaps to be displayed.
+    ///  Borderless browser form
     /// </summary>
     public class BrowserObjectForm : Form
     {
         private Bitmap _previousBitmap = new Bitmap(1, 1);
-
-        #region Constructor
-
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            this.components = new System.ComponentModel.Container();
-        }
-
-        #endregion
-
+        
         /// <summary> 
         /// PerPixelAlpha is the basis of alpha blended logo objects.
         /// </summary>
         public BrowserObjectForm()
         {
-            InitializeComponent();
-            
             FormBorderStyle = FormBorderStyle.None;
             ShowInTaskbar = false;
             AllowDrop = false;
@@ -69,8 +36,6 @@ namespace PerPixelAlphaForms
                             ControlStyles.AllPaintingInWmPaint, true);
             UpdateStyles();
         }
-
-        #endregion
 
         /// <summary>
         /// Allows us to set the window styles at creation time to allow for widget type objects.
@@ -117,8 +82,7 @@ namespace PerPixelAlphaForms
                     _previousBitmap.Dispose();
                     _previousBitmap = bitmap;
                 }
-
-
+                
                 try
                 {
                     hBitmap = _previousBitmap.GetHbitmap(Color.FromArgb(0));
@@ -189,25 +153,25 @@ namespace PerPixelAlphaForms
         public const byte AC_SRC_ALPHA = 1;
 
 
-        [DllImportAttribute("user32.dll")]
+        [DllImport("user32.dll")]
         public extern static bool UpdateLayeredWindow(IntPtr handle, IntPtr hdcDst, ref Point pptDst, ref Size psize, IntPtr hdcSrc, ref Point pprSrc, int crKey, ref BLENDFUNCTION pblend, int dwFlags);
 
-        [DllImportAttribute("user32.dll")]
+        [DllImport("user32.dll")]
         public extern static IntPtr GetDC(IntPtr handle);
 
-        [DllImportAttribute("user32.dll", ExactSpelling = true)]
+        [DllImport("user32.dll", ExactSpelling = true)]
         public extern static int ReleaseDC(IntPtr handle, IntPtr hDC);
 
-        [DllImportAttribute("gdi32.dll")]
+        [DllImport("gdi32.dll")]
         public extern static IntPtr CreateCompatibleDC(IntPtr hDC);
 
-        [DllImportAttribute("gdi32.dll")]
+        [DllImport("gdi32.dll")]
         public extern static bool DeleteDC(IntPtr hdc);
 
-        [DllImportAttribute("gdi32.dll")]
+        [DllImport("gdi32.dll")]
         public extern static IntPtr SelectObject(IntPtr hDC, IntPtr hObject);
 
-        [DllImportAttribute("gdi32.dll")]
+        [DllImport("gdi32.dll")]
         public extern static bool DeleteObject(IntPtr hObject);
     }
 

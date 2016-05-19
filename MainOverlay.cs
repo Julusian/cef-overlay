@@ -19,7 +19,7 @@ using CefSharp;
 
 namespace CEFOverlay
 {
-    static class Program
+    static class MainOverlay
     {
         /// <summary>
         /// The main entry point for the application.

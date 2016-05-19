@@ -5,22 +5,12 @@
 
 // Custom Desktop Logo allows you to create custom static and animated logos from PNG images.
 
-// Copyright (C) 2008 by Eric Wong. 
-// VideoInPicture@gmail.com
-// http://customdesktoplogo.wikidot.com
-// http://easyunicodepaster.wikidot.com
-// http://circledock.wikidot.com
-// http://videoinpicture.wikidot.com
-// http://webcamsignature.wikidot.com
-// http://windowextractor.wikidot.com
-
 // Uses AMS.Profile from http://www.codeproject.com/KB/cs/readwritexmlini.aspx for .ini file operations (Open source, non-specific license)
 // Uses hotkey selector component from http://www.codeproject.com/KB/miscctrl/systemhotkey.aspx (Open source, non-specific license)
 
 using System;
 
-
-namespace MemoryManagement
+namespace CEFOverlay.Util
 {    
     public static class MemoryUtility    
     {        
@@ -31,6 +21,7 @@ namespace MemoryManagement
         {
             if (!_enabled)
                 return;
+
             try
             {
                 if (Environment.OSVersion.Platform >= PlatformID.Win32NT)

@@ -25,9 +25,8 @@ using System.Windows.Forms;
 using System.IO;
 
 using CefSharp;
-using CEFOverlay;
+using CEFOverlay.Util;
 using CEFOverlay.Settings;
-using MemoryManagement;
 using Hook;
 
 
