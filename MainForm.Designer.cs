@@ -50,7 +50,6 @@
             this.quitToolStripMenuItem});
             this.MainFormContextMenuStrip.Name = "MainFormContextMenuStrip";
             this.MainFormContextMenuStrip.Size = new System.Drawing.Size(174, 136);
-            this.MainFormContextMenuStrip.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.MainFormContextMenuStrip_Closed);
             // 
             // hideLogosToolStripMenuItem
             // 

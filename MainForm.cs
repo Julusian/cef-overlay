@@ -38,7 +38,6 @@ namespace CEFOverlay
 
         // The directory and file names used to store the resources for the program.
         static readonly string systemFilesDirectoryName = @"System";
-        static readonly string settingsDirectoryName = @"Settings";
         static readonly string configINIFileName = @"Config.ini";
 
         /// <summary>
@@ -49,7 +48,7 @@ namespace CEFOverlay
         /// <summary>
         /// The list of all the logos currently active.
         /// </summary>
-        static List<BrowserObject> allLogos = new List<BrowserObject>();
+        private static BrowserObject _browserObject;
         
         static Hooks windowsHook = new Hooks();
 
@@ -57,14 +56,7 @@ namespace CEFOverlay
         delegate void ShowHideCallback();
         delegate void CloseLogoCallback();
 
-        private static MainForm instance;
-        public static MainForm Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static MainForm Instance { get; private set; }
 
         #endregion
 
@@ -72,29 +64,26 @@ namespace CEFOverlay
 
         static MainForm()
         {
-             instance = new MainForm();
+             Instance = new MainForm();
         }
-
-        /// <summary>
-
-        /// </summary>
+        
         public MainForm()
         {
             InitializeComponent();
 
-            Control.CheckForIllegalCrossThreadCalls = false;
-            checkSystemFoldersExist();
+            CheckForIllegalCrossThreadCalls = false;
+            CheckFoldersExist();
 
             // Load settings from files
             settingsINI = new SettingsLoader(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName +
-                Path.DirectorySeparatorChar + settingsDirectoryName + Path.DirectorySeparatorChar + configINIFileName);
-            loadLanguage();
+                Path.DirectorySeparatorChar + configINIFileName);
+            LoadLanguage();
 
             DoubleBuffered = true;
 
             // We require this hook to correct a Windows bug where a topmost window will become not topmost in some cases
             // when other programs refresh the screen.
-            windowsHook.OnForegroundWindowChanged += new OnForegroundWindowChangedDelegate(window_ForegroundChanged);
+            windowsHook.OnForegroundWindowChanged += window_ForegroundChanged;
             GC.KeepAlive(windowsHook);
         }
 
@@ -106,7 +95,7 @@ namespace CEFOverlay
             MemoryUtility.ClearUnusedMemory();
         }
 
-        private void checkSystemFoldersExist()
+        private void CheckFoldersExist()
         {
             // Make sure the "System" folder exists
             if (!Directory.Exists(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName))
@@ -120,22 +109,6 @@ namespace CEFOverlay
                     MessageBox.Show(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + @" is missing.", @"Custom Desktop Logo");
                 }
             }
-            
-            // Make sure the "Settings" folder exists
-            if (!Directory.Exists(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + Path.DirectorySeparatorChar
-                + settingsDirectoryName))
-            {
-                try
-                {
-                    Directory.CreateDirectory(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + Path.DirectorySeparatorChar
-                        + settingsDirectoryName);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + Path.DirectorySeparatorChar
-                        + settingsDirectoryName + @" is missing.", @"Custom Desktop Logo");
-                }
-            }
         }
 
         #endregion
@@ -146,49 +119,43 @@ namespace CEFOverlay
         {
             MainFormTrayIcon.Visible = true;
 
-            loadLanguage();
-            loadLogos();
+            LoadLanguage();
+            LoadOverlay();
         }
         
 
-        private void closeAllLogos()
+        private void ResetOverlay()
         {
-            for (int i = 0; i < allLogos.Count; i++)
+            if (_browserObject.InvokeRequired)
             {
-                if (allLogos[i].InvokeRequired)
-                {
-                    CloseLogoCallback d = new CloseLogoCallback(closeAllLogos);
-                    allLogos[i].Invoke(d, new object[] { });
-                }
-                else
-                {
-                    allLogos[i].Dispose();
-                } 
+                CloseLogoCallback d = new CloseLogoCallback(ResetOverlay);
+                _browserObject.Invoke(d, new object[] { });
+            }
+            else
+            {
+                _browserObject.Dispose();
             }
 
-            allLogos.Clear();
+            _browserObject = null;
         }
 
-        private void loadLogos()
+        private void LoadOverlay()
         {
-            closeAllLogos();
-            
-            allLogos.Add(new BrowserObject());
+            ResetOverlay();
+
+            _browserObject = new BrowserObject();
 
             hideLogosToolStripMenuItem.Checked = false;
         }
 
         private void window_ForegroundChanged(IntPtr hWnd)
         {
-            for (int i = 0; allLogos != null && i < allLogos.Count; i++)
+            try
             {
-                try
-                {
-                    allLogos[i].SetZLevel();
-                }
-                catch (Exception)
-                { }
+                _browserObject.SetZLevel();
             }
+            catch (Exception)
+            { }
         }
 
         #endregion
@@ -218,69 +185,47 @@ namespace CEFOverlay
             this.BringToFront();
         }
         
-        public void hideLogosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void hideLogosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (hideLogosToolStripMenuItem.Checked == true)
+            if (hideLogosToolStripMenuItem.Checked)
             {
-                hideAllLogos();
+                HideOverlay();
             }
             else
             {
-                showAllLogos();
+                ShowOverlay();
             }
         }
-
-        public bool hideLogosToolStripMenuItemChecked
+        
+        private static void HideOverlay()
         {
-            get
+            if (_browserObject.InvokeRequired)
             {
-                return hideLogosToolStripMenuItem.Checked;
+                ShowHideCallback d = new ShowHideCallback(HideOverlay);
+                _browserObject.Invoke(d, new object[] { });
             }
-            set
+            else
             {
-                hideLogosToolStripMenuItem.Checked = value;
+                _browserObject.Hide();
             }
         }
 
-        private void hideAllLogos()
+        private static void ShowOverlay()
         {
-            for (int i = 0; i < allLogos.Count; i++)
+            if (_browserObject.InvokeRequired)
             {
-                if (allLogos[i].InvokeRequired)
-                {
-                    ShowHideCallback d = new ShowHideCallback(hideAllLogos);
-                    allLogos[i].Invoke(d, new object[] { });
-                }
-                else
-                {
-                    allLogos[i].Hide();
-                }
+                ShowHideCallback d = new ShowHideCallback(ShowOverlay);
+                _browserObject.Invoke(d, new object[] { });
+            }
+            else
+            {
+                _browserObject.Show();
+                _browserObject.WindowState = FormWindowState.Normal;
+                _browserObject.Show();
+                _browserObject.BringToFront();
             }
         }
-
-        private void showAllLogos()
-        {
-            for (int i = 0; i < allLogos.Count; i++)
-            {
-                if (allLogos[i].InvokeRequired)
-                {
-                    ShowHideCallback d = new ShowHideCallback(showAllLogos);
-                    allLogos[i].Invoke(d, new object[] { });
-                }
-                else
-                {
-                    allLogos[i].Show();
-                    allLogos[i].WindowState = FormWindowState.Normal;
-                    allLogos[i].Show();
-                    allLogos[i].BringToFront();
-                }
-            }
-        }
-
-        private void MainFormContextMenuStrip_Closed(object sender, ToolStripDropDownClosedEventArgs e)
-        {
-        }
-
+        
         #endregion
 
         #region Miscellaneous
@@ -308,7 +253,7 @@ namespace CEFOverlay
 
         #region Language Methods
 
-        private void loadLanguage()
+        private void LoadLanguage()
         {
             this.Text = "Custom logo";
             this.MainFormTrayIcon.Text = "Custom logo";

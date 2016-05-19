@@ -106,10 +106,10 @@
     <Compile Include="Util\MemoryManagement.cs" />
     <Compile Include="Settings\SettingsLoader.cs" />
     <Compile Include="Settings\SettingsProperties.cs" />
-    <Compile Include="Windows_API_and_Hooks\Hook.cs" />
-    <Compile Include="Windows_API_and_Hooks\SingleApplication.cs" />
-    <Compile Include="Windows_API_and_Hooks\User32API.cs" />
-    <Compile Include="Windows_API_and_Hooks\WindowMessageConstants.cs" />
+    <Compile Include="WindowsAPI\Hook.cs" />
+    <Compile Include="WindowsAPI\SingleApplication.cs" />
+    <Compile Include="WindowsAPI\User32API.cs" />
+    <Compile Include="WindowsAPI\WindowMessageConstants.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +185,17 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Shell32">
+      <Guid>{50A7E9B0-70EF-11D1-B75A-00A0C90564FE}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\cef.redist.x64.3.2623.1396\build\cef.redist.x64.targets" Condition="Exists('packages\cef.redist.x64.3.2623.1396\build\cef.redist.x64.targets')" />
