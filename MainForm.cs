@@ -25,11 +25,13 @@ using System.Windows.Forms;
 using System.IO;
 
 using CefSharp;
+using CEFOverlay;
+using CEFOverlay.Settings;
 using MemoryManagement;
 using Hook;
 
 
-namespace CustomDesktopLogo
+namespace CEFOverlay
 {
     public partial class MainForm : Form
     {
@@ -43,12 +45,12 @@ namespace CustomDesktopLogo
         /// <summary>
         /// The general settings for the program.
         /// </summary>
-        public static SettingsLoader.SettingsLoader settingsINI;
+        public static SettingsLoader settingsINI;
 
         /// <summary>
         /// The list of all the logos currently active.
         /// </summary>
-        static List<LogoObject> allLogos = new List<LogoObject>();
+        static List<BrowserObject> allLogos = new List<BrowserObject>();
         
         static Hooks windowsHook = new Hooks();
 
@@ -85,7 +87,7 @@ namespace CustomDesktopLogo
             checkSystemFoldersExist();
 
             // Load settings from files
-            settingsINI = new SettingsLoader.SettingsLoader(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName +
+            settingsINI = new SettingsLoader(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName +
                 Path.DirectorySeparatorChar + settingsDirectoryName + Path.DirectorySeparatorChar + configINIFileName);
             loadLanguage();
 
@@ -172,7 +174,7 @@ namespace CustomDesktopLogo
         {
             closeAllLogos();
             
-            allLogos.Add(new LogoObject());
+            allLogos.Add(new BrowserObject());
 
             hideLogosToolStripMenuItem.Checked = false;
         }

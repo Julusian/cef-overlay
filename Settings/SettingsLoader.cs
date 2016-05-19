@@ -7,13 +7,12 @@
 // to allow for high legibility for the end user.
 
 using System;
-using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms;
+using AMS.Profile;
+// Allows for .ini file manipulation
 
-using AMS.Profile;      // Allows for .ini file manipulation
-using SettingsInformation;
-
-namespace SettingsLoader
+namespace CEFOverlay.Settings
 {
     /// <summary>    
     /// Loads the global settings for the dock. Does not include the individual settings for the dock items.
@@ -98,7 +97,7 @@ namespace SettingsLoader
                 SetEntry(theSection, "url", DataVerifier);
             }
 
-            SettingsProperties.url = DataVerifier;
+            SettingsProperties.Url = DataVerifier;
 
             #endregion;
         }

@@ -5,9 +5,9 @@ using System.Timers;
 using CefSharp.OffScreen;
 using PerPixelAlphaForms;
 
-namespace CustomDesktopLogo
+namespace CEFOverlay
 {
-    public class BrowserObject : LogoPerPixelAlphaForm
+    public class BrowserObject : BrowserObjectForm
     {
         #region Windows Form Designer
 

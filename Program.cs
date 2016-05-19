@@ -5,21 +5,11 @@
 
 // Custom Desktop Logo allows you to create custom static and animated logos from PNG images.
 
-// Copyright (C) 2008 by Eric Wong. 
-// VideoInPicture@gmail.com
-// http://customdesktoplogo.wikidot.com
-// http://easyunicodepaster.wikidot.com
-// http://circledock.wikidot.com
-// http://videoinpicture.wikidot.com
-// http://webcamsignature.wikidot.com
-// http://windowextractor.wikidot.com
-
 // Uses AMS.Profile from http://www.codeproject.com/KB/cs/readwritexmlini.aspx for .ini file operations (Open source, non-specific license)
 // Uses hotkey selector component from http://www.codeproject.com/KB/miscctrl/systemhotkey.aspx (Open source, non-specific license)
 
 // This file contains the entry point for the application and sets the unhandled exception methods that can be helpful for debugging.
 // Only one instance of the program is allowed to run from one folder to prevent two programs from writing into the same settings files at the same time.
-
 
 using System;
 using System.Diagnostics;		
@@ -27,7 +17,7 @@ using System.Windows.Forms;
 using System.Threading;
 using CefSharp;
 
-namespace CustomDesktopLogo
+namespace CEFOverlay
 {
     static class Program
     {

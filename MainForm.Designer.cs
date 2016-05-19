@@ -1,4 +1,4 @@
-﻿namespace CustomDesktopLogo
+﻿namespace CEFOverlay
 {
     partial class MainForm
     {
