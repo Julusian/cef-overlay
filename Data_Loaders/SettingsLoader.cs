@@ -188,41 +188,7 @@ namespace SettingsLoader
             LogoProperties.path = DataVerifier;
 
             #endregion
-
-            #region defaultOpacity
-
-            DataVerifier = null;
-            DataVerifier = GetEntry(theSection, "defaultOpacity");
-
-            if (DataVerifier == null)
-            {
-                DataVerifier = @"255";
-                SetEntry(theSection, "defaultOpacity", DataVerifier);
-            }
-
-            try
-            {
-                LogoProperties.defaultOpacity = int.Parse(DataVerifier);
-            }
-            catch (Exception)
-            {
-                LogoProperties.defaultOpacity = 255;
-                SetEntry(theSection, "defaultOpacity", @"255");
-            }
-
-            if (LogoProperties.defaultOpacity < 0)
-            {
-                LogoProperties.defaultOpacity = 0;
-                SetEntry(theSection, "defaultOpacity", @"0");
-            }
-            else if (LogoProperties.defaultOpacity > 255)
-            {
-                LogoProperties.defaultOpacity = 255;
-                SetEntry(theSection, "defaultOpacity", @"255");
-            }
-
-            #endregion
-
+            
             #region multiMonitorDisplayMode
 
             TypeConverter multiMonitorDisplayModeConverter = TypeDescriptor.GetConverter(typeof(MultiMonitorDisplayModes));

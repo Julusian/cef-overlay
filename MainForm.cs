@@ -257,18 +257,7 @@ namespace CustomDesktopLogo
                 delayBetweenAnimationsTrackBar.Value = 0;
             }
             delayBetweenAnimationsValueLabel.Text = delayBetweenAnimationsTrackBar.Value.ToString();
-
-            try
-            {
-                opacityTrackBar.Value = settingsINI.LogoProperties.defaultOpacity;
-            }
-            catch (Exception)
-            {
-                opacityTrackBar.Value = 255;
-            }
-            opacityValueLabel.Text = opacityTrackBar.Value.ToString();
-
-
+            
             try
             {
                 AnimationTimer.Interval = 1000 / settingsINI.GeneralAnimation.framesPerSecond;
@@ -413,9 +402,7 @@ namespace CustomDesktopLogo
             switch (settingsINI.LogoProperties.multiMonitorDisplayMode)
             {
                 default:
-                    allLogos.Add(new LogoObject(imageBitmaps[0], 
-                        new Point(0,0),
-                        settingsINI.LogoProperties.defaultOpacity));
+                    allLogos.Add(new LogoObject(imageBitmaps[0], new Point(0, 0), 255));
                     break;
             }
 
@@ -474,7 +461,7 @@ namespace CustomDesktopLogo
                // This method is unsafe for multi-threaded coded
                 for (int i = 0; i < allLogos.Count; i++)
                 {
-                    allLogos[i].SetBitmap(true, imageBitmaps[imageBitmapsIndex], true, (byte)settingsINI.LogoProperties.defaultOpacity, false, 0, 0);
+                    allLogos[i].SetBitmap(true, imageBitmaps[imageBitmapsIndex], true, 255, false, 0, 0);
                 }
             }
             catch (Exception)
@@ -778,7 +765,6 @@ namespace CustomDesktopLogo
             animationTabPage.Text = language.general.animationAndGraphics;
             framesPerSecondGroupBox.Text = language.general.framesPerSecond;
             delayBetweenAnimationsGroupBox.Text = language.general.delayBetweenAnimationsSeconds;
-            opacityGroupBox.Text = language.general.opacity;
 
             // Language tab
             LanguageTabPage.Text = language.general.language;
@@ -940,63 +926,6 @@ namespace CustomDesktopLogo
                 elapsedTime = 0;
                 AnimationTimer.Interval = 1000 / settingsINI.GeneralAnimation.framesPerSecond;
                 AnimationTimer.Start();
-            }
-        }
-
-        private void scaleImageFactorTrackBar_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (scaleImageFactorChanged)
-            {
-                scaleImageFactorChanged = false;
-                loadImageList();
-            }
-        }
-
-        private void scaleImageFactorTrackBar_Leave(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (scaleImageFactorChanged)
-            {
-                scaleImageFactorChanged = false;
-                loadImageList();
-            }
-        }
-
-        private void opacityTrackBar_Scroll(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "defaultOpacity", opacityTrackBar.Value.ToString());
-            settingsINI.LogoProperties.defaultOpacity = opacityTrackBar.Value;
-            opacityValueLabel.Text = opacityTrackBar.Value.ToString();
-
-            updateLogoOpacity();
-        }
-
-        private void updateLogoOpacity()
-        {
-            for (int i = 0; i < allLogos.Count; i++)
-            {
-                if (allLogos[i].InvokeRequired)
-                {
-                    UpdateSizeOpacityCallback d = new UpdateSizeOpacityCallback(updateLogoOpacity);
-                    allLogos[i].Invoke(d, new object[] { });
-                }
-                else
-                {
-                    try
-                    {
-                        allLogos[i].SetBitmap(false, null, true, (byte)settingsINI.LogoProperties.defaultOpacity, false, 0, 0);
-                    }
-                    catch (Exception)
-                    { }
-                }
             }
         }
 

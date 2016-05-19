@@ -53,9 +53,6 @@
             this.allSameRadioButton = new System.Windows.Forms.RadioButton();
             this.sizeTabPage = new System.Windows.Forms.TabPage();
             this.animationTabPage = new System.Windows.Forms.TabPage();
-            this.opacityGroupBox = new System.Windows.Forms.GroupBox();
-            this.opacityValueLabel = new System.Windows.Forms.Label();
-            this.opacityTrackBar = new System.Windows.Forms.TrackBar();
             this.delayBetweenAnimationsGroupBox = new System.Windows.Forms.GroupBox();
             this.delayBetweenAnimationsValueLabel = new System.Windows.Forms.Label();
             this.delayBetweenAnimationsTrackBar = new System.Windows.Forms.TrackBar();
@@ -90,8 +87,6 @@
             this.multiMonitorDisplayModsGroupBox.SuspendLayout();
             this.sizeTabPage.SuspendLayout();
             this.animationTabPage.SuspendLayout();
-            this.opacityGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.opacityTrackBar)).BeginInit();
             this.delayBetweenAnimationsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delayBetweenAnimationsTrackBar)).BeginInit();
             this.framesPerSecondGroupBox.SuspendLayout();
@@ -324,7 +319,6 @@
             // 
             // animationTabPage
             // 
-            this.animationTabPage.Controls.Add(this.opacityGroupBox);
             this.animationTabPage.Controls.Add(this.delayBetweenAnimationsGroupBox);
             this.animationTabPage.Controls.Add(this.framesPerSecondGroupBox);
             this.animationTabPage.Location = new System.Drawing.Point(4, 22);
@@ -333,39 +327,6 @@
             this.animationTabPage.TabIndex = 2;
             this.animationTabPage.Text = "Animation / Graphics";
             this.animationTabPage.UseVisualStyleBackColor = true;
-            // 
-            // opacityGroupBox
-            // 
-            this.opacityGroupBox.BackColor = System.Drawing.SystemColors.Window;
-            this.opacityGroupBox.Controls.Add(this.opacityValueLabel);
-            this.opacityGroupBox.Controls.Add(this.opacityTrackBar);
-            this.opacityGroupBox.Location = new System.Drawing.Point(9, 242);
-            this.opacityGroupBox.Name = "opacityGroupBox";
-            this.opacityGroupBox.Size = new System.Drawing.Size(503, 98);
-            this.opacityGroupBox.TabIndex = 5;
-            this.opacityGroupBox.TabStop = false;
-            this.opacityGroupBox.Text = "Opacity";
-            // 
-            // opacityValueLabel
-            // 
-            this.opacityValueLabel.AutoSize = true;
-            this.opacityValueLabel.Location = new System.Drawing.Point(241, 75);
-            this.opacityValueLabel.Name = "opacityValueLabel";
-            this.opacityValueLabel.Size = new System.Drawing.Size(22, 13);
-            this.opacityValueLabel.TabIndex = 1;
-            this.opacityValueLabel.Text = "1.0";
-            // 
-            // opacityTrackBar
-            // 
-            this.opacityTrackBar.BackColor = System.Drawing.SystemColors.Window;
-            this.opacityTrackBar.Location = new System.Drawing.Point(10, 27);
-            this.opacityTrackBar.Maximum = 255;
-            this.opacityTrackBar.Name = "opacityTrackBar";
-            this.opacityTrackBar.Size = new System.Drawing.Size(483, 45);
-            this.opacityTrackBar.TabIndex = 0;
-            this.opacityTrackBar.TickFrequency = 5;
-            this.opacityTrackBar.Value = 1;
-            this.opacityTrackBar.Scroll += new System.EventHandler(this.opacityTrackBar_Scroll);
             // 
             // delayBetweenAnimationsGroupBox
             // 
@@ -644,9 +605,6 @@
             this.multiMonitorDisplayModsGroupBox.ResumeLayout(false);
             this.sizeTabPage.ResumeLayout(false);
             this.animationTabPage.ResumeLayout(false);
-            this.opacityGroupBox.ResumeLayout(false);
-            this.opacityGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.opacityTrackBar)).EndInit();
             this.delayBetweenAnimationsGroupBox.ResumeLayout(false);
             this.delayBetweenAnimationsGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delayBetweenAnimationsTrackBar)).EndInit();
@@ -689,9 +647,6 @@
         private System.Windows.Forms.Label delayBetweenAnimationsValueLabel;
         private System.Windows.Forms.TrackBar delayBetweenAnimationsTrackBar;
         private System.Windows.Forms.Button refreshImageListButton;
-        private System.Windows.Forms.GroupBox opacityGroupBox;
-        private System.Windows.Forms.Label opacityValueLabel;
-        private System.Windows.Forms.TrackBar opacityTrackBar;
         private System.Windows.Forms.TabPage LanguageTabPage;
         private System.Windows.Forms.GroupBox languageGroupBox;
         private System.Windows.Forms.Label languageAuthorLabel;

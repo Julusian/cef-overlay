@@ -24,11 +24,6 @@ namespace SettingsInformation
         /// </summary>
         public string path;
 
-        /// <summary>
-        /// Opacity of the LogoProperties image in pixels.
-        /// </summary>
-        public int defaultOpacity;
-
         public MultiMonitorDisplayModes multiMonitorDisplayMode;
 
         public bool disableMovement;
