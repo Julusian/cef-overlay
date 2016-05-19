@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainFormContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.dropFolderModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideLogosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,17 +51,6 @@
             this.animationTabPage = new System.Windows.Forms.TabPage();
             this.LanguageTabPage = new System.Windows.Forms.TabPage();
             this.dropFolderTab = new System.Windows.Forms.TabPage();
-            this.useAsDropFolderCheckBox = new System.Windows.Forms.CheckBox();
-            this.filePathsDataGridView = new System.Windows.Forms.DataGridView();
-            this.folderName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.folderPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.browseButton = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.TargetFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.filePathsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.copyMoveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.test1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.folderPathsFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.MainFormContextMenuStrip.SuspendLayout();
             this.settingsTabControl.SuspendLayout();
             this.selectImagesTabPage.SuspendLayout();
@@ -72,14 +60,11 @@
             this.animationTabPage.SuspendLayout();
             this.LanguageTabPage.SuspendLayout();
             this.dropFolderTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filePathsDataGridView)).BeginInit();
-            this.filePathsContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainFormContextMenuStrip
             // 
             this.MainFormContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dropFolderModeToolStripMenuItem,
             this.hideLogosToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.quitToolStripMenuItem});
@@ -87,14 +72,6 @@
             this.MainFormContextMenuStrip.Size = new System.Drawing.Size(174, 136);
             this.MainFormContextMenuStrip.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.MainFormContextMenuStrip_Closed);
             this.MainFormContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.MainFormContextMenuStrip_Opening);
-            // 
-            // dropFolderModeToolStripMenuItem
-            // 
-            this.dropFolderModeToolStripMenuItem.CheckOnClick = true;
-            this.dropFolderModeToolStripMenuItem.Name = "dropFolderModeToolStripMenuItem";
-            this.dropFolderModeToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.dropFolderModeToolStripMenuItem.Text = "Drop Folder Mode";
-            this.dropFolderModeToolStripMenuItem.Click += new System.EventHandler(this.dropFolderModeToolStripMenuItem_Click);
             // 
             // hideLogosToolStripMenuItem
             // 
@@ -289,102 +266,12 @@
             // 
             // dropFolderTab
             // 
-            this.dropFolderTab.Controls.Add(this.useAsDropFolderCheckBox);
-            this.dropFolderTab.Controls.Add(this.filePathsDataGridView);
             this.dropFolderTab.Location = new System.Drawing.Point(4, 22);
             this.dropFolderTab.Name = "dropFolderTab";
             this.dropFolderTab.Size = new System.Drawing.Size(520, 526);
             this.dropFolderTab.TabIndex = 6;
             this.dropFolderTab.Text = "Drop Folder";
             this.dropFolderTab.UseVisualStyleBackColor = true;
-            // 
-            // useAsDropFolderCheckBox
-            // 
-            this.useAsDropFolderCheckBox.AutoSize = true;
-            this.useAsDropFolderCheckBox.Location = new System.Drawing.Point(16, 11);
-            this.useAsDropFolderCheckBox.Name = "useAsDropFolderCheckBox";
-            this.useAsDropFolderCheckBox.Size = new System.Drawing.Size(313, 17);
-            this.useAsDropFolderCheckBox.TabIndex = 1;
-            this.useAsDropFolderCheckBox.Text = "Use Logo as a Drop Folder (Responds to Input, Drag && Drop)";
-            this.useAsDropFolderCheckBox.UseVisualStyleBackColor = true;
-            this.useAsDropFolderCheckBox.CheckedChanged += new System.EventHandler(this.useAsDropFolderCheckBox_CheckedChanged);
-            // 
-            // filePathsDataGridView
-            // 
-            this.filePathsDataGridView.AllowUserToAddRows = false;
-            this.filePathsDataGridView.AllowUserToDeleteRows = false;
-            this.filePathsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.filePathsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.folderName,
-            this.folderPath,
-            this.browseButton});
-            this.filePathsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.filePathsDataGridView.Location = new System.Drawing.Point(0, 54);
-            this.filePathsDataGridView.Name = "filePathsDataGridView";
-            this.filePathsDataGridView.RowHeadersVisible = false;
-            this.filePathsDataGridView.Size = new System.Drawing.Size(520, 472);
-            this.filePathsDataGridView.TabIndex = 0;
-            this.filePathsDataGridView.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.filePathsDataGridView_RowLeave);
-            this.filePathsDataGridView.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.filePathsDataGridView_RowValidated);
-            this.filePathsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.filePathsDataGridView_CellContentClick);
-            // 
-            // folderName
-            // 
-            this.folderName.HeaderText = "Folder Name";
-            this.folderName.Name = "folderName";
-            this.folderName.Width = 150;
-            // 
-            // folderPath
-            // 
-            this.folderPath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.folderPath.HeaderText = "Folder Path";
-            this.folderPath.Name = "folderPath";
-            // 
-            // browseButton
-            // 
-            this.browseButton.HeaderText = "Browse";
-            this.browseButton.Name = "browseButton";
-            this.browseButton.ReadOnly = true;
-            this.browseButton.Text = ".....";
-            this.browseButton.Width = 75;
-            // 
-            // TargetFolderBrowserDialog
-            // 
-            this.TargetFolderBrowserDialog.ShowNewFolderButton = false;
-            // 
-            // filePathsContextMenuStrip
-            // 
-            this.filePathsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyMoveToolStripMenuItem1,
-            this.test1ToolStripMenuItem,
-            this.test2ToolStripMenuItem});
-            this.filePathsContextMenuStrip.Name = "filePathsContextMenuStrip";
-            this.filePathsContextMenuStrip.Size = new System.Drawing.Size(147, 70);
-            this.filePathsContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.filePathsContextMenuStrip_Opening);
-            // 
-            // copyMoveToolStripMenuItem1
-            // 
-            this.copyMoveToolStripMenuItem1.Enabled = false;
-            this.copyMoveToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.copyMoveToolStripMenuItem1.Name = "copyMoveToolStripMenuItem1";
-            this.copyMoveToolStripMenuItem1.Size = new System.Drawing.Size(146, 22);
-            this.copyMoveToolStripMenuItem1.Text = "Copy/Move";
-            // 
-            // test1ToolStripMenuItem
-            // 
-            this.test1ToolStripMenuItem.Name = "test1ToolStripMenuItem";
-            this.test1ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.test1ToolStripMenuItem.Tag = "C:\\";
-            this.test1ToolStripMenuItem.Text = "Test 1";
-            this.test1ToolStripMenuItem.Click += new System.EventHandler(this.filePathToolStripMenuItem_Click);
-            // 
-            // test2ToolStripMenuItem
-            // 
-            this.test2ToolStripMenuItem.Name = "test2ToolStripMenuItem";
-            this.test2ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.test2ToolStripMenuItem.Tag = "D:\\";
-            this.test2ToolStripMenuItem.Text = "Test 2";
-            this.test2ToolStripMenuItem.Click += new System.EventHandler(this.filePathToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -415,8 +302,6 @@
             this.LanguageTabPage.ResumeLayout(false);
             this.dropFolderTab.ResumeLayout(false);
             this.dropFolderTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filePathsDataGridView)).EndInit();
-            this.filePathsContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -443,18 +328,6 @@
         private System.Windows.Forms.TabPage LanguageTabPage;
         private System.Windows.Forms.ToolStripMenuItem hideLogosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.FolderBrowserDialog TargetFolderBrowserDialog;
         private System.Windows.Forms.TabPage dropFolderTab;
-        private System.Windows.Forms.DataGridView filePathsDataGridView;
-        private System.Windows.Forms.ContextMenuStrip filePathsContextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem test1ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem test2ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copyMoveToolStripMenuItem1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn folderName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn folderPath;
-        private System.Windows.Forms.DataGridViewButtonColumn browseButton;
-        private System.Windows.Forms.FolderBrowserDialog folderPathsFolderBrowserDialog;
-        private System.Windows.Forms.CheckBox useAsDropFolderCheckBox;
-        private System.Windows.Forms.ToolStripMenuItem dropFolderModeToolStripMenuItem;
     }
 }

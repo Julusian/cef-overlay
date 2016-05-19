@@ -145,68 +145,13 @@ namespace CustomDesktopLogo
         {
             //SetZLevel(currWindowLevel);
         }
-
-        FileLocationActions action = FileLocationActions.Copy;
-
-        /// <summary> 
-        /// Change the cursor when using Drag and Drop
-        /// </summary>
-        protected override void OnDragEnter(DragEventArgs e)
-        {
-            if (e.KeyState == 12) // Ctrl + Shift is down
-            {
-                e.Effect = DragDropEffects.Link;
-                action = FileLocationActions.AddTargetFolder;
-            }
-            else if (e.KeyState == 8) // Ctrl key is down
-            {
-                e.Effect = DragDropEffects.Copy;
-                action = FileLocationActions.Copy;
-            }
-            else
-            {
-                e.Effect = DragDropEffects.Move;
-                action = FileLocationActions.Move;
-            }
-        }
-
-        /// <summary> 
-        /// Add files to the dock using Drag and Drop
-        /// </summary>
-        protected override void OnDragDrop(DragEventArgs e)
-        {
-            string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
-            if (files != null)
-            {
-                //Console.WriteLine(e.KeyState);
-                if (e.KeyState == 12) // Ctrl + Shift is down
-                {
-                    MainForm.Instance.addTargetFolder(files);
-                }
-                else
-                {
-                    if (e.KeyState == 8)
-                    {
-                        action = FileLocationActions.Copy;
-                    }
-                    else
-                    {
-                        action = FileLocationActions.Move;
-                    }
-                    MainForm.Instance.moveCopyToFilePathOptions(this, files, action);
-                }
-            }
-        }
-
+        
         private void filePathToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem aToolStripMenuItem = (ToolStripMenuItem)sender;
 
             switch ((String)aToolStripMenuItem.Tag)
             {
-                case "DropFolderMode":
-                    MainForm.Instance.useAsDropFolderCheckBoxChecked = aToolStripMenuItem.Checked;
-                    break;
                 case "HideLogos":
                     MainForm.Instance.hideLogosToolStripMenuItemChecked = aToolStripMenuItem.Checked;
                     MainForm.Instance.hideLogosToolStripMenuItem_Click(this, null);
@@ -234,16 +179,6 @@ namespace CustomDesktopLogo
             if (e.Button == MouseButtons.Right)
             {
                 filePathsContextMenuStrip.Items.Clear();
-
-                ToolStripMenuItem dropFolderModeToolStripMenuItem = new ToolStripMenuItem();
-                dropFolderModeToolStripMenuItem.Name = "dropFolderModeToolStripMenuItem";
-                dropFolderModeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-                dropFolderModeToolStripMenuItem.Text = "Drop folder mode";
-                dropFolderModeToolStripMenuItem.Tag = "DropFolderMode";
-                dropFolderModeToolStripMenuItem.CheckOnClick = true;
-                dropFolderModeToolStripMenuItem.Checked = MainForm.Instance.useAsDropFolderCheckBoxChecked;
-                dropFolderModeToolStripMenuItem.Click += new System.EventHandler(this.filePathToolStripMenuItem_Click);
-                filePathsContextMenuStrip.Items.Add(dropFolderModeToolStripMenuItem);
                 
                 ToolStripMenuItem hideLogosToolStripMenuItem = new ToolStripMenuItem();
                 hideLogosToolStripMenuItem.Name = "hideLogosToolStripMenuItem";
