@@ -37,8 +37,6 @@ namespace SettingsLoader
 
         public SettingsInformation.LogoProperties LogoProperties = new LogoProperties();
         public SettingsInformation.Language Language = new Language();
-        public SettingsInformation.General General = new General();
-        public SettingsInformation.GeneralAnimation GeneralAnimation = new GeneralAnimation();
         public SettingsInformation.FolderPaths FolderPaths = new FolderPaths();
 
         #endregion
@@ -88,8 +86,6 @@ namespace SettingsLoader
         {
             LogoProperties = new SettingsInformation.LogoProperties();
             Language = new SettingsInformation.Language();
-            General = new SettingsInformation.General();
-            GeneralAnimation = new SettingsInformation.GeneralAnimation();
             FolderPaths = new SettingsInformation.FolderPaths();
         }
 
@@ -268,52 +264,8 @@ namespace SettingsLoader
         private void LoadGeneralAnimation()
         {
             const String theSection = "GeneralAnimation";
-
-            #region framesPerSecond
-
-            DataVerifier = null;
-            DataVerifier = GetEntry(theSection, "framesPerSecond");
-
-            if (DataVerifier == null)
-            {
-                DataVerifier = @"20";
-                SetEntry(theSection, "framesPerSecond", DataVerifier);
-            }
-
-            try
-            {
-                GeneralAnimation.framesPerSecond = int.Parse(DataVerifier);
-            }
-            catch (Exception)
-            {
-                GeneralAnimation.framesPerSecond = 20;
-                SetEntry(theSection, "framesPerSecond", @"20");
-            }
-
-            #endregion
-
-            #region delayBetweenAnimations
-
-            DataVerifier = null;
-            DataVerifier = GetEntry(theSection, "delayBetweenAnimations");
-
-            if (DataVerifier == null)
-            {
-                DataVerifier = @"30";
-                SetEntry(theSection, "delayBetweenAnimations", DataVerifier);
-            }
-
-            try
-            {
-                GeneralAnimation.delayBetweenAnimations = int.Parse(DataVerifier);
-            }
-            catch (Exception)
-            {
-                GeneralAnimation.delayBetweenAnimations = 30;
-                SetEntry(theSection, "delayBetweenAnimations", @"30");
-            }
-
-            #endregion
+            
+            
         }
 
 

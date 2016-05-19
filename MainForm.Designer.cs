@@ -53,12 +53,6 @@
             this.allSameRadioButton = new System.Windows.Forms.RadioButton();
             this.sizeTabPage = new System.Windows.Forms.TabPage();
             this.animationTabPage = new System.Windows.Forms.TabPage();
-            this.delayBetweenAnimationsGroupBox = new System.Windows.Forms.GroupBox();
-            this.delayBetweenAnimationsValueLabel = new System.Windows.Forms.Label();
-            this.delayBetweenAnimationsTrackBar = new System.Windows.Forms.TrackBar();
-            this.framesPerSecondGroupBox = new System.Windows.Forms.GroupBox();
-            this.fpsValueLabel = new System.Windows.Forms.Label();
-            this.fpsTrackBar = new System.Windows.Forms.TrackBar();
             this.LanguageTabPage = new System.Windows.Forms.TabPage();
             this.languageGroupBox = new System.Windows.Forms.GroupBox();
             this.languageAuthorLabel = new System.Windows.Forms.Label();
@@ -72,7 +66,6 @@
             this.folderPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.browseButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.languageFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.AnimationTimer = new System.Windows.Forms.Timer(this.components);
             this.TargetFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.filePathsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyMoveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,10 +80,6 @@
             this.multiMonitorDisplayModsGroupBox.SuspendLayout();
             this.sizeTabPage.SuspendLayout();
             this.animationTabPage.SuspendLayout();
-            this.delayBetweenAnimationsGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.delayBetweenAnimationsTrackBar)).BeginInit();
-            this.framesPerSecondGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fpsTrackBar)).BeginInit();
             this.LanguageTabPage.SuspendLayout();
             this.languageGroupBox.SuspendLayout();
             this.dropFolderTab.SuspendLayout();
@@ -319,79 +308,12 @@
             // 
             // animationTabPage
             // 
-            this.animationTabPage.Controls.Add(this.delayBetweenAnimationsGroupBox);
-            this.animationTabPage.Controls.Add(this.framesPerSecondGroupBox);
             this.animationTabPage.Location = new System.Drawing.Point(4, 22);
             this.animationTabPage.Name = "animationTabPage";
             this.animationTabPage.Size = new System.Drawing.Size(520, 526);
             this.animationTabPage.TabIndex = 2;
             this.animationTabPage.Text = "Animation / Graphics";
             this.animationTabPage.UseVisualStyleBackColor = true;
-            // 
-            // delayBetweenAnimationsGroupBox
-            // 
-            this.delayBetweenAnimationsGroupBox.BackColor = System.Drawing.SystemColors.Window;
-            this.delayBetweenAnimationsGroupBox.Controls.Add(this.delayBetweenAnimationsValueLabel);
-            this.delayBetweenAnimationsGroupBox.Controls.Add(this.delayBetweenAnimationsTrackBar);
-            this.delayBetweenAnimationsGroupBox.Location = new System.Drawing.Point(9, 126);
-            this.delayBetweenAnimationsGroupBox.Name = "delayBetweenAnimationsGroupBox";
-            this.delayBetweenAnimationsGroupBox.Size = new System.Drawing.Size(503, 98);
-            this.delayBetweenAnimationsGroupBox.TabIndex = 4;
-            this.delayBetweenAnimationsGroupBox.TabStop = false;
-            this.delayBetweenAnimationsGroupBox.Text = "Delay Between Animations (seconds)";
-            // 
-            // delayBetweenAnimationsValueLabel
-            // 
-            this.delayBetweenAnimationsValueLabel.AutoSize = true;
-            this.delayBetweenAnimationsValueLabel.Location = new System.Drawing.Point(241, 75);
-            this.delayBetweenAnimationsValueLabel.Name = "delayBetweenAnimationsValueLabel";
-            this.delayBetweenAnimationsValueLabel.Size = new System.Drawing.Size(22, 13);
-            this.delayBetweenAnimationsValueLabel.TabIndex = 1;
-            this.delayBetweenAnimationsValueLabel.Text = "1.0";
-            // 
-            // delayBetweenAnimationsTrackBar
-            // 
-            this.delayBetweenAnimationsTrackBar.BackColor = System.Drawing.SystemColors.Window;
-            this.delayBetweenAnimationsTrackBar.Location = new System.Drawing.Point(10, 27);
-            this.delayBetweenAnimationsTrackBar.Maximum = 600;
-            this.delayBetweenAnimationsTrackBar.Name = "delayBetweenAnimationsTrackBar";
-            this.delayBetweenAnimationsTrackBar.Size = new System.Drawing.Size(483, 45);
-            this.delayBetweenAnimationsTrackBar.TabIndex = 0;
-            this.delayBetweenAnimationsTrackBar.TickFrequency = 10;
-            this.delayBetweenAnimationsTrackBar.Value = 1;
-            this.delayBetweenAnimationsTrackBar.Scroll += new System.EventHandler(this.delayBetweenAnimationsTrackBar_Scroll);
-            // 
-            // framesPerSecondGroupBox
-            // 
-            this.framesPerSecondGroupBox.BackColor = System.Drawing.SystemColors.Window;
-            this.framesPerSecondGroupBox.Controls.Add(this.fpsValueLabel);
-            this.framesPerSecondGroupBox.Controls.Add(this.fpsTrackBar);
-            this.framesPerSecondGroupBox.Location = new System.Drawing.Point(9, 12);
-            this.framesPerSecondGroupBox.Name = "framesPerSecondGroupBox";
-            this.framesPerSecondGroupBox.Size = new System.Drawing.Size(503, 98);
-            this.framesPerSecondGroupBox.TabIndex = 3;
-            this.framesPerSecondGroupBox.TabStop = false;
-            this.framesPerSecondGroupBox.Text = "Frames Per Second";
-            // 
-            // fpsValueLabel
-            // 
-            this.fpsValueLabel.AutoSize = true;
-            this.fpsValueLabel.Location = new System.Drawing.Point(241, 75);
-            this.fpsValueLabel.Name = "fpsValueLabel";
-            this.fpsValueLabel.Size = new System.Drawing.Size(22, 13);
-            this.fpsValueLabel.TabIndex = 1;
-            this.fpsValueLabel.Text = "1.0";
-            // 
-            // fpsTrackBar
-            // 
-            this.fpsTrackBar.BackColor = System.Drawing.SystemColors.Window;
-            this.fpsTrackBar.Location = new System.Drawing.Point(10, 27);
-            this.fpsTrackBar.Maximum = 30;
-            this.fpsTrackBar.Name = "fpsTrackBar";
-            this.fpsTrackBar.Size = new System.Drawing.Size(483, 45);
-            this.fpsTrackBar.TabIndex = 0;
-            this.fpsTrackBar.Value = 1;
-            this.fpsTrackBar.Scroll += new System.EventHandler(this.fpsTrackBar_Scroll);
             // 
             // LanguageTabPage
             // 
@@ -526,10 +448,6 @@
             this.languageFileDialog.Filter = "INI|*.ini";
             this.languageFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.languageFileDialog_FileOk);
             // 
-            // AnimationTimer
-            // 
-            this.AnimationTimer.Tick += new System.EventHandler(this.AnimationTimer_Tick);
-            // 
             // TargetFolderBrowserDialog
             // 
             this.TargetFolderBrowserDialog.ShowNewFolderButton = false;
@@ -605,12 +523,6 @@
             this.multiMonitorDisplayModsGroupBox.ResumeLayout(false);
             this.sizeTabPage.ResumeLayout(false);
             this.animationTabPage.ResumeLayout(false);
-            this.delayBetweenAnimationsGroupBox.ResumeLayout(false);
-            this.delayBetweenAnimationsGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.delayBetweenAnimationsTrackBar)).EndInit();
-            this.framesPerSecondGroupBox.ResumeLayout(false);
-            this.framesPerSecondGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fpsTrackBar)).EndInit();
             this.LanguageTabPage.ResumeLayout(false);
             this.languageGroupBox.ResumeLayout(false);
             this.languageGroupBox.PerformLayout();
@@ -640,12 +552,6 @@
         private System.Windows.Forms.RadioButton primaryOnlyRadioButton;
         private System.Windows.Forms.RadioButton allSameRadioButton;
         private System.Windows.Forms.Label selectImagesInstructionsLabel;
-        private System.Windows.Forms.GroupBox framesPerSecondGroupBox;
-        private System.Windows.Forms.Label fpsValueLabel;
-        private System.Windows.Forms.TrackBar fpsTrackBar;
-        private System.Windows.Forms.GroupBox delayBetweenAnimationsGroupBox;
-        private System.Windows.Forms.Label delayBetweenAnimationsValueLabel;
-        private System.Windows.Forms.TrackBar delayBetweenAnimationsTrackBar;
         private System.Windows.Forms.Button refreshImageListButton;
         private System.Windows.Forms.TabPage LanguageTabPage;
         private System.Windows.Forms.GroupBox languageGroupBox;
@@ -658,7 +564,6 @@
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpAboutToolStripMenuItem;
         private System.Windows.Forms.Button helpAboutButton;
-        private System.Windows.Forms.Timer AnimationTimer;
         private System.Windows.Forms.FolderBrowserDialog TargetFolderBrowserDialog;
         private System.Windows.Forms.TabPage dropFolderTab;
         private System.Windows.Forms.DataGridView filePathsDataGridView;

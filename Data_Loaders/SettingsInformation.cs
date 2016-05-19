@@ -34,17 +34,6 @@ namespace SettingsInformation
         public string path;
     }
 
-    public struct General
-    {
-
-    }
-
-    public struct GeneralAnimation
-    {
-        public int framesPerSecond;
-        public int delayBetweenAnimations;
-    }
-
     public struct FolderPaths
     {
         public bool useAsDropFolder;

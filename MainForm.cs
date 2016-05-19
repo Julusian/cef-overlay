@@ -88,12 +88,8 @@ namespace CustomDesktopLogo
         static List<Bitmap> imageBitmaps = new List<Bitmap>();
 
         static int imageBitmapsIndex = 0;
-
-        static int elapsedTime = 0;
-
+        
         static bool loaded = false;
-
-        static bool scaleImageFactorChanged = false;
 
         static bool isUpdatingLogoGraphics = false;
 
@@ -236,37 +232,7 @@ namespace CustomDesktopLogo
                     allSameRadioButton.Checked = true;
                     break;
             }
-
-            // Animation/Graphics tab
-            try
-            {
-                fpsTrackBar.Value = settingsINI.GeneralAnimation.framesPerSecond;
-            }
-            catch (Exception)
-            {
-                fpsTrackBar.Value = 0;
-            }
-            fpsValueLabel.Text = fpsTrackBar.Value.ToString();
-
-            try
-            {
-                delayBetweenAnimationsTrackBar.Value = settingsINI.GeneralAnimation.delayBetweenAnimations;
-            }
-            catch (Exception)
-            {
-                delayBetweenAnimationsTrackBar.Value = 0;
-            }
-            delayBetweenAnimationsValueLabel.Text = delayBetweenAnimationsTrackBar.Value.ToString();
             
-            try
-            {
-                AnimationTimer.Interval = 1000 / settingsINI.GeneralAnimation.framesPerSecond;
-            }
-            catch (Exception)
-            {
-                AnimationTimer.Interval = 100;
-            }
-
             TargetFolderBrowserDialog.SelectedPath = Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName
                 + Path.DirectorySeparatorChar + imagesDirectoryName + Path.DirectorySeparatorChar;
 
@@ -390,9 +356,6 @@ namespace CustomDesktopLogo
 
         private void loadLogos()
         {
-            AnimationTimer.Stop();
-            elapsedTime = settingsINI.GeneralAnimation.delayBetweenAnimations * 1000;
-
             closeAllLogos();
             imageBitmapsIndex = 0;
 
@@ -419,39 +382,6 @@ namespace CustomDesktopLogo
                 { }
             }
 
-            // initialize the animation
-            if (imageBitmaps != null && imageBitmaps.Count > 1 && settingsINI.GeneralAnimation.framesPerSecond > 0)
-            {
-                AnimationTimer.Stop();
-                elapsedTime = 0;
-                AnimationTimer.Interval = 1000 / settingsINI.GeneralAnimation.framesPerSecond;
-                AnimationTimer.Start();
-            }
-        }
-
-        private void AnimationTimer_Tick(object sender, EventArgs e)
-        {
-            if (elapsedTime < settingsINI.GeneralAnimation.delayBetweenAnimations * 1000)
-            {
-                elapsedTime += AnimationTimer.Interval;
-                return;
-            }
-
-            if (++imageBitmapsIndex < imageBitmaps.Count)
-            {
-                // just need to updateLogoGraphics
-            }
-            else
-            {
-                imageBitmapsIndex = 0;
-                elapsedTime = 0;
-            }
-
-            if (isUpdatingLogoGraphics == false)
-            {
-                isUpdatingLogoGraphics = true;
-                ThreadPool.QueueUserWorkItem(new WaitCallback(updateLogoGraphics));
-            }
         }
 
         private void updateLogoGraphics(object o)
@@ -543,20 +473,10 @@ namespace CustomDesktopLogo
         {
             if (hideLogosToolStripMenuItem.Checked == true)
             {
-                AnimationTimer.Stop();
-                elapsedTime = 0;
                 hideAllLogos();
             }
             else
             {
-                AnimationTimer.Stop();
-                elapsedTime = 0;
-
-                if (settingsINI.GeneralAnimation.framesPerSecond > 0 && imageBitmaps.Count > 1)
-                {
-                    AnimationTimer.Interval = 1000 / settingsINI.GeneralAnimation.framesPerSecond;
-                    AnimationTimer.Start();
-                }
                 showAllLogos();
             }
         }
@@ -590,7 +510,6 @@ namespace CustomDesktopLogo
                 }
                 else
                 {
-                    AnimationTimer.Stop();
                     allLogos[i].Hide();
                 }
             }
@@ -629,8 +548,6 @@ namespace CustomDesktopLogo
 
         private void MainFormContextMenuStrip_Closed(object sender, ToolStripDropDownClosedEventArgs e)
         {
-            if (AnimationTimer.Enabled == false)
-                MemoryUtility.ClearUnusedMemory();
         }
 
         #endregion
@@ -643,7 +560,6 @@ namespace CustomDesktopLogo
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Cef.Shutdown();
-            AnimationTimer.Stop();
             MainFormTrayIcon.Dispose();
             Environment.Exit(0);
             //closeAllLogos();
@@ -763,8 +679,6 @@ namespace CustomDesktopLogo
 
             // Animation / Graphics tab
             animationTabPage.Text = language.general.animationAndGraphics;
-            framesPerSecondGroupBox.Text = language.general.framesPerSecond;
-            delayBetweenAnimationsGroupBox.Text = language.general.delayBetweenAnimationsSeconds;
 
             // Language tab
             LanguageTabPage.Text = language.general.language;
@@ -827,8 +741,6 @@ namespace CustomDesktopLogo
 
         private void refreshImageListButton_Click(object sender, EventArgs e)
         {
-            AnimationTimer.Stop();
-            elapsedTime = 0;
             loadImageList();
         }
 
@@ -895,40 +807,7 @@ namespace CustomDesktopLogo
         #endregion
 
         #region Animation / Graphics Settings
-
-        private void delayBetweenAnimationsTrackBar_Scroll(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            settingsINI.SetEntry("GeneralAnimation", "delayBetweenAnimations", delayBetweenAnimationsTrackBar.Value.ToString());
-            settingsINI.GeneralAnimation.delayBetweenAnimations = delayBetweenAnimationsTrackBar.Value;
-            delayBetweenAnimationsValueLabel.Text = delayBetweenAnimationsTrackBar.Value.ToString();
-        }
-
-        private void fpsTrackBar_Scroll(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            settingsINI.SetEntry("GeneralAnimation", "framesPerSecond", fpsTrackBar.Value.ToString());
-            settingsINI.GeneralAnimation.framesPerSecond = fpsTrackBar.Value;
-            fpsValueLabel.Text = fpsTrackBar.Value.ToString();
-
-            if (settingsINI.GeneralAnimation.framesPerSecond <= 0 || imageBitmaps.Count <= 0)
-            {
-                AnimationTimer.Stop();
-                elapsedTime = settingsINI.GeneralAnimation.delayBetweenAnimations * 1000;
-            }
-            else
-            {
-                AnimationTimer.Stop();
-                elapsedTime = 0;
-                AnimationTimer.Interval = 1000 / settingsINI.GeneralAnimation.framesPerSecond;
-                AnimationTimer.Start();
-            }
-        }
-
+        
         private void sizeTabPage_Click(object sender, EventArgs e)
         {
             this.Select(true, true);
