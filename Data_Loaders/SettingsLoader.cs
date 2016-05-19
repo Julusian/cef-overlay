@@ -9,11 +9,9 @@
 using System;
 using System.Windows.Forms;
 using System.IO;
-using System.ComponentModel;
 
 using AMS.Profile;      // Allows for .ini file manipulation
 using SettingsInformation;
-using CustomDesktopLogo;
 
 namespace SettingsLoader
 {
@@ -31,7 +29,7 @@ namespace SettingsLoader
         private Profile SettingsINI;
         private String DataVerifier;
 
-        public SettingsInformation.LogoProperties LogoProperties = new LogoProperties();
+        public SettingsProperties SettingsProperties;
 
         #endregion
 
@@ -78,7 +76,7 @@ namespace SettingsLoader
         /// </summary>        
         public void InitializeSettingsInfoStructs()
         {
-            LogoProperties = new SettingsInformation.LogoProperties();
+            SettingsProperties = new SettingsProperties();
         }
 
         /// <summary>        
@@ -87,8 +85,22 @@ namespace SettingsLoader
         /// </summary>  
         public void SettingsLoaderLoadData()
         {
-            LoadLogoProperties();
+            const String theSection = "Settings";
 
+            #region url
+
+            DataVerifier = null;
+            DataVerifier = GetEntry(theSection, "url");
+
+            if (DataVerifier == null)
+            {
+                DataVerifier = @"";
+                SetEntry(theSection, "url", DataVerifier);
+            }
+
+            SettingsProperties.url = DataVerifier;
+
+            #endregion;
         }
 
         /// <summary>        
@@ -151,30 +163,5 @@ namespace SettingsLoader
         }
 
         #endregion
-
-        #region Load Each Section for LanguageInformation
-
-        private void LoadLogoProperties()
-        {
-            const String theSection = "LogoProperties";
-
-            #region path
-
-            DataVerifier = null;
-            DataVerifier = GetEntry(theSection, "path");
-
-            if (DataVerifier == null)
-            {
-                DataVerifier = @"";
-                SetEntry(theSection, "path", DataVerifier);
-            }
-
-            LogoProperties.path = DataVerifier;
-
-            #endregion
-            
-        }
-        
-        #endregion
-    }
+     }
 }

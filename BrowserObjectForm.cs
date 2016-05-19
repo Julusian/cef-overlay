@@ -3,17 +3,6 @@
 // Custom Desktop Logo is open source software licensed under GNU GENERAL PUBLIC LICENSE V3. 
 // Use it as you wish, but you must share your source code under the terms of use of the license.
 
-// Custom Desktop Logo allows you to create custom static and animated logos from PNG images.
-
-// Copyright (C) 2008 by Eric Wong. 
-// VideoInPicture@gmail.com
-// http://customdesktoplogo.wikidot.com
-// http://easyunicodepaster.wikidot.com
-// http://circledock.wikidot.com
-// http://videoinpicture.wikidot.com
-// http://webcamsignature.wikidot.com
-// http://windowextractor.wikidot.com
-
 // Uses AMS.Profile from http://www.codeproject.com/KB/cs/readwritexmlini.aspx for .ini file operations (Open source, non-specific license)
 // Uses hotkey selector component from http://www.codeproject.com/KB/miscctrl/systemhotkey.aspx (Open source, non-specific license)
 
@@ -26,43 +15,13 @@ using System.Runtime.InteropServices;
 
 namespace PerPixelAlphaForms
 {
-     /// <summary>
-    /// Creates an alpha blended form for the logo object.
-    /// </summary>
-    public class LogoPerPixelAlphaForm : PerPixelAlphaForm
-    {
-        /// <summary>
-        /// Allows us to set the window styles at creation time to allow for widget type objects.
-        /// </summary>
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-
-                //Set the form to be a layered type to allow for alpha blended graphics and makes it a toolwindow type to 
-                //remove it from the taskbar and Alt-Tab list.
-                cp.ExStyle = Constants.WindowExStyles.WS_EX_LAYERED | Constants.WindowExStyles.WS_EX_TOOLWINDOW;// | Constants.WindowExStyles.WS_EX_NOACTIVATE;
-
-                cp.Style = unchecked((int)0xD4000000);
-
-                return cp;
-            }
-        }
-    }
-
     /// <summary>
     /// This is the basic class that other dock items/objects inherits. 
     /// Essentially, it contains methods that manage the setting of the image bitmaps to be displayed.
     /// </summary>
-    public class PerPixelAlphaForm : Form
+    public class BrowserObjectForm : Form
     {
-        private Bitmap previousBitmap = new Bitmap(1, 1);
-
-        public Bitmap _Bitmap
-        {
-            get { return previousBitmap; }
-        }
+        private Bitmap _previousBitmap = new Bitmap(1, 1);
 
         #region Constructor
 
@@ -87,7 +46,7 @@ namespace PerPixelAlphaForms
         /// <summary> 
         /// PerPixelAlpha is the basis of alpha blended logo objects.
         /// </summary>
-        public PerPixelAlphaForm()
+        public BrowserObjectForm()
         {
             InitializeComponent();
             
@@ -106,12 +65,31 @@ namespace PerPixelAlphaForms
         {
             // Set the value of the double-buffering style bits to true.
             DoubleBuffered = true;
-            this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint |
+            SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint |
                             ControlStyles.AllPaintingInWmPaint, true);
-            this.UpdateStyles();
+            UpdateStyles();
         }
 
         #endregion
+
+        /// <summary>
+        /// Allows us to set the window styles at creation time to allow for widget type objects.
+        /// </summary>
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+
+                //Set the form to be a layered type to allow for alpha blended graphics and makes it a toolwindow type to 
+                //remove it from the taskbar and Alt-Tab list.
+                cp.ExStyle = Constants.WindowExStyles.WS_EX_LAYERED | Constants.WindowExStyles.WS_EX_TOOLWINDOW;// | Constants.WindowExStyles.WS_EX_NOACTIVATE;
+
+                cp.Style = unchecked((int)0xD4000000);
+
+                return cp;
+            }
+        }
 
         #region Alpha Blending
 
@@ -132,28 +110,28 @@ namespace PerPixelAlphaForms
                 // TODO - disposing of old bitmap, and ensuring old one is valid
                 if (bitmap == null)
                 {
-                    previousBitmap = new Bitmap(1, 1);
+                    _previousBitmap = new Bitmap(1, 1);
                 }
                 else
                 {
-                    previousBitmap.Dispose();
-                    previousBitmap = bitmap;
+                    _previousBitmap.Dispose();
+                    _previousBitmap = bitmap;
                 }
 
 
                 try
                 {
-                    hBitmap = previousBitmap.GetHbitmap(Color.FromArgb(0));
+                    hBitmap = _previousBitmap.GetHbitmap(Color.FromArgb(0));
                 }
                 catch (Exception)
                 {
-                    previousBitmap = new Bitmap(1, 1);
-                    hBitmap = previousBitmap.GetHbitmap(Color.FromArgb(0));
+                    _previousBitmap = new Bitmap(1, 1);
+                    hBitmap = _previousBitmap.GetHbitmap(Color.FromArgb(0));
                 }
 
                 oldBitmap = Win32.SelectObject(memDc, hBitmap);
 
-                Size size = new Size(previousBitmap.Width, previousBitmap.Height);
+                Size size = new Size(_previousBitmap.Width, _previousBitmap.Height);
 
                 Point pointSource = new Point(0, 0);
 
