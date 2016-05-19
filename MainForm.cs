@@ -21,7 +21,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms;
 using System.IO;
 
@@ -37,7 +36,6 @@ namespace CustomDesktopLogo
         #region Variables
 
         // The directory and file names used to store the resources for the program.
-        static readonly string imagesDirectoryName = @"Images";
         static readonly string systemFilesDirectoryName = @"System";
         static readonly string settingsDirectoryName = @"Settings";
         static readonly string configINIFileName = @"Config.ini";
@@ -52,7 +50,6 @@ namespace CustomDesktopLogo
         /// </summary>
         static List<LogoObject> allLogos = new List<LogoObject>();
         
-       
         static Hooks windowsHook = new Hooks();
 
         // These delegates enables asynchronous calls 
@@ -120,22 +117,6 @@ namespace CustomDesktopLogo
                 catch (Exception)
                 {
                     MessageBox.Show(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + @" is missing.", @"Custom Desktop Logo");
-                }
-            }
-
-            // Make sure the "Images" folder exists
-            if (!Directory.Exists(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + Path.DirectorySeparatorChar
-                + imagesDirectoryName))
-            {
-                try
-                {
-                    Directory.CreateDirectory(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + Path.DirectorySeparatorChar
-                        + imagesDirectoryName);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + Path.DirectorySeparatorChar
-                        + imagesDirectoryName + @" is missing.", @"Custom Desktop Logo");
                 }
             }
             

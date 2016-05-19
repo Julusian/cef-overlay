@@ -57,34 +57,11 @@ namespace PerPixelAlphaForms
     /// </summary>
     public class PerPixelAlphaForm : Form
     {
-        private Point previousLocation = new Point(0, 0);
-
-        public Point _Location
-        {
-            get
-            {
-                return previousLocation;
-            }
-        }
-
-        private int previousOpacity = 255;
-
-        public int _Opacity
-        {
-            get
-            {
-                return previousOpacity;
-            }
-        }
-
         private Bitmap previousBitmap = new Bitmap(1, 1);
 
         public Bitmap _Bitmap
         {
-            get
-            {
-                return previousBitmap;
-            }
+            get { return previousBitmap; }
         }
 
         #region Constructor
@@ -143,9 +120,7 @@ namespace PerPixelAlphaForms
         /// The size of the bitmap drawn is equal to the size of the given "bitmap".
         /// </summary>
         /// <param name="bitmap">The bitmap must be 32ppp with alpha-channel. This is a referenced parameter. Do not dispose of the bitmap before setting this to null.</param>
-        /// <param name="opacity">0-255</param>
-        public void SetBitmap(bool setNewBitmap, Bitmap bitmap, bool setNewOpacity, byte opacity, 
-            bool setNewPos, int newLeftPos, int newTopPos)
+        public void SetBitmap(Bitmap bitmap)
         {
             IntPtr hBitmap = IntPtr.Zero;
             IntPtr oldBitmap = IntPtr.Zero;
@@ -154,19 +129,17 @@ namespace PerPixelAlphaForms
 
             try
             {
-                if (setNewBitmap)
+                // TODO - disposing of old bitmap, and ensuring old one is valid
+                if (bitmap == null)
                 {
-                    if (bitmap == null)
-                    {
-                        previousBitmap = new Bitmap(1, 1);
-                    }
-                    else
-                    {
-                        previousBitmap.Dispose();
-                        previousBitmap = bitmap;
-                    }
-
+                    previousBitmap = new Bitmap(1, 1);
                 }
+                else
+                {
+                    previousBitmap.Dispose();
+                    previousBitmap = bitmap;
+                }
+
 
                 try
                 {
@@ -188,28 +161,12 @@ namespace PerPixelAlphaForms
                 blend.BlendOp = 0;
                 blend.BlendFlags = 0;
 
-                if (setNewOpacity)
-                {
-                    blend.SourceConstantAlpha = opacity;
-                    previousOpacity = (int)opacity;
-                }
-                else
-                {
-                    blend.SourceConstantAlpha = (byte)previousOpacity;
-                }
-
+                blend.SourceConstantAlpha = 255;
                 blend.AlphaFormat = 1;
 
-                if (setNewPos == true)
-                {
-                    Point topPos = new Point(newLeftPos, newTopPos);
-                    previousLocation = topPos;
-                    Win32.UpdateLayeredWindow(Handle, screenDc, ref topPos, ref size, memDc, ref pointSource, 0, ref blend, Win32.ULW_ALPHA);
-                }
-                else
-                {
-                    Win32.UpdateLayeredWindow(Handle, screenDc, ref previousLocation, ref size, memDc, ref pointSource, 0, ref blend, Win32.ULW_ALPHA);
-                }
+                Point topPos = new Point(0, 0);
+                Win32.UpdateLayeredWindow(Handle, screenDc, ref topPos, ref size, memDc, ref pointSource, 0, ref blend, Win32.ULW_ALPHA);
+
             }
             catch (Exception e)
             {

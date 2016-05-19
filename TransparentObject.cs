@@ -21,7 +21,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Timers;
 using PerPixelAlphaForms;
@@ -54,35 +53,17 @@ namespace CustomDesktopLogo
         private void InitializeComponent()
         {
             this.components = new Container();
-            this.filePathsContextMenuStrip = new ContextMenuStrip(components);
-            this.filePathsContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // filePathsContextMenuStrip
-            // 
-            this.filePathsContextMenuStrip.Items.AddRange(new ToolStripItem[] {});
-            this.filePathsContextMenuStrip.Opening += filePathsContextMenuStrip_Opening;
-            this.filePathsContextMenuStrip.Name = "filePathsContextMenuStrip";
-            this.filePathsContextMenuStrip.Size = new Size(153, 70);
             // 
             // TransparentObject
             // 
             
             this.ClientSize = new Size(1, 1);
             this.Name = "TransparentObject";
-            this.ContextMenuStrip = filePathsContextMenuStrip;
-            this.MouseUp += LogoObject_MouseUp;
-            this.filePathsContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
-        }
-  
-        void filePathsContextMenuStrip_Opening(object sender, CancelEventArgs e)
-        {
         }
 
         #endregion
-
-        public ContextMenuStrip filePathsContextMenuStrip;
 
         #region Constructor
 
@@ -97,7 +78,7 @@ namespace CustomDesktopLogo
             InitializeComponent();
             AllowDrop = false;
             this.Show();
-            SetBitmap(true, new Bitmap(1,1), true, (byte)255, true, 0, 0);
+            SetBitmap(new Bitmap(1,1));
             SetZLevel();
             SetTransparencyToInput();
 
@@ -114,9 +95,8 @@ namespace CustomDesktopLogo
             var bitmap = browser.ScreenshotOrNull();
             if (bitmap != null)
             {
-                SetBitmap(true, bitmap, true, 255, true, 0, 0);
+                SetBitmap(bitmap);
             }
-        
         }
 
         public void SetZLevel()
@@ -130,71 +110,6 @@ namespace CustomDesktopLogo
             Pinvoke.Win32.SetWindowLong(this.Handle, Constants.GWLConstants.GWL_EXSTYLE, Constants.WindowExStyles.WS_EX_LAYERED | Constants.WindowExStyles.WS_EX_TOOLWINDOW | Constants.WindowExStyles.WS_EX_TRANSPARENT);
         }
         
-        private void filePathToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem aToolStripMenuItem = (ToolStripMenuItem)sender;
-
-            switch ((String)aToolStripMenuItem.Tag)
-            {
-                case "HideLogos":
-                    MainForm.Instance.hideLogosToolStripMenuItemChecked = aToolStripMenuItem.Checked;
-                    MainForm.Instance.hideLogosToolStripMenuItem_Click(this, null);
-                    break;
-                case "Settings":
-                    MainForm.Instance.settingsToolStripMenuItem_Click(this, null);
-                    break;
-                case "Quit":
-                    MainForm.Instance.Close();
-                    break;
-                default:
-                    //do nothing
-                    break;
-            }
-        }
-        
-        public void showContextMenu()
-        {
-            this.filePathsContextMenuStrip.Show(MousePosition.X, MousePosition.Y);
-            this.filePathsContextMenuStrip.BringToFront();
-        }
-
-        void LogoObject_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                filePathsContextMenuStrip.Items.Clear();
-                
-                ToolStripMenuItem hideLogosToolStripMenuItem = new ToolStripMenuItem();
-                hideLogosToolStripMenuItem.Name = "hideLogosToolStripMenuItem";
-                hideLogosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-                hideLogosToolStripMenuItem.Text = "Hide logo";
-                hideLogosToolStripMenuItem.Tag = "HideLogos";
-                hideLogosToolStripMenuItem.CheckOnClick = true;
-                hideLogosToolStripMenuItem.Checked = MainForm.Instance.hideLogosToolStripMenuItemChecked;
-                hideLogosToolStripMenuItem.Click += new System.EventHandler(this.filePathToolStripMenuItem_Click);
-                filePathsContextMenuStrip.Items.Add(hideLogosToolStripMenuItem);
-
-                ToolStripMenuItem settingsToolStripMenuItem = new ToolStripMenuItem();
-                settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-                settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-                settingsToolStripMenuItem.Text = "Settings";
-                settingsToolStripMenuItem.Tag = "Settings";
-                settingsToolStripMenuItem.Click += new System.EventHandler(this.filePathToolStripMenuItem_Click);
-                filePathsContextMenuStrip.Items.Add(settingsToolStripMenuItem);
-                
-                ToolStripMenuItem quitToolStripMenuItem = new ToolStripMenuItem();
-                quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-                quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-                quitToolStripMenuItem.Text = "Quit";
-                quitToolStripMenuItem.Tag = "Quit";
-                quitToolStripMenuItem.Click += new System.EventHandler(this.filePathToolStripMenuItem_Click);
-                filePathsContextMenuStrip.Items.Add(quitToolStripMenuItem);
-
-                filePathsContextMenuStrip.Show();
-                filePathsContextMenuStrip.Left = MousePosition.X;
-                filePathsContextMenuStrip.Top = MousePosition.Y;
-            }
-        }
         #endregion
     }
 
