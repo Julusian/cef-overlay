@@ -54,18 +54,12 @@
             this.sizeTabPage = new System.Windows.Forms.TabPage();
             this.animationTabPage = new System.Windows.Forms.TabPage();
             this.LanguageTabPage = new System.Windows.Forms.TabPage();
-            this.languageGroupBox = new System.Windows.Forms.GroupBox();
-            this.languageAuthorLabel = new System.Windows.Forms.Label();
-            this.languageNameAndVersionLabel = new System.Windows.Forms.Label();
-            this.languageBrowseButton = new System.Windows.Forms.Button();
-            this.languageFilePathTextBox = new System.Windows.Forms.TextBox();
             this.dropFolderTab = new System.Windows.Forms.TabPage();
             this.useAsDropFolderCheckBox = new System.Windows.Forms.CheckBox();
             this.filePathsDataGridView = new System.Windows.Forms.DataGridView();
             this.folderName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.folderPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.browseButton = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.languageFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.TargetFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.filePathsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyMoveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,7 +75,6 @@
             this.sizeTabPage.SuspendLayout();
             this.animationTabPage.SuspendLayout();
             this.LanguageTabPage.SuspendLayout();
-            this.languageGroupBox.SuspendLayout();
             this.dropFolderTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filePathsDataGridView)).BeginInit();
             this.filePathsContextMenuStrip.SuspendLayout();
@@ -317,69 +310,12 @@
             // 
             // LanguageTabPage
             // 
-            this.LanguageTabPage.Controls.Add(this.languageGroupBox);
             this.LanguageTabPage.Location = new System.Drawing.Point(4, 22);
             this.LanguageTabPage.Name = "LanguageTabPage";
             this.LanguageTabPage.Size = new System.Drawing.Size(520, 526);
             this.LanguageTabPage.TabIndex = 5;
             this.LanguageTabPage.Text = "Language";
             this.LanguageTabPage.UseVisualStyleBackColor = true;
-            // 
-            // languageGroupBox
-            // 
-            this.languageGroupBox.Controls.Add(this.languageAuthorLabel);
-            this.languageGroupBox.Controls.Add(this.languageNameAndVersionLabel);
-            this.languageGroupBox.Controls.Add(this.languageBrowseButton);
-            this.languageGroupBox.Controls.Add(this.languageFilePathTextBox);
-            this.languageGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.languageGroupBox.Location = new System.Drawing.Point(8, 12);
-            this.languageGroupBox.Name = "languageGroupBox";
-            this.languageGroupBox.Size = new System.Drawing.Size(504, 82);
-            this.languageGroupBox.TabIndex = 68;
-            this.languageGroupBox.TabStop = false;
-            this.languageGroupBox.Text = "Language";
-            // 
-            // languageAuthorLabel
-            // 
-            this.languageAuthorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.languageAuthorLabel.Location = new System.Drawing.Point(245, 47);
-            this.languageAuthorLabel.Name = "languageAuthorLabel";
-            this.languageAuthorLabel.Size = new System.Drawing.Size(197, 29);
-            this.languageAuthorLabel.TabIndex = 63;
-            this.languageAuthorLabel.Text = "By: Eric Wong";
-            this.languageAuthorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // languageNameAndVersionLabel
-            // 
-            this.languageNameAndVersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.languageNameAndVersionLabel.Location = new System.Drawing.Point(15, 47);
-            this.languageNameAndVersionLabel.Name = "languageNameAndVersionLabel";
-            this.languageNameAndVersionLabel.Size = new System.Drawing.Size(197, 29);
-            this.languageNameAndVersionLabel.TabIndex = 62;
-            this.languageNameAndVersionLabel.Text = "English 1.0";
-            this.languageNameAndVersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // languageBrowseButton
-            // 
-            this.languageBrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.languageBrowseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.languageBrowseButton.Location = new System.Drawing.Point(383, 19);
-            this.languageBrowseButton.Name = "languageBrowseButton";
-            this.languageBrowseButton.Size = new System.Drawing.Size(55, 20);
-            this.languageBrowseButton.TabIndex = 61;
-            this.languageBrowseButton.Text = ".....";
-            this.languageBrowseButton.UseVisualStyleBackColor = true;
-            this.languageBrowseButton.Click += new System.EventHandler(this.languageBrowseButton_Click);
-            // 
-            // languageFilePathTextBox
-            // 
-            this.languageFilePathTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.languageFilePathTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.languageFilePathTextBox.Location = new System.Drawing.Point(69, 19);
-            this.languageFilePathTextBox.Name = "languageFilePathTextBox";
-            this.languageFilePathTextBox.ReadOnly = true;
-            this.languageFilePathTextBox.Size = new System.Drawing.Size(308, 20);
-            this.languageFilePathTextBox.TabIndex = 0;
             // 
             // dropFolderTab
             // 
@@ -442,11 +378,6 @@
             this.browseButton.ReadOnly = true;
             this.browseButton.Text = ".....";
             this.browseButton.Width = 75;
-            // 
-            // languageFileDialog
-            // 
-            this.languageFileDialog.Filter = "INI|*.ini";
-            this.languageFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.languageFileDialog_FileOk);
             // 
             // TargetFolderBrowserDialog
             // 
@@ -524,8 +455,6 @@
             this.sizeTabPage.ResumeLayout(false);
             this.animationTabPage.ResumeLayout(false);
             this.LanguageTabPage.ResumeLayout(false);
-            this.languageGroupBox.ResumeLayout(false);
-            this.languageGroupBox.PerformLayout();
             this.dropFolderTab.ResumeLayout(false);
             this.dropFolderTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filePathsDataGridView)).EndInit();
@@ -554,12 +483,6 @@
         private System.Windows.Forms.Label selectImagesInstructionsLabel;
         private System.Windows.Forms.Button refreshImageListButton;
         private System.Windows.Forms.TabPage LanguageTabPage;
-        private System.Windows.Forms.GroupBox languageGroupBox;
-        private System.Windows.Forms.Label languageAuthorLabel;
-        private System.Windows.Forms.Label languageNameAndVersionLabel;
-        private System.Windows.Forms.Button languageBrowseButton;
-        private System.Windows.Forms.TextBox languageFilePathTextBox;
-        private System.Windows.Forms.OpenFileDialog languageFileDialog;
         private System.Windows.Forms.ToolStripMenuItem hideLogosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpAboutToolStripMenuItem;

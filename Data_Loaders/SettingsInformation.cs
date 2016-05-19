@@ -29,11 +29,6 @@ namespace SettingsInformation
         public bool disableMovement;
     }
 
-    public struct Language
-    {
-        public string path;
-    }
-
     public struct FolderPaths
     {
         public bool useAsDropFolder;

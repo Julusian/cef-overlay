@@ -36,7 +36,6 @@ namespace SettingsLoader
         private String DataVerifier;
 
         public SettingsInformation.LogoProperties LogoProperties = new LogoProperties();
-        public SettingsInformation.Language Language = new Language();
         public SettingsInformation.FolderPaths FolderPaths = new FolderPaths();
 
         #endregion
@@ -85,7 +84,6 @@ namespace SettingsLoader
         public void InitializeSettingsInfoStructs()
         {
             LogoProperties = new SettingsInformation.LogoProperties();
-            Language = new SettingsInformation.Language();
             FolderPaths = new SettingsInformation.FolderPaths();
         }
 
@@ -97,9 +95,6 @@ namespace SettingsLoader
         {
             LoadFolderPaths();
             LoadLogoProperties();
-            LoadLanguage();
-            LoadGeneral();
-            LoadGeneralAnimation();
 
         }
 
@@ -233,42 +228,7 @@ namespace SettingsLoader
 
             #endregion
         }
-
-
-        private void LoadLanguage()
-        {
-            const String theSection = "Language";
-
-            #region Path
-
-            DataVerifier = null;
-            DataVerifier = GetEntry(theSection, "path");
-
-            if (DataVerifier == null)
-            {
-                DataVerifier = @"";
-                SetEntry(theSection, "path", DataVerifier);
-            }
-
-            Language.path = DataVerifier;
-
-            #endregion
-        }
-
-
-        private void LoadGeneral()
-        {
-            const String theSection = "General";
-        }
-
-        private void LoadGeneralAnimation()
-        {
-            const String theSection = "GeneralAnimation";
-            
-            
-        }
-
-
+        
         private void LoadFolderPaths()
         {
             const String theSection = "FolderPaths";

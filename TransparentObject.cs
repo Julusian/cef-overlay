@@ -105,7 +105,7 @@ namespace CustomDesktopLogo
             SetTransparencyToInput(MainForm.settingsINI.FolderPaths.useAsDropFolder);
 
             timer = new System.Timers.Timer(50);
-            browser = new ChromiumWebBrowser("poltergeist.julus.uk");
+            browser = new ChromiumWebBrowser("google.com");
             timer.Elapsed += UpdateBitmap;
             timer.AutoReset = true;
             timer.Enabled = true;
@@ -272,7 +272,7 @@ namespace CustomDesktopLogo
                 ToolStripMenuItem dropFolderModeToolStripMenuItem = new ToolStripMenuItem();
                 dropFolderModeToolStripMenuItem.Name = "dropFolderModeToolStripMenuItem";
                 dropFolderModeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-                dropFolderModeToolStripMenuItem.Text = MainForm.language.mainContextMenu.dropFolderMode;
+                dropFolderModeToolStripMenuItem.Text = "Drop folder mode";
                 dropFolderModeToolStripMenuItem.Tag = "DropFolderMode";
                 dropFolderModeToolStripMenuItem.CheckOnClick = true;
                 dropFolderModeToolStripMenuItem.Checked = MainForm.Instance.useAsDropFolderCheckBoxChecked;
@@ -282,7 +282,7 @@ namespace CustomDesktopLogo
                 ToolStripMenuItem disableMovementModeToolStripMenuItem = new ToolStripMenuItem();
                 disableMovementModeToolStripMenuItem.Name = "disableMovementModeToolStripMenuItem";
                 disableMovementModeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-                disableMovementModeToolStripMenuItem.Text = MainForm.language.mainContextMenu.disableMovement;
+                disableMovementModeToolStripMenuItem.Text = "Disable movement";
                 disableMovementModeToolStripMenuItem.Tag = "DisableMovement";
                 if (MainForm.Instance.useAsDropFolderCheckBoxChecked)
                     disableMovementModeToolStripMenuItem.Enabled = true;
@@ -296,7 +296,7 @@ namespace CustomDesktopLogo
                 ToolStripMenuItem hideLogosToolStripMenuItem = new ToolStripMenuItem();
                 hideLogosToolStripMenuItem.Name = "hideLogosToolStripMenuItem";
                 hideLogosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-                hideLogosToolStripMenuItem.Text = MainForm.language.mainContextMenu.hideLogo;
+                hideLogosToolStripMenuItem.Text = "Hide logo";
                 hideLogosToolStripMenuItem.Tag = "HideLogos";
                 hideLogosToolStripMenuItem.CheckOnClick = true;
                 hideLogosToolStripMenuItem.Checked = MainForm.Instance.hideLogosToolStripMenuItemChecked;
@@ -306,7 +306,7 @@ namespace CustomDesktopLogo
                 ToolStripMenuItem settingsToolStripMenuItem = new ToolStripMenuItem();
                 settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
                 settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-                settingsToolStripMenuItem.Text = MainForm.language.mainContextMenu.settings;
+                settingsToolStripMenuItem.Text = "Settings";
                 settingsToolStripMenuItem.Tag = "Settings";
                 settingsToolStripMenuItem.Click += new System.EventHandler(this.filePathToolStripMenuItem_Click);
                 filePathsContextMenuStrip.Items.Add(settingsToolStripMenuItem);
@@ -314,7 +314,7 @@ namespace CustomDesktopLogo
                 ToolStripMenuItem helpAboutToolStripMenuItem = new ToolStripMenuItem();
                 helpAboutToolStripMenuItem.Name = "helpAboutToolStripMenuItem";
                 helpAboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-                helpAboutToolStripMenuItem.Text = MainForm.language.mainContextMenu.helpabout;
+                helpAboutToolStripMenuItem.Text = "Help/About";
                 helpAboutToolStripMenuItem.Tag = "HelpAbout";
                 helpAboutToolStripMenuItem.Click += new System.EventHandler(this.filePathToolStripMenuItem_Click);
                 filePathsContextMenuStrip.Items.Add(helpAboutToolStripMenuItem);
@@ -322,7 +322,7 @@ namespace CustomDesktopLogo
                 ToolStripMenuItem quitToolStripMenuItem = new ToolStripMenuItem();
                 quitToolStripMenuItem.Name = "quitToolStripMenuItem";
                 quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-                quitToolStripMenuItem.Text = MainForm.language.mainContextMenu.quit;
+                quitToolStripMenuItem.Text = "Quit";
                 quitToolStripMenuItem.Tag = "Quit";
                 quitToolStripMenuItem.Click += new System.EventHandler(this.filePathToolStripMenuItem_Click);
                 filePathsContextMenuStrip.Items.Add(quitToolStripMenuItem);

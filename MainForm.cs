@@ -62,15 +62,9 @@ namespace CustomDesktopLogo
         // The directory and file names used to store the resources for the program.
         static readonly string imagesDirectoryName = @"Images";
         static readonly string systemFilesDirectoryName = @"System";
-        static readonly string languagesDirectoryName = @"Languages";
         static readonly string settingsDirectoryName = @"Settings";
         static readonly string configINIFileName = @"Config.ini";
         static readonly int numFolderPaths = 20;
-
-        /// <summary>
-        /// The language collection used for displayed words.
-        /// </summary>
-        public static LanguageLoader.LanguageLoader language;
 
         /// <summary>
         /// The general settings for the program.
@@ -87,11 +81,8 @@ namespace CustomDesktopLogo
         /// </summary>
         static List<Bitmap> imageBitmaps = new List<Bitmap>();
 
-        static int imageBitmapsIndex = 0;
-        
+       
         static bool loaded = false;
-
-        static bool isUpdatingLogoGraphics = false;
 
         static Hooks windowsHook = new Hooks();
 
@@ -181,23 +172,7 @@ namespace CustomDesktopLogo
                         + imagesDirectoryName + @" is missing.", @"Custom Desktop Logo");
                 }
             }
-
-            // Make sure the "Languages" folder exists
-            if (!Directory.Exists(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + Path.DirectorySeparatorChar
-                + languagesDirectoryName))
-            {
-                try
-                {
-                    Directory.CreateDirectory(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + Path.DirectorySeparatorChar
-                        + languagesDirectoryName);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + Path.DirectorySeparatorChar
-                        + languagesDirectoryName + @" is missing.", @"Custom Desktop Logo");
-                }
-            }
-
+            
             // Make sure the "Settings" folder exists
             if (!Directory.Exists(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + Path.DirectorySeparatorChar
                 + settingsDirectoryName))
@@ -309,7 +284,7 @@ namespace CustomDesktopLogo
 
                         if (memoryCounter.WorkingSetSize > 100000000)
                         {
-                            if (MessageBox.Show(language.errorMessages.usingTooMuchMemoryContinueQuestion, language.errorMessages.customDesktopLogo, MessageBoxButtons.YesNo) == DialogResult.No)
+                            if (MessageBox.Show("Too much memory. Continue?", "Error custom logo", MessageBoxButtons.YesNo) == DialogResult.No)
                             {
                                 imagesListBox.Items.Clear();
                                 imageBitmaps.Clear();
@@ -357,7 +332,6 @@ namespace CustomDesktopLogo
         private void loadLogos()
         {
             closeAllLogos();
-            imageBitmapsIndex = 0;
 
             if (imageBitmaps == null || imageBitmaps.Count <= 0)
                 return;
@@ -382,22 +356,6 @@ namespace CustomDesktopLogo
                 { }
             }
 
-        }
-
-        private void updateLogoGraphics(object o)
-        {
-            try
-            {
-               // This method is unsafe for multi-threaded coded
-                for (int i = 0; i < allLogos.Count; i++)
-                {
-                    allLogos[i].SetBitmap(true, imageBitmaps[imageBitmapsIndex], true, 255, false, 0, 0);
-                }
-            }
-            catch (Exception)
-            { }
-
-            isUpdatingLogoGraphics = false;
         }
 
         private void window_ForegroundChanged(IntPtr hWnd)
@@ -581,136 +539,40 @@ namespace CustomDesktopLogo
 
         #region Language Methods
 
-        private void languageBrowseButton_Click(object sender, EventArgs e)
-        {
-            languageFileDialog.InitialDirectory = Application.StartupPath + Path.DirectorySeparatorChar + languagesDirectoryName;
-            languageFileDialog.ShowDialog();
-        }
-
-        private void languageFileDialog_FileOk(object sender, CancelEventArgs e)
-        {
-            String newLanguagePath;
-            if (languageFileDialog.FileName.StartsWith(Application.StartupPath + Path.DirectorySeparatorChar))
-            {
-                newLanguagePath = @"." + languageFileDialog.FileName.Substring(Application.StartupPath.Length);
-            }
-            else
-            {
-                newLanguagePath = languageFileDialog.FileName;
-            }
-
-            settingsINI.SetEntry("Language", "path", newLanguagePath);
-
-            loadLanguage();
-        }
-
         private void loadLanguage()
         {
-            #region Load Language Data from File
+            this.Text = "Custom logo";
+            this.MainFormTrayIcon.Text = "Custom logo";
 
-            string languagePath = (String)settingsINI.GetEntry("Language", "path");
-
-            if (languagePath == null || languagePath.Length <= 0)
-            {
-                if (Directory.Exists(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + Path.DirectorySeparatorChar + languagesDirectoryName) == false)
-                {
-                    try
-                    {
-                        Directory.CreateDirectory(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + Path.DirectorySeparatorChar + languagesDirectoryName);
-                    }
-                    catch (Exception)
-                    { }
-                }
-
-                settingsINI.SetEntry("Language", "path", @"." + Path.DirectorySeparatorChar + systemFilesDirectoryName +
-                    Path.DirectorySeparatorChar + languagesDirectoryName + Path.DirectorySeparatorChar + @"ExampleLanguageFile.ini");
-                language = new LanguageLoader.LanguageLoader(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName +
-                    Path.DirectorySeparatorChar + languagesDirectoryName + Path.DirectorySeparatorChar + @"ExampleLanguageFile.ini");
-
-                languageFilePathTextBox.Text = @"." + Path.DirectorySeparatorChar + systemFilesDirectoryName +
-                    Path.DirectorySeparatorChar + languagesDirectoryName + Path.DirectorySeparatorChar + @"ExampleLanguageFile.ini";
-            }
-            else
-            {
-                languageFilePathTextBox.Text = languagePath;
-                if (languagePath.StartsWith(@"." + Path.DirectorySeparatorChar))
-                {
-                    languagePath = Application.StartupPath + languagePath.Substring(1);
-                }
-                language = new LanguageLoader.LanguageLoader(languagePath);
-            }
-
-            if (LanguageFileIsValid())
-                languageFilePathTextBox.BackColor = Color.LightGray;
-            else
-                languageFilePathTextBox.BackColor = Color.Red;
-
-            #endregion
-
-            this.Text = language.general.customDesktopLogo;
-            this.MainFormTrayIcon.Text = language.general.customDesktopLogo;
-
-            quitToolStripMenuItem.Text = language.mainContextMenu.quit;
-            helpAboutToolStripMenuItem.Text = language.mainContextMenu.helpabout;
-            hideLogosToolStripMenuItem.Text = language.mainContextMenu.hideLogo;
-            settingsToolStripMenuItem.Text = language.mainContextMenu.settings;
-            dropFolderModeToolStripMenuItem.Text = language.mainContextMenu.dropFolderMode;
-            disableMovementToolStripMenuItem.Text = language.mainContextMenu.disableMovement;
+            quitToolStripMenuItem.Text = "Quit";
+            helpAboutToolStripMenuItem.Text = "Help/About";
+            hideLogosToolStripMenuItem.Text = "Hide Logo";
+            settingsToolStripMenuItem.Text = "Settings";
+            dropFolderModeToolStripMenuItem.Text = "Drop mode";
+            disableMovementToolStripMenuItem.Text = "Disable movement";
 
             // Select Images tab
-            selectImagesTabPage.Text = language.general.selectImages;
-            changeImagesButton.Text = language.general.changeImageFolder;
-            refreshImageListButton.Text = language.general.refreshImageList;
-            selectImagesInstructionsLabel.Text = language.general.instructions + "\r\r" + language.general.instruction1 + "\r"
-                + language.general.instruction2 + "\r" + language.general.instruction3 + "\r" + language.general.instruction4
-                + "\r" + language.general.instruction5;
-            helpAboutButton.Text = language.general.helpabout;
+            selectImagesTabPage.Text = "Select images";
+            changeImagesButton.Text = "Change folder";
+            refreshImageListButton.Text = "Refresh list";
+            selectImagesInstructionsLabel.Text = "SELECT";
+            helpAboutButton.Text = "Help/About";
 
             // Location tab
-            locationTabPage.Text = language.general.location;
-            multiMonitorDisplayModsGroupBox.Text = language.general.multiMonitorDisplayModes;
-            allSameRadioButton.Text = language.general.allSame;
-            primaryOnlyRadioButton.Text = language.general.primaryOnly;
-            allButPrimaryRadioButton.Text = language.general.allButPrimary;
-            virtualMonitorRadioButton.Text = language.general.virtualMonitor;
+            locationTabPage.Text = "Locations";
+            multiMonitorDisplayModsGroupBox.Text = "Monitor modes";
+            allSameRadioButton.Text = "All same";
+            primaryOnlyRadioButton.Text = "Primary only";
+            allButPrimaryRadioButton.Text = "All but primary";
+            virtualMonitorRadioButton.Text = "Virtual monitor";
             
             // Size tab
-            sizeTabPage.Text = language.general.size;
+            sizeTabPage.Text = "Size";
 
             // Animation / Graphics tab
-            animationTabPage.Text = language.general.animationAndGraphics;
-
-            // Language tab
-            LanguageTabPage.Text = language.general.language;
-            languageGroupBox.Text = language.general.language;
-            languageNameAndVersionLabel.Text = language.languageFile.languageName + " " + language.languageFile.languageFileVersion;
-            languageAuthorLabel.Text = language.general.createdBy + " " + language.languageFile.fileAuthor;
-
-            // Drop Folder tab
-            dropFolderTab.Text = language.general.dropFolder;
-            disableLogoMovementCB.Text = language.mainContextMenu.disableMovement;
-            useAsDropFolderCheckBox.Text = language.general.useAsDropFolderWithExplanation;
-            folderName.HeaderText = language.general.folderName;
-            folderPath.HeaderText = language.general.folderPath;
-            browseButton.HeaderText = language.general.browse;
+            animationTabPage.Text = "Animation";
         }
-
-        // A string used to hold the version identifier of this build
-        public readonly String programVersion = @"2.0";
-
-        public bool LanguageFileIsValid()
-        {
-            String[] compatibleProgramVersions = { programVersion };
-            String versionStated = language.languageFile.intendedForProgramVersion.Trim().ToUpper();
-            foreach (String compareVersion in compatibleProgramVersions)
-            {
-                if (compareVersion.Trim().ToUpper() == versionStated)
-                    return true;
-            }
-
-            return false;
-        }
-
+        
         #endregion
 
         #region Change Image List
@@ -857,7 +719,7 @@ namespace CustomDesktopLogo
             }
             else
             {
-                MessageBox.Show((String)sendToolStripMenuItem.Tag + @" :" + @language.errorMessages.folderDoesNotExist, language.errorMessages.customDesktopLogo);
+                MessageBox.Show((String)sendToolStripMenuItem.Tag + @" :" + "Folder not exist", "Custom logo");
             }
         }
 
