@@ -70,7 +70,6 @@ namespace CustomDesktopLogo
             
             this.ClientSize = new Size(1, 1);
             this.Name = "TransparentObject";
-            this.Activated += LogoObject_Activated;
             this.ContextMenuStrip = filePathsContextMenuStrip;
             this.MouseUp += LogoObject_MouseUp;
             this.filePathsContextMenuStrip.ResumeLayout(false);
@@ -100,7 +99,7 @@ namespace CustomDesktopLogo
             this.Show();
             SetBitmap(true, new Bitmap(1,1), true, (byte)255, true, 0, 0);
             SetZLevel();
-            SetTransparencyToInput(MainForm.settingsINI.FolderPaths.useAsDropFolder);
+            SetTransparencyToInput();
 
             timer = new System.Timers.Timer(50);
             browser = new ChromiumWebBrowser("google.com");
@@ -118,7 +117,6 @@ namespace CustomDesktopLogo
                 SetBitmap(true, bitmap, true, 255, true, 0, 0);
             }
         
-        //Console.WriteLine("BITMAP: " + bitmap);
         }
 
         public void SetZLevel()
@@ -127,23 +125,9 @@ namespace CustomDesktopLogo
                 | Pinvoke.Win32.SWP_NOACTIVATE | Pinvoke.Win32.SWP_NOOWNERZORDER | Pinvoke.Win32.SWP_NOREDRAW | Pinvoke.Win32.SWP_NOSENDCHANGING);
         }
 
-        public void SetTransparencyToInput(bool respond)
+        public void SetTransparencyToInput()
         {
-            //long originalLong = Pinvoke.Win32.GetWindowLong(this.Handle, Constants.GWLConstants.GWL_EXSTYLE);
-
-            if (respond)
-            {
-                Pinvoke.Win32.SetWindowLong(this.Handle, Constants.GWLConstants.GWL_EXSTYLE, Constants.WindowExStyles.WS_EX_LAYERED | Constants.WindowExStyles.WS_EX_TOOLWINDOW);
-            }
-            else
-            {
-                Pinvoke.Win32.SetWindowLong(this.Handle, Constants.GWLConstants.GWL_EXSTYLE, Constants.WindowExStyles.WS_EX_LAYERED | Constants.WindowExStyles.WS_EX_TOOLWINDOW | Constants.WindowExStyles.WS_EX_TRANSPARENT);
-            }
-        }
-
-        void LogoObject_Activated(object sender, EventArgs e)
-        {
-            //SetZLevel(currWindowLevel);
+            Pinvoke.Win32.SetWindowLong(this.Handle, Constants.GWLConstants.GWL_EXSTYLE, Constants.WindowExStyles.WS_EX_LAYERED | Constants.WindowExStyles.WS_EX_TOOLWINDOW | Constants.WindowExStyles.WS_EX_TRANSPARENT);
         }
         
         private void filePathToolStripMenuItem_Click(object sender, EventArgs e)

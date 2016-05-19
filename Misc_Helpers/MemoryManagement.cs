@@ -18,13 +18,6 @@
 // Uses hotkey selector component from http://www.codeproject.com/KB/miscctrl/systemhotkey.aspx (Open source, non-specific license)
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.ComponentModel;
-using System.Windows.Forms;
-using System.Drawing;
-using System.Text;
 
 
 namespace MemoryManagement

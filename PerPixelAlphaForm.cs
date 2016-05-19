@@ -21,11 +21,8 @@
 
 using System;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-
-using ImageOperations;
 
 namespace PerPixelAlphaForms
 {
@@ -34,10 +31,6 @@ namespace PerPixelAlphaForms
     /// </summary>
     public class LogoPerPixelAlphaForm : PerPixelAlphaForm
     {
-        public LogoPerPixelAlphaForm()
-        {
-        }
-
         /// <summary>
         /// Allows us to set the window styles at creation time to allow for widget type objects.
         /// </summary>

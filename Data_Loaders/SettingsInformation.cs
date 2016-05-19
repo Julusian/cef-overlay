@@ -26,16 +26,5 @@ namespace SettingsInformation
 
         public MultiMonitorDisplayModes multiMonitorDisplayMode;
     }
-
-    public struct FolderPaths
-    {
-        public bool useAsDropFolder;
-        public List<FolderPathItem> folderPaths;
-    }
-
-    public struct FolderPathItem
-    {
-        public String path;
-        public String displayName;
-    }
+    
 }

@@ -100,7 +100,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Misc_Helpers\ImageOperations.cs" />
     <Compile Include="Misc_Helpers\MemoryManagement.cs" />
     <Compile Include="Data_Loaders\SettingsInformation.cs" />
     <Compile Include="Data_Loaders\SettingsLoader.cs" />

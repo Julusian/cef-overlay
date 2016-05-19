@@ -220,17 +220,6 @@ namespace CustomDesktopLogo
 
             hideLogosToolStripMenuItem.Checked = false;
 
-            // Set whether the logos respond to input
-            for (int i = 0; allLogos != null && i < allLogos.Count; i++)
-            {
-                try
-                {
-                    allLogos[i].SetTransparencyToInput(settingsINI.FolderPaths.useAsDropFolder);
-                }
-                catch (Exception)
-                { }
-            }
-
         }
 
         private void window_ForegroundChanged(IntPtr hWnd)

@@ -33,7 +33,6 @@ namespace SettingsLoader
         private String DataVerifier;
 
         public SettingsInformation.LogoProperties LogoProperties = new LogoProperties();
-        public SettingsInformation.FolderPaths FolderPaths = new FolderPaths();
 
         #endregion
 
@@ -81,7 +80,6 @@ namespace SettingsLoader
         public void InitializeSettingsInfoStructs()
         {
             LogoProperties = new SettingsInformation.LogoProperties();
-            FolderPaths = new SettingsInformation.FolderPaths();
         }
 
         /// <summary>        
@@ -90,7 +88,6 @@ namespace SettingsLoader
         /// </summary>  
         public void SettingsLoaderLoadData()
         {
-            LoadFolderPaths();
             LoadLogoProperties();
 
         }
@@ -204,74 +201,6 @@ namespace SettingsLoader
             
         }
         
-        private void LoadFolderPaths()
-        {
-            const String theSection = "FolderPaths";
-            FolderPaths.folderPaths = new List<FolderPathItem>();
-
-            int numFolderPaths = 20;
-            String DataVerifier;
-
-            #region Use as drop folder
-
-            DataVerifier = null;
-            DataVerifier = GetEntry(theSection, "useAsDropFolder");
-
-            if (DataVerifier == null)
-            {
-                DataVerifier = false.ToString();
-                SetEntry(theSection, "useAsDropFolder", DataVerifier);
-            }
-
-            try
-            {
-                FolderPaths.useAsDropFolder = bool.Parse(DataVerifier);
-            }
-            catch (Exception)
-            {
-                FolderPaths.useAsDropFolder = false;
-                SetEntry(theSection, "useAsDropFolder", false.ToString());
-            }
-
-            #endregion
-
-            // Ensure data integrity
-            if (!SettingsINI.HasSection(theSection))
-            {
-                for (int i = 0; i < numFolderPaths; i++)
-                {
-                    SetEntry(theSection, i.ToString() + @"-FolderPath", "");
-                    SetEntry(theSection, i.ToString() + @"-DisplayName", "");
-                }
-            }
-            else
-            {
-                for (int i = 0; i < numFolderPaths; i++)
-                {
-                    if (!SettingsINI.HasEntry(theSection, i.ToString() + @"-FolderPath"))
-                    {
-                        SetEntry(theSection, i.ToString() + @"-FolderPath", "");
-                    }
-
-                    if (!SettingsINI.HasEntry(theSection, i.ToString() + @"-DisplayName"))
-                    {
-                        SetEntry(theSection, i.ToString() + @"-DisplayName", "");
-                    }
-                }
-            }
-
-
-            for (int i = 0; i < numFolderPaths; i++)
-            {
-                FolderPathItem newFolderPathItem = new FolderPathItem();
-                newFolderPathItem.path = GetEntry(theSection, i.ToString() + @"-FolderPath");
-                newFolderPathItem.displayName = GetEntry(theSection, i.ToString() + @"-DisplayName");
-                FolderPaths.folderPaths.Add(newFolderPathItem);
-            }
-            
-        }
-
-
         #endregion
     }
 }
