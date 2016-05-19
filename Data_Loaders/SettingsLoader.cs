@@ -257,31 +257,6 @@ namespace SettingsLoader
 
             #endregion
 
-            #region windowLevel
-
-            TypeConverter windowLevelConverter = TypeDescriptor.GetConverter(typeof(WindowLevelTypes));
-
-            DataVerifier = null;
-            DataVerifier = GetEntry(theSection, "windowLevel");
-
-            if (DataVerifier == null)
-            {
-                DataVerifier = WindowLevelTypes.Topmost.ToString();
-                SetEntry(theSection, "windowLevel", DataVerifier);
-            }
-
-            try
-            {
-                LogoProperties.windowLevel = (WindowLevelTypes)windowLevelConverter.ConvertFromString(DataVerifier);
-            }
-            catch (Exception)
-            {
-                LogoProperties.windowLevel = WindowLevelTypes.Topmost;
-                SetEntry(theSection, "windowLevel", WindowLevelTypes.Topmost.ToString());
-            }
-
-            #endregion
-
             #region multiMonitorDisplayMode
 
             TypeConverter multiMonitorDisplayModeConverter = TypeDescriptor.GetConverter(typeof(MultiMonitorDisplayModes));

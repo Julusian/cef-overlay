@@ -36,7 +36,7 @@ namespace CustomDesktopLogo
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -53,29 +53,28 @@ namespace CustomDesktopLogo
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogoObject));
-            this.filePathsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.components = new Container();
+            this.filePathsContextMenuStrip = new ContextMenuStrip(components);
             this.filePathsContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // filePathsContextMenuStrip
             // 
-            this.filePathsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {});
-            this.filePathsContextMenuStrip.Opening += new CancelEventHandler(filePathsContextMenuStrip_Opening);
+            this.filePathsContextMenuStrip.Items.AddRange(new ToolStripItem[] {});
+            this.filePathsContextMenuStrip.Opening += filePathsContextMenuStrip_Opening;
             this.filePathsContextMenuStrip.Name = "filePathsContextMenuStrip";
-            this.filePathsContextMenuStrip.Size = new System.Drawing.Size(153, 70);
+            this.filePathsContextMenuStrip.Size = new Size(153, 70);
             // 
             // TransparentObject
             // 
             
-            this.ClientSize = new System.Drawing.Size(1, 1);
+            this.ClientSize = new Size(1, 1);
             this.Name = "TransparentObject";
-            this.Activated += new EventHandler(LogoObject_Activated);
-            this.MouseMove += new MouseEventHandler(LogoObject_MouseMove);
+            this.Activated += LogoObject_Activated;
+            this.MouseMove += LogoObject_MouseMove;
             this.ContextMenuStrip = filePathsContextMenuStrip;
-            this.MouseUp += new MouseEventHandler(LogoObject_MouseUp);
-            this.MouseDown += new MouseEventHandler(LogoObject_MouseDown);
+            this.MouseUp += LogoObject_MouseUp;
+            this.MouseDown += LogoObject_MouseDown;
             this.filePathsContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
         }
@@ -86,8 +85,7 @@ namespace CustomDesktopLogo
 
         #endregion
 
-        public System.Windows.Forms.ContextMenuStrip filePathsContextMenuStrip;
-        public ToolStripContainer toolStripContainer = new System.Windows.Forms.ToolStripContainer();
+        public ContextMenuStrip filePathsContextMenuStrip;
 
         #region Constructor
 
@@ -97,14 +95,13 @@ namespace CustomDesktopLogo
         /// <summary> 
         /// Create an alpha blended form with a transparent background.
         /// </summary>
-        public LogoObject(Bitmap images, Point initialLocation, int initialOpacity, WindowLevelTypes initialLevel)
+        public LogoObject(Bitmap images, Point initialLocation, int initialOpacity)
         {
-            currWindowLevel = initialLevel;
             InitializeComponent();
             AllowDrop = false;
             this.Show();
             SetBitmap(true, images, true, (byte)initialOpacity, true, initialLocation.X, initialLocation.Y);
-            SetZLevel(initialLevel);
+            SetZLevel();
             SetTransparencyToInput(MainForm.settingsINI.FolderPaths.useAsDropFolder);
 
             timer = new System.Timers.Timer(50);
@@ -126,19 +123,10 @@ namespace CustomDesktopLogo
         //Console.WriteLine("BITMAP: " + bitmap);
         }
 
-        public void SetZLevel(WindowLevelTypes level)
+        public void SetZLevel()
         {
-            if (filePathsContextMenuStrip.Visible)
-                return;
-            if (level == WindowLevelTypes.AlwaysOnBottom)
-                Pinvoke.Win32.SetWindowPos(this.Handle, (IntPtr)Pinvoke.Win32.HWND_BOTTOM, 0, 0, 0, 0, Pinvoke.Win32.SWP_NOMOVE | Pinvoke.Win32.SWP_NOSIZE
-                    | Pinvoke.Win32.SWP_NOACTIVATE | Pinvoke.Win32.SWP_NOOWNERZORDER | Pinvoke.Win32.SWP_NOREDRAW | Pinvoke.Win32.SWP_NOSENDCHANGING);
-            else if (level == WindowLevelTypes.Normal)
-                Pinvoke.Win32.SetWindowPos(this.Handle, (IntPtr)Pinvoke.Win32.HWND_NOTOPMOST, 0, 0, 0, 0, Pinvoke.Win32.SWP_NOMOVE | Pinvoke.Win32.SWP_NOSIZE
-                    | Pinvoke.Win32.SWP_NOACTIVATE | Pinvoke.Win32.SWP_NOOWNERZORDER | Pinvoke.Win32.SWP_NOREDRAW | Pinvoke.Win32.SWP_NOSENDCHANGING);
-            else  // Topmost
-                Pinvoke.Win32.SetWindowPos(this.Handle, (IntPtr)Pinvoke.Win32.HWND_TOPMOST, 0, 0, 0, 0, Pinvoke.Win32.SWP_NOMOVE | Pinvoke.Win32.SWP_NOSIZE
-                    | Pinvoke.Win32.SWP_NOACTIVATE | Pinvoke.Win32.SWP_NOOWNERZORDER | Pinvoke.Win32.SWP_NOREDRAW | Pinvoke.Win32.SWP_NOSENDCHANGING);
+            Pinvoke.Win32.SetWindowPos(Handle, (IntPtr)Pinvoke.Win32.HWND_TOPMOST, 0, 0, 0, 0, Pinvoke.Win32.SWP_NOMOVE | Pinvoke.Win32.SWP_NOSIZE
+                | Pinvoke.Win32.SWP_NOACTIVATE | Pinvoke.Win32.SWP_NOOWNERZORDER | Pinvoke.Win32.SWP_NOREDRAW | Pinvoke.Win32.SWP_NOSENDCHANGING);
         }
 
         public void SetTransparencyToInput(bool respond)
@@ -155,7 +143,6 @@ namespace CustomDesktopLogo
             }
         }
 
-        WindowLevelTypes currWindowLevel;
         void LogoObject_Activated(object sender, EventArgs e)
         {
             //SetZLevel(currWindowLevel);

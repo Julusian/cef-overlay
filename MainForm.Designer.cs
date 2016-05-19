@@ -67,10 +67,6 @@
             this.bottomMiddleRadioButton = new System.Windows.Forms.RadioButton();
             this.bottomLeftRadioButton = new System.Windows.Forms.RadioButton();
             this.centreRadioButton = new System.Windows.Forms.RadioButton();
-            this.zLevelGroupBox = new System.Windows.Forms.GroupBox();
-            this.normalRadioButton = new System.Windows.Forms.RadioButton();
-            this.alwaysOnBottomRadioButton = new System.Windows.Forms.RadioButton();
-            this.topmostRadioButton = new System.Windows.Forms.RadioButton();
             this.sizeTabPage = new System.Windows.Forms.TabPage();
             this.scaleImagesFactorGroupBox = new System.Windows.Forms.GroupBox();
             this.scaleImageFactorValueLabel = new System.Windows.Forms.Label();
@@ -115,7 +111,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.xOffsetNumericUpDown)).BeginInit();
             this.multiMonitorDisplayModsGroupBox.SuspendLayout();
             this.displayLocationGroupBox.SuspendLayout();
-            this.zLevelGroupBox.SuspendLayout();
             this.sizeTabPage.SuspendLayout();
             this.scaleImagesFactorGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scaleImageFactorTrackBar)).BeginInit();
@@ -279,7 +274,6 @@
             this.locationTabPage.Controls.Add(this.locationOffsetGroupBox);
             this.locationTabPage.Controls.Add(this.multiMonitorDisplayModsGroupBox);
             this.locationTabPage.Controls.Add(this.displayLocationGroupBox);
-            this.locationTabPage.Controls.Add(this.zLevelGroupBox);
             this.locationTabPage.Location = new System.Drawing.Point(4, 22);
             this.locationTabPage.Name = "locationTabPage";
             this.locationTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -540,51 +534,6 @@
             this.centreRadioButton.Text = "Centre";
             this.centreRadioButton.UseVisualStyleBackColor = true;
             this.centreRadioButton.CheckedChanged += new System.EventHandler(this.centreRadioButton_CheckedChanged);
-            // 
-            // zLevelGroupBox
-            // 
-            this.zLevelGroupBox.Controls.Add(this.normalRadioButton);
-            this.zLevelGroupBox.Controls.Add(this.alwaysOnBottomRadioButton);
-            this.zLevelGroupBox.Controls.Add(this.topmostRadioButton);
-            this.zLevelGroupBox.Location = new System.Drawing.Point(14, 11);
-            this.zLevelGroupBox.Name = "zLevelGroupBox";
-            this.zLevelGroupBox.Size = new System.Drawing.Size(171, 120);
-            this.zLevelGroupBox.TabIndex = 0;
-            this.zLevelGroupBox.TabStop = false;
-            this.zLevelGroupBox.Text = "Z-Level";
-            // 
-            // normalRadioButton
-            // 
-            this.normalRadioButton.Location = new System.Drawing.Point(12, 45);
-            this.normalRadioButton.Name = "normalRadioButton";
-            this.normalRadioButton.Size = new System.Drawing.Size(143, 37);
-            this.normalRadioButton.TabIndex = 2;
-            this.normalRadioButton.TabStop = true;
-            this.normalRadioButton.Text = "Normal";
-            this.normalRadioButton.UseVisualStyleBackColor = true;
-            this.normalRadioButton.CheckedChanged += new System.EventHandler(this.normalRadioButton_CheckedChanged);
-            // 
-            // alwaysOnBottomRadioButton
-            // 
-            this.alwaysOnBottomRadioButton.Location = new System.Drawing.Point(12, 77);
-            this.alwaysOnBottomRadioButton.Name = "alwaysOnBottomRadioButton";
-            this.alwaysOnBottomRadioButton.Size = new System.Drawing.Size(143, 37);
-            this.alwaysOnBottomRadioButton.TabIndex = 1;
-            this.alwaysOnBottomRadioButton.TabStop = true;
-            this.alwaysOnBottomRadioButton.Text = "Always on Bottom";
-            this.alwaysOnBottomRadioButton.UseVisualStyleBackColor = true;
-            this.alwaysOnBottomRadioButton.CheckedChanged += new System.EventHandler(this.alwaysOnBottomRadioButton_CheckedChanged);
-            // 
-            // topmostRadioButton
-            // 
-            this.topmostRadioButton.Location = new System.Drawing.Point(12, 13);
-            this.topmostRadioButton.Name = "topmostRadioButton";
-            this.topmostRadioButton.Size = new System.Drawing.Size(143, 37);
-            this.topmostRadioButton.TabIndex = 0;
-            this.topmostRadioButton.TabStop = true;
-            this.topmostRadioButton.Text = "Topmost";
-            this.topmostRadioButton.UseVisualStyleBackColor = true;
-            this.topmostRadioButton.CheckedChanged += new System.EventHandler(this.topmostRadioButton_CheckedChanged);
             // 
             // sizeTabPage
             // 
@@ -957,7 +906,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.xOffsetNumericUpDown)).EndInit();
             this.multiMonitorDisplayModsGroupBox.ResumeLayout(false);
             this.displayLocationGroupBox.ResumeLayout(false);
-            this.zLevelGroupBox.ResumeLayout(false);
             this.sizeTabPage.ResumeLayout(false);
             this.scaleImagesFactorGroupBox.ResumeLayout(false);
             this.scaleImagesFactorGroupBox.PerformLayout();
@@ -995,9 +943,6 @@
         private System.Windows.Forms.TabPage animationTabPage;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.GroupBox displayLocationGroupBox;
-        private System.Windows.Forms.GroupBox zLevelGroupBox;
-        private System.Windows.Forms.RadioButton alwaysOnBottomRadioButton;
-        private System.Windows.Forms.RadioButton topmostRadioButton;
         private System.Windows.Forms.GroupBox multiMonitorDisplayModsGroupBox;
         private System.Windows.Forms.TabPage sizeTabPage;
         private System.Windows.Forms.GroupBox locationOffsetGroupBox;
@@ -1052,7 +997,6 @@
         private System.Windows.Forms.ToolStripMenuItem test1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem test2ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyMoveToolStripMenuItem1;
-        private System.Windows.Forms.RadioButton normalRadioButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn folderName;
         private System.Windows.Forms.DataGridViewTextBoxColumn folderPath;
         private System.Windows.Forms.DataGridViewButtonColumn browseButton;

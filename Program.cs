@@ -23,11 +23,9 @@
 
 using System;
 using System.Diagnostics;		
-using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Threading;
 using CefSharp;
-using CustomDesktopLogo.Properties;
 
 namespace CustomDesktopLogo
 {

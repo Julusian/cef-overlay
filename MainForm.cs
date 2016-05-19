@@ -20,10 +20,8 @@
 // Uses hotkey selector component from http://www.codeproject.com/KB/miscctrl/systemhotkey.aspx (Open source, non-specific license)
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -32,11 +30,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Diagnostics;
 
-using AMS.Profile;
 using CefSharp;
-using PerPixelAlphaForms;
-using LanguageLoader;
-using SettingsLoader;
 using ImageOperations;
 using MemoryManagement;
 using Hook;
@@ -44,12 +38,6 @@ using Hook;
 
 namespace CustomDesktopLogo
 {
-    public enum WindowLevelTypes
-    {
-        Topmost,
-        Normal,
-        AlwaysOnBottom
-    }
 
     public enum LocationTypes
     {
@@ -118,8 +106,6 @@ namespace CustomDesktopLogo
         static int elapsedTime = 0;
 
         static bool loaded = false;
-
-        static Size desiredLogoSize = new Size(1, 1);
 
         static bool scaleImageFactorChanged = false;
 
@@ -257,14 +243,6 @@ namespace CustomDesktopLogo
 
             loadLanguage();
             loadImageList();
-
-            // Location Tab settings
-            if (settingsINI.LogoProperties.windowLevel == WindowLevelTypes.AlwaysOnBottom)
-                alwaysOnBottomRadioButton.Checked = true;
-            else if (settingsINI.LogoProperties.windowLevel == WindowLevelTypes.Normal)
-                normalRadioButton.Checked = true;
-            else
-                topmostRadioButton.Checked = true;
 
             switch (settingsINI.LogoProperties.multiMonitorDisplayMode)
             {
@@ -475,7 +453,7 @@ namespace CustomDesktopLogo
                     allLogos.Add(new LogoObject(imageBitmaps[0], 
                         new Point(Screen.PrimaryScreen.Bounds.Right - (int)(imageBitmaps[0].Width) + settingsINI.LogoProperties.xOffset,
                             Screen.PrimaryScreen.Bounds.Bottom - (int)(imageBitmaps[0].Height) + settingsINI.LogoProperties.yOffset),
-                        settingsINI.LogoProperties.defaultOpacity, settingsINI.LogoProperties.windowLevel));
+                        settingsINI.LogoProperties.defaultOpacity));
                     break;
             }
 
@@ -545,17 +523,14 @@ namespace CustomDesktopLogo
 
         private void window_ForegroundChanged(IntPtr hWnd)
         {
-            if (settingsINI.LogoProperties.windowLevel == WindowLevelTypes.AlwaysOnBottom || settingsINI.LogoProperties.windowLevel == WindowLevelTypes.Topmost)
+            for (int i = 0; allLogos != null && i < allLogos.Count; i++)
             {
-                for (int i = 0; allLogos != null && i < allLogos.Count; i++)
+                try
                 {
-                    try
-                    {
-                        allLogos[i].SetZLevel(settingsINI.LogoProperties.windowLevel);
-                    }
-                    catch (Exception)
-                    { }
+                    allLogos[i].SetZLevel();
                 }
+                catch (Exception)
+                { }
             }
         }
 
@@ -828,10 +803,6 @@ namespace CustomDesktopLogo
 
             // Location tab
             locationTabPage.Text = language.general.location;
-            zLevelGroupBox.Text = language.general.zLevel;
-            normalRadioButton.Text = language.general.normal;
-            topmostRadioButton.Text = language.general.topmost;
-            alwaysOnBottomRadioButton.Text = language.general.alwaysOnBottom;
             multiMonitorDisplayModsGroupBox.Text = language.general.multiMonitorDisplayModes;
             allSameRadioButton.Text = language.general.allSame;
             primaryOnlyRadioButton.Text = language.general.primaryOnly;
@@ -933,49 +904,7 @@ namespace CustomDesktopLogo
         #endregion
 
         #region Window Level and Multi-Monitor Display Modes
-
-        private void topmostRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (topmostRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "windowLevel", WindowLevelTypes.Topmost.ToString());
-            settingsINI.LogoProperties.windowLevel = WindowLevelTypes.Topmost;
-
-            loadLogos();
-        }
-
-        private void alwaysOnBottomRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (alwaysOnBottomRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "windowLevel", WindowLevelTypes.AlwaysOnBottom.ToString());
-            settingsINI.LogoProperties.windowLevel = WindowLevelTypes.AlwaysOnBottom;
-
-            loadLogos();
-        }
-
-        private void normalRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            if (normalRadioButton.Checked == false)
-                return;
-
-            settingsINI.SetEntry("LogoProperties", "windowLevel", WindowLevelTypes.Normal.ToString());
-            settingsINI.LogoProperties.windowLevel = WindowLevelTypes.Normal;
-
-            loadLogos();
-        }
-
+        
         private void allSameRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (loaded == false)

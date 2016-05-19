@@ -38,8 +38,6 @@ namespace SettingsInformation
         /// </summary>
         public int scaleImagesFactor;
 
-        public WindowLevelTypes windowLevel;
-
         public MultiMonitorDisplayModes multiMonitorDisplayMode;
 
         public LocationTypes displayLocation;
