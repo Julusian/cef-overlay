@@ -25,8 +25,6 @@ namespace SettingsInformation
         public string path;
 
         public MultiMonitorDisplayModes multiMonitorDisplayMode;
-
-        public bool disableMovement;
     }
 
     public struct FolderPaths

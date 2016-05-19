@@ -228,7 +228,6 @@ namespace CustomDesktopLogo
 
             // For the Folder Paths tab
             useAsDropFolderCheckBox.Checked = settingsINI.FolderPaths.useAsDropFolder;
-            disableLogoMovementCB.Checked = settingsINI.LogoProperties.disableMovement;
 
             filePathsDataGridView.Rows.Add(numFolderPaths);
 
@@ -415,18 +414,6 @@ namespace CustomDesktopLogo
             }
         }
 
-        public bool disableMovementCheckBoxChecked
-        {
-            get
-            {
-                return disableLogoMovementCB.Checked;
-            }
-            set
-            {
-                disableLogoMovementCB.Checked = value;
-            }
-        }
-
         public void hideLogosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (hideLogosToolStripMenuItem.Checked == true)
@@ -437,12 +424,6 @@ namespace CustomDesktopLogo
             {
                 showAllLogos();
             }
-        }
-
-        public void disableMovementToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            settingsINI.LogoProperties.disableMovement = disableLogoMovementCB.Checked;
-            settingsINI.SetEntry("LogoProperties", "disableMovement", disableLogoMovementCB.Checked.ToString());
         }
 
         public bool hideLogosToolStripMenuItemChecked
@@ -495,11 +476,6 @@ namespace CustomDesktopLogo
         private void MainFormContextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
             dropFolderModeToolStripMenuItem.Checked = useAsDropFolderCheckBox.Checked;
-            disableMovementToolStripMenuItem.Checked = disableLogoMovementCB.Checked;
-            if (useAsDropFolderCheckBox.Checked)
-                disableMovementToolStripMenuItem.Enabled = true;
-            else
-                disableMovementToolStripMenuItem.Enabled = false;
             //if (AnimationTimer.Enabled == false)
             //    MemoryUtility.ClearUnusedMemory();
         }
@@ -545,18 +521,15 @@ namespace CustomDesktopLogo
             this.MainFormTrayIcon.Text = "Custom logo";
 
             quitToolStripMenuItem.Text = "Quit";
-            helpAboutToolStripMenuItem.Text = "Help/About";
             hideLogosToolStripMenuItem.Text = "Hide Logo";
             settingsToolStripMenuItem.Text = "Settings";
             dropFolderModeToolStripMenuItem.Text = "Drop mode";
-            disableMovementToolStripMenuItem.Text = "Disable movement";
 
             // Select Images tab
             selectImagesTabPage.Text = "Select images";
             changeImagesButton.Text = "Change folder";
             refreshImageListButton.Text = "Refresh list";
             selectImagesInstructionsLabel.Text = "SELECT";
-            helpAboutButton.Text = "Help/About";
 
             // Location tab
             locationTabPage.Text = "Locations";
@@ -742,15 +715,7 @@ namespace CustomDesktopLogo
                 { }
             }
         }
-
-        private void disableLogoMovementCB_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded == false)
-                return;
-
-            settingsINI.LogoProperties.disableMovement = disableLogoMovementCB.Checked;
-            settingsINI.SetEntry("LogoProperties", "disableMovement", disableLogoMovementCB.Checked.ToString());
-        }
+        
 
         String[] files = { };
         FileLocationActions action = FileLocationActions.Copy;

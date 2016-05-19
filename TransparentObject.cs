@@ -71,10 +71,8 @@ namespace CustomDesktopLogo
             this.ClientSize = new Size(1, 1);
             this.Name = "TransparentObject";
             this.Activated += LogoObject_Activated;
-            this.MouseMove += LogoObject_MouseMove;
             this.ContextMenuStrip = filePathsContextMenuStrip;
             this.MouseUp += LogoObject_MouseUp;
-            this.MouseDown += LogoObject_MouseDown;
             this.filePathsContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
         }
@@ -209,10 +207,6 @@ namespace CustomDesktopLogo
                 case "DropFolderMode":
                     MainForm.Instance.useAsDropFolderCheckBoxChecked = aToolStripMenuItem.Checked;
                     break;
-                case "DisableMovement":
-                    MainForm.Instance.disableMovementCheckBoxChecked = aToolStripMenuItem.Checked;
-                    MainForm.Instance.disableMovementToolStripMenuItem_Click(this, null);
-                    break;
                 case "HideLogos":
                     MainForm.Instance.hideLogosToolStripMenuItemChecked = aToolStripMenuItem.Checked;
                     MainForm.Instance.hideLogosToolStripMenuItem_Click(this, null);
@@ -228,26 +222,7 @@ namespace CustomDesktopLogo
                     break;
             }
         }
-
-        bool LeftMouseButtonDown = false;
-        Boolean ThisObjectMovedWithLeftMouse = false;
-        Point StoredMouseOffset = new Point(0, 0);
-        Point previousMousePosition = new Point(0, 0);
-
-        void LogoObject_MouseMove(object sender, MouseEventArgs e)
-        {
-            //Console.WriteLine(MainForm.settingsINI.LogoProperties.disableMovement);
-            if (LeftMouseButtonDown)
-            {
-                if (!MainForm.settingsINI.LogoProperties.disableMovement && (ThisObjectMovedWithLeftMouse == true || Math.Abs(Cursor.Position.X - previousMousePosition.X) > 5
-                    || Math.Abs(Cursor.Position.Y - previousMousePosition.Y) > 5))
-                {
-                    ThisObjectMovedWithLeftMouse = true;
-                    SetBitmap(false, null, false, (byte)255, true, Cursor.Position.X - StoredMouseOffset.X, Cursor.Position.Y - StoredMouseOffset.Y);
-                }
-            }
-        }
-
+        
         public void showContextMenu()
         {
             this.filePathsContextMenuStrip.Show(MousePosition.X, MousePosition.Y);
@@ -256,16 +231,7 @@ namespace CustomDesktopLogo
 
         void LogoObject_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                if (ThisObjectMovedWithLeftMouse == false)
-                {
-                    MainForm.Instance.moveCopyToFilePathOptions(this, null, FileLocationActions.Open);
-                }
-                LeftMouseButtonDown = false;
-                ThisObjectMovedWithLeftMouse = false;
-            }
-            else if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 filePathsContextMenuStrip.Items.Clear();
 
@@ -278,21 +244,7 @@ namespace CustomDesktopLogo
                 dropFolderModeToolStripMenuItem.Checked = MainForm.Instance.useAsDropFolderCheckBoxChecked;
                 dropFolderModeToolStripMenuItem.Click += new System.EventHandler(this.filePathToolStripMenuItem_Click);
                 filePathsContextMenuStrip.Items.Add(dropFolderModeToolStripMenuItem);
-
-                ToolStripMenuItem disableMovementModeToolStripMenuItem = new ToolStripMenuItem();
-                disableMovementModeToolStripMenuItem.Name = "disableMovementModeToolStripMenuItem";
-                disableMovementModeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-                disableMovementModeToolStripMenuItem.Text = "Disable movement";
-                disableMovementModeToolStripMenuItem.Tag = "DisableMovement";
-                if (MainForm.Instance.useAsDropFolderCheckBoxChecked)
-                    disableMovementModeToolStripMenuItem.Enabled = true;
-                else
-                    disableMovementModeToolStripMenuItem.Enabled = false;
-                disableMovementModeToolStripMenuItem.CheckOnClick = true;
-                disableMovementModeToolStripMenuItem.Checked = MainForm.Instance.disableMovementCheckBoxChecked;
-                disableMovementModeToolStripMenuItem.Click += new System.EventHandler(this.filePathToolStripMenuItem_Click);
-                filePathsContextMenuStrip.Items.Add(disableMovementModeToolStripMenuItem);
-
+                
                 ToolStripMenuItem hideLogosToolStripMenuItem = new ToolStripMenuItem();
                 hideLogosToolStripMenuItem.Name = "hideLogosToolStripMenuItem";
                 hideLogosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -330,17 +282,6 @@ namespace CustomDesktopLogo
                 filePathsContextMenuStrip.Show();
                 filePathsContextMenuStrip.Left = MousePosition.X;
                 filePathsContextMenuStrip.Top = MousePosition.Y;
-            }
-        }
-
-        void LogoObject_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                LeftMouseButtonDown = true;
-                ThisObjectMovedWithLeftMouse = false;
-                StoredMouseOffset = new Point(Cursor.Position.X - this._Location.X, Cursor.Position.Y - this._Location.Y);
-                previousMousePosition = Cursor.Position;
             }
         }
         #endregion

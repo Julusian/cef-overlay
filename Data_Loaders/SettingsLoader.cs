@@ -9,9 +9,6 @@
 using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Collections;
-using System.Text;
-using System.Drawing;
 using System.IO;
 using System.ComponentModel;
 
@@ -205,28 +202,6 @@ namespace SettingsLoader
 
             #endregion
             
-            #region disableMovement
-
-            DataVerifier = null;
-            DataVerifier = GetEntry(theSection, "disableMovement");
-
-            if (DataVerifier == null)
-            {
-                DataVerifier = false.ToString();
-                SetEntry(theSection, "disableMovement", DataVerifier);
-            }
-
-            try
-            {
-                LogoProperties.disableMovement = bool.Parse(DataVerifier);
-            }
-            catch (Exception)
-            {
-                LogoProperties.disableMovement = false;
-                SetEntry(theSection, "disableMovement", false.ToString());
-            }
-
-            #endregion
         }
         
         private void LoadFolderPaths()

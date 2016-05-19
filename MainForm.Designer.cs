@@ -32,15 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainFormContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.dropFolderModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.disableMovementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideLogosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpAboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainFormTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.settingsTabControl = new System.Windows.Forms.TabControl();
             this.selectImagesTabPage = new System.Windows.Forms.TabPage();
-            this.helpAboutButton = new System.Windows.Forms.Button();
             this.refreshImageListButton = new System.Windows.Forms.Button();
             this.selectImagesInstructionsLabel = new System.Windows.Forms.Label();
             this.changeImagesButton = new System.Windows.Forms.Button();
@@ -66,7 +63,6 @@
             this.test1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.folderPathsFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.disableLogoMovementCB = new System.Windows.Forms.CheckBox();
             this.MainFormContextMenuStrip.SuspendLayout();
             this.settingsTabControl.SuspendLayout();
             this.selectImagesTabPage.SuspendLayout();
@@ -84,10 +80,8 @@
             // 
             this.MainFormContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dropFolderModeToolStripMenuItem,
-            this.disableMovementToolStripMenuItem,
             this.hideLogosToolStripMenuItem,
             this.settingsToolStripMenuItem,
-            this.helpAboutToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.MainFormContextMenuStrip.Name = "MainFormContextMenuStrip";
             this.MainFormContextMenuStrip.Size = new System.Drawing.Size(174, 136);
@@ -101,14 +95,6 @@
             this.dropFolderModeToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.dropFolderModeToolStripMenuItem.Text = "Drop Folder Mode";
             this.dropFolderModeToolStripMenuItem.Click += new System.EventHandler(this.dropFolderModeToolStripMenuItem_Click);
-            // 
-            // disableMovementToolStripMenuItem
-            // 
-            this.disableMovementToolStripMenuItem.CheckOnClick = true;
-            this.disableMovementToolStripMenuItem.Name = "disableMovementToolStripMenuItem";
-            this.disableMovementToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.disableMovementToolStripMenuItem.Text = "Disable Movement";
-            this.disableMovementToolStripMenuItem.Click += new System.EventHandler(this.disableMovementToolStripMenuItem_Click);
             // 
             // hideLogosToolStripMenuItem
             // 
@@ -124,12 +110,6 @@
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
-            // 
-            // helpAboutToolStripMenuItem
-            // 
-            this.helpAboutToolStripMenuItem.Name = "helpAboutToolStripMenuItem";
-            this.helpAboutToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.helpAboutToolStripMenuItem.Text = "Help/About";
             // 
             // quitToolStripMenuItem
             // 
@@ -162,7 +142,6 @@
             // 
             // selectImagesTabPage
             // 
-            this.selectImagesTabPage.Controls.Add(this.helpAboutButton);
             this.selectImagesTabPage.Controls.Add(this.refreshImageListButton);
             this.selectImagesTabPage.Controls.Add(this.selectImagesInstructionsLabel);
             this.selectImagesTabPage.Controls.Add(this.changeImagesButton);
@@ -174,15 +153,6 @@
             this.selectImagesTabPage.TabIndex = 0;
             this.selectImagesTabPage.Text = "Select Images";
             this.selectImagesTabPage.UseVisualStyleBackColor = true;
-            // 
-            // helpAboutButton
-            // 
-            this.helpAboutButton.Location = new System.Drawing.Point(382, 486);
-            this.helpAboutButton.Name = "helpAboutButton";
-            this.helpAboutButton.Size = new System.Drawing.Size(130, 34);
-            this.helpAboutButton.TabIndex = 4;
-            this.helpAboutButton.Text = "Help/About";
-            this.helpAboutButton.UseVisualStyleBackColor = true;
             // 
             // refreshImageListButton
             // 
@@ -319,7 +289,6 @@
             // 
             // dropFolderTab
             // 
-            this.dropFolderTab.Controls.Add(this.disableLogoMovementCB);
             this.dropFolderTab.Controls.Add(this.useAsDropFolderCheckBox);
             this.dropFolderTab.Controls.Add(this.filePathsDataGridView);
             this.dropFolderTab.Location = new System.Drawing.Point(4, 22);
@@ -417,17 +386,6 @@
             this.test2ToolStripMenuItem.Text = "Test 2";
             this.test2ToolStripMenuItem.Click += new System.EventHandler(this.filePathToolStripMenuItem_Click);
             // 
-            // disableLogoMovementCB
-            // 
-            this.disableLogoMovementCB.AutoSize = true;
-            this.disableLogoMovementCB.Location = new System.Drawing.Point(16, 31);
-            this.disableLogoMovementCB.Name = "disableLogoMovementCB";
-            this.disableLogoMovementCB.Size = new System.Drawing.Size(141, 17);
-            this.disableLogoMovementCB.TabIndex = 2;
-            this.disableLogoMovementCB.Text = "Disable Logo Movement";
-            this.disableLogoMovementCB.UseVisualStyleBackColor = true;
-            this.disableLogoMovementCB.CheckedChanged += new System.EventHandler(this.disableLogoMovementCB_CheckedChanged);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -485,8 +443,6 @@
         private System.Windows.Forms.TabPage LanguageTabPage;
         private System.Windows.Forms.ToolStripMenuItem hideLogosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpAboutToolStripMenuItem;
-        private System.Windows.Forms.Button helpAboutButton;
         private System.Windows.Forms.FolderBrowserDialog TargetFolderBrowserDialog;
         private System.Windows.Forms.TabPage dropFolderTab;
         private System.Windows.Forms.DataGridView filePathsDataGridView;
@@ -500,7 +456,5 @@
         private System.Windows.Forms.FolderBrowserDialog folderPathsFolderBrowserDialog;
         private System.Windows.Forms.CheckBox useAsDropFolderCheckBox;
         private System.Windows.Forms.ToolStripMenuItem dropFolderModeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem disableMovementToolStripMenuItem;
-        private System.Windows.Forms.CheckBox disableLogoMovementCB;
     }
 }
