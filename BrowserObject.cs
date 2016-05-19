@@ -1,60 +1,20 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Timers;
 using CefSharp.OffScreen;
-using PerPixelAlphaForms;
 
 namespace CEFOverlay
 {
+    /// <summary>
+    ///  Renderable browser object
+    /// </summary>
     public class BrowserObject : BrowserObjectForm
     {
-        #region Windows Form Designer
-
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private IContainer components;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private void InitializeComponent()
-        {
-            components = new Container();
-            SuspendLayout();
-            // 
-            // TransparentObject
-            // 
-            
-            ClientSize = new Size(1, 1);
-            Name = "TransparentObject";
-            ResumeLayout(false);
-        }
-
-        #endregion
-
-        #region Constructor
-
         private readonly ChromiumWebBrowser _browser;
         private readonly Timer _timer;
-
-        /// <summary> 
-        /// Create an alpha blended form with a transparent background.
-        /// </summary>
+        
         public BrowserObject()
         {
-            InitializeComponent();
             AllowDrop = false;
             Show();
             SetBitmap(new Bitmap(1,1));
@@ -80,15 +40,21 @@ namespace CEFOverlay
 
         public void SetZLevel()
         {
-            Pinvoke.Win32.SetWindowPos(Handle, (IntPtr)Pinvoke.Win32.HWND_TOPMOST, 0, 0, 0, 0, Pinvoke.Win32.SWP_NOMOVE | Pinvoke.Win32.SWP_NOSIZE
-                                                                                               | Pinvoke.Win32.SWP_NOACTIVATE | Pinvoke.Win32.SWP_NOOWNERZORDER | Pinvoke.Win32.SWP_NOREDRAW | Pinvoke.Win32.SWP_NOSENDCHANGING);
+            Pinvoke.Win32.SetWindowPos(Handle, (IntPtr) Pinvoke.Win32.HWND_TOPMOST, 0, 0, 0, 0,
+                Pinvoke.Win32.SWP_NOMOVE | 
+                Pinvoke.Win32.SWP_NOSIZE |
+                Pinvoke.Win32.SWP_NOACTIVATE | 
+                Pinvoke.Win32.SWP_NOOWNERZORDER | 
+                Pinvoke.Win32.SWP_NOREDRAW |
+                Pinvoke.Win32.SWP_NOSENDCHANGING);
         }
 
         private void SetTransparencyToInput()
         {
-            Pinvoke.Win32.SetWindowLong(Handle, Constants.GWLConstants.GWL_EXSTYLE, Constants.WindowExStyles.WS_EX_LAYERED | Constants.WindowExStyles.WS_EX_TOOLWINDOW | Constants.WindowExStyles.WS_EX_TRANSPARENT);
+            Pinvoke.Win32.SetWindowLong(Handle, Constants.GWLConstants.GWL_EXSTYLE,
+                Constants.WindowExStyles.WS_EX_LAYERED | 
+                Constants.WindowExStyles.WS_EX_TOOLWINDOW |
+                Constants.WindowExStyles.WS_EX_TRANSPARENT);
         }
-        
-        #endregion
     }
 }
