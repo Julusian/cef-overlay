@@ -20,13 +20,10 @@
 // Uses hotkey selector component from http://www.codeproject.com/KB/miscctrl/systemhotkey.aspx (Open source, non-specific license)
 
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using System.IO;
 
 using CefSharp;
 using CEFOverlay.Util;
-using CEFOverlay.Settings;
 using Hook;
 
 
@@ -35,18 +32,9 @@ namespace CEFOverlay
     public partial class MainForm : Form
     {
         #region Variables
-
-        // The directory and file names used to store the resources for the program.
-        static readonly string systemFilesDirectoryName = @"System";
-        static readonly string configINIFileName = @"Config.ini";
-
+        
         /// <summary>
-        /// The general settings for the program.
-        /// </summary>
-        public static SettingsLoader settingsINI;
-
-        /// <summary>
-        /// The list of all the logos currently active.
+        /// The browser client object
         /// </summary>
         private static BrowserObject _browserObject;
         
@@ -72,11 +60,7 @@ namespace CEFOverlay
             InitializeComponent();
 
             CheckForIllegalCrossThreadCalls = false;
-            CheckFoldersExist();
 
-            // Load settings from files
-            settingsINI = new SettingsLoader(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName +
-                Path.DirectorySeparatorChar + configINIFileName);
             LoadLanguage();
 
             DoubleBuffered = true;
@@ -95,22 +79,6 @@ namespace CEFOverlay
             MemoryUtility.ClearUnusedMemory();
         }
 
-        private void CheckFoldersExist()
-        {
-            // Make sure the "System" folder exists
-            if (!Directory.Exists(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName))
-            {
-                try
-                {
-                    Directory.CreateDirectory(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show(Application.StartupPath + Path.DirectorySeparatorChar + systemFilesDirectoryName + @" is missing.", @"Custom Desktop Logo");
-                }
-            }
-        }
-
         #endregion
 
         #region Main Methods
@@ -119,13 +87,29 @@ namespace CEFOverlay
         {
             MainFormTrayIcon.Visible = true;
 
+            LoadFormData();
+
             LoadLanguage();
             LoadOverlay();
         }
-        
+
+        private void LoadFormData()
+        {
+            urlBox.Text = Properties.Settings.Default.url;
+        }
+
+        private void SaveFormData()
+        {
+            Properties.Settings.Default.url = urlBox.Text;
+
+            Properties.Settings.Default.Save();
+        }
 
         private void ResetOverlay()
         {
+            if (_browserObject == null)
+                return;
+
             if (_browserObject.InvokeRequired)
             {
                 CloseLogoCallback d = new CloseLogoCallback(ResetOverlay);
@@ -171,7 +155,6 @@ namespace CEFOverlay
         {
             this.Show();
             this.WindowState = FormWindowState.Normal;
-            settingsTabControl.Invalidate();
             this.Show();
             this.BringToFront();
         }
@@ -180,49 +163,34 @@ namespace CEFOverlay
         {
             this.Show();
             this.WindowState = FormWindowState.Normal;
-            settingsTabControl.Invalidate();
             this.Show();
             this.BringToFront();
         }
         
         private void hideLogosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (hideLogosToolStripMenuItem.Checked)
-            {
-                HideOverlay();
-            }
-            else
-            {
-                ShowOverlay();
-            }
-        }
-        
-        private static void HideOverlay()
-        {
-            if (_browserObject.InvokeRequired)
-            {
-                ShowHideCallback d = new ShowHideCallback(HideOverlay);
-                _browserObject.Invoke(d, new object[] { });
-            }
-            else
-            {
-                _browserObject.Hide();
-            }
+            ShowHideOverlay(!hideLogosToolStripMenuItem.Checked);
         }
 
-        private static void ShowOverlay()
+        private static void ShowHideOverlay(bool show)
         {
             if (_browserObject.InvokeRequired)
             {
-                ShowHideCallback d = new ShowHideCallback(ShowOverlay);
+                ShowHideCallback d = () => ShowHideOverlay(show);
                 _browserObject.Invoke(d, new object[] { });
+                return;
             }
-            else
+
+            if (show)
             {
                 _browserObject.Show();
                 _browserObject.WindowState = FormWindowState.Normal;
                 _browserObject.Show();
                 _browserObject.BringToFront();
+            }
+            else
+            {
+                _browserObject.Hide();
             }
         }
         
@@ -246,6 +214,8 @@ namespace CEFOverlay
             {
                 this.Select(true, true);
                 this.Hide();
+
+                SaveFormData();
             }
         }
 
@@ -262,12 +232,14 @@ namespace CEFOverlay
             hideLogosToolStripMenuItem.Text = "Hide Logo";
             settingsToolStripMenuItem.Text = "Settings";
             
-            // Location tab
-            locationTabPage.Text = "Locations";
         }
-        
+
         #endregion
-        
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

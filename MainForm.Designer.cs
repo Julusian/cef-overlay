@@ -35,41 +35,40 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainFormTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.settingsTabControl = new System.Windows.Forms.TabControl();
-            this.locationTabPage = new System.Windows.Forms.TabPage();
+            this.urlBox = new System.Windows.Forms.TextBox();
+            this.urlLabel = new System.Windows.Forms.Label();
             this.MainFormContextMenuStrip.SuspendLayout();
-            this.settingsTabControl.SuspendLayout();
-            this.locationTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainFormContextMenuStrip
             // 
+            this.MainFormContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MainFormContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hideLogosToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.MainFormContextMenuStrip.Name = "MainFormContextMenuStrip";
-            this.MainFormContextMenuStrip.Size = new System.Drawing.Size(174, 136);
+            this.MainFormContextMenuStrip.Size = new System.Drawing.Size(155, 76);
             // 
             // hideLogosToolStripMenuItem
             // 
             this.hideLogosToolStripMenuItem.CheckOnClick = true;
             this.hideLogosToolStripMenuItem.Name = "hideLogosToolStripMenuItem";
-            this.hideLogosToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.hideLogosToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
             this.hideLogosToolStripMenuItem.Text = "Hide Logos";
             this.hideLogosToolStripMenuItem.Click += new System.EventHandler(this.hideLogosToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -80,49 +79,47 @@
             this.MainFormTrayIcon.Visible = true;
             this.MainFormTrayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MainFormTrayIcon_MouseDoubleClick);
             // 
-            // settingsTabControl
+            // urlBox
             // 
-            this.settingsTabControl.Controls.Add(this.locationTabPage);
-            this.settingsTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.settingsTabControl.Location = new System.Drawing.Point(0, 0);
-            this.settingsTabControl.Name = "settingsTabControl";
-            this.settingsTabControl.SelectedIndex = 0;
-            this.settingsTabControl.Size = new System.Drawing.Size(528, 552);
-            this.settingsTabControl.TabIndex = 1;
+            this.urlBox.Location = new System.Drawing.Point(49, 10);
+            this.urlBox.Name = "urlBox";
+            this.urlBox.Size = new System.Drawing.Size(380, 22);
+            this.urlBox.TabIndex = 1;
             // 
-            // locationTabPage
+            // urlLabel
             // 
-            this.locationTabPage.Location = new System.Drawing.Point(4, 22);
-            this.locationTabPage.Name = "locationTabPage";
-            this.locationTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.locationTabPage.Size = new System.Drawing.Size(520, 526);
-            this.locationTabPage.TabIndex = 1;
-            this.locationTabPage.Text = "Location";
-            this.locationTabPage.UseVisualStyleBackColor = true;
+            this.urlLabel.AutoSize = true;
+            this.urlLabel.Location = new System.Drawing.Point(13, 13);
+            this.urlLabel.Name = "urlLabel";
+            this.urlLabel.Size = new System.Drawing.Size(30, 17);
+            this.urlLabel.TabIndex = 2;
+            this.urlLabel.Text = "Url:";
+            this.urlLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(528, 552);
-            this.Controls.Add(this.settingsTabControl);
+            this.ClientSize = new System.Drawing.Size(441, 480);
+            this.Controls.Add(this.urlLabel);
+            this.Controls.Add(this.urlBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Opacity = 0;
+            this.Opacity = 0D;
             this.ShowInTaskbar = false;
-            this.Text = "DropFolder";
+            this.Text = "CEF Overlay Settings";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.MainFormContextMenuStrip.ResumeLayout(false);
-            this.settingsTabControl.ResumeLayout(false);
-            this.locationTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -130,10 +127,10 @@
 
         private System.Windows.Forms.ContextMenuStrip MainFormContextMenuStrip;
         private System.Windows.Forms.NotifyIcon MainFormTrayIcon;
-        private System.Windows.Forms.TabControl settingsTabControl;
-        private System.Windows.Forms.TabPage locationTabPage;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hideLogosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.TextBox urlBox;
+        private System.Windows.Forms.Label urlLabel;
     }
 }

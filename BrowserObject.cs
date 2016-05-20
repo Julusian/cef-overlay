@@ -15,14 +15,13 @@ namespace CEFOverlay
         
         public BrowserObject()
         {
-            AllowDrop = false;
             Show();
             SetBitmap(new Bitmap(1,1));
             SetZLevel();
             SetTransparencyToInput();
 
             _timer = new Timer(50);
-            _browser = new ChromiumWebBrowser("google.com");
+            _browser = new ChromiumWebBrowser(Properties.Settings.Default.url);
             _timer.Elapsed += NextFrame;
             _timer.AutoReset = true;
             _timer.Enabled = true;
