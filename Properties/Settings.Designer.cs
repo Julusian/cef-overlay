@@ -25,13 +25,25 @@ namespace CEFOverlay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://google.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string url {
             get {
                 return ((string)(this["url"]));
             }
             set {
                 this["url"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("example.html")]
+        public string defaultFile {
+            get {
+                return ((string)(this["defaultFile"]));
+            }
+            set {
+                this["defaultFile"] = value;
             }
         }
     }

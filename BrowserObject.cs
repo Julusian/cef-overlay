@@ -19,8 +19,15 @@ namespace CEFOverlay
             SetBitmap(new Bitmap(1,1));
             SetZLevel();
             SetTransparencyToInput();
-            
-            _browser = new ChromiumWebBrowser(Properties.Settings.Default.url);
+
+            string url = Properties.Settings.Default.url;
+            if (url == "")
+            {
+                string dir = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + System.IO.Path.DirectorySeparatorChar;
+                url = "file:///" + dir + Properties.Settings.Default.defaultFile;
+            }
+
+            _browser = new ChromiumWebBrowser(url);
             
             Rectangle target = Screen.PrimaryScreen.WorkingArea;
             _browser.Size = new Size(target.Width, target.Height);

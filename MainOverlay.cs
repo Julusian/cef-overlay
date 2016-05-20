@@ -34,6 +34,7 @@ namespace CEFOverlay
                 var settings = new CefSettings();
 
 #if DEBUG
+                // TODO - this doesnt seem to work
                 settings.RemoteDebuggingPort = 8088;
 #endif
 

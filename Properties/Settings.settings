@@ -3,7 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="url" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://google.com</Value>
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="defaultFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">example.html</Value>
     </Setting>
   </Settings>
 </SettingsFile>
