@@ -60,9 +60,7 @@ namespace CEFOverlay
             InitializeComponent();
 
             CheckForIllegalCrossThreadCalls = false;
-
-            LoadLanguage();
-
+            
             DoubleBuffered = true;
 
             // We require this hook to correct a Windows bug where a topmost window will become not topmost in some cases
@@ -73,10 +71,9 @@ namespace CEFOverlay
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            this.Hide();
-            this.ShowInTaskbar = true;
-            this.Opacity = 1.0;
-            MemoryUtility.ClearUnusedMemory();
+            Hide();
+            ShowInTaskbar = true;
+            Opacity = 1.0;
         }
 
         #endregion
@@ -88,8 +85,7 @@ namespace CEFOverlay
             MainFormTrayIcon.Visible = true;
 
             LoadFormData();
-
-            LoadLanguage();
+            
             LoadOverlay();
         }
 
@@ -129,7 +125,7 @@ namespace CEFOverlay
 
             _browserObject = new BrowserObject();
 
-            hideLogosToolStripMenuItem.Checked = false;
+            hideOverlayToolStripMenuItem.Checked = false;
         }
 
         private void window_ForegroundChanged(IntPtr hWnd)
@@ -148,28 +144,33 @@ namespace CEFOverlay
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         public void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Show();
-            this.WindowState = FormWindowState.Normal;
-            this.Show();
-            this.BringToFront();
+            Show();
+            WindowState = FormWindowState.Normal;
+            Show();
+            BringToFront();
         }
 
         private void MainFormTrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            this.Show();
-            this.WindowState = FormWindowState.Normal;
-            this.Show();
-            this.BringToFront();
+            Show();
+            WindowState = FormWindowState.Normal;
+            Show();
+            BringToFront();
         }
         
-        private void hideLogosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void HideOverlayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowHideOverlay(!hideLogosToolStripMenuItem.Checked);
+            ShowHideOverlay(!hideOverlayToolStripMenuItem.Checked);
+        }
+
+        private void RefreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _browserObject?.RefreshPage();
         }
 
         private static void ShowHideOverlay(bool show)
@@ -210,10 +211,10 @@ namespace CEFOverlay
 
         private void MainForm_Resize(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Minimized)
+            if (WindowState == FormWindowState.Minimized)
             {
-                this.Select(true, true);
-                this.Hide();
+                Select(true, true);
+                Hide();
 
                 SaveFormData();
             }
@@ -221,25 +222,6 @@ namespace CEFOverlay
 
         #endregion
 
-        #region Language Methods
-
-        private void LoadLanguage()
-        {
-            this.Text = "Custom logo";
-            this.MainFormTrayIcon.Text = "Custom logo";
-
-            quitToolStripMenuItem.Text = "Quit";
-            hideLogosToolStripMenuItem.Text = "Hide Logo";
-            settingsToolStripMenuItem.Text = "Settings";
-            
-        }
-
-        #endregion
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Timers;
+using CefSharp;
 using CefSharp.OffScreen;
 
 namespace CEFOverlay
@@ -54,6 +55,11 @@ namespace CEFOverlay
                 Constants.WindowExStyles.WS_EX_LAYERED | 
                 Constants.WindowExStyles.WS_EX_TOOLWINDOW |
                 Constants.WindowExStyles.WS_EX_TRANSPARENT);
+        }
+
+        public void RefreshPage()
+        {
+            _browser.Reload();
         }
     }
 }

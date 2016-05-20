@@ -31,7 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainFormContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.hideLogosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hideOverlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainFormTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -44,31 +45,40 @@
             // 
             this.MainFormContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MainFormContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hideLogosToolStripMenuItem,
+            this.hideOverlayToolStripMenuItem,
+            this.refreshToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.MainFormContextMenuStrip.Name = "MainFormContextMenuStrip";
-            this.MainFormContextMenuStrip.Size = new System.Drawing.Size(155, 76);
+            this.MainFormContextMenuStrip.Size = new System.Drawing.Size(161, 82);
+            this.MainFormContextMenuStrip.Text = "CEF Overlay";
             // 
-            // hideLogosToolStripMenuItem
+            // hideOverlayToolStripMenuItem
             // 
-            this.hideLogosToolStripMenuItem.CheckOnClick = true;
-            this.hideLogosToolStripMenuItem.Name = "hideLogosToolStripMenuItem";
-            this.hideLogosToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
-            this.hideLogosToolStripMenuItem.Text = "Hide Logos";
-            this.hideLogosToolStripMenuItem.Click += new System.EventHandler(this.hideLogosToolStripMenuItem_Click);
+            this.hideOverlayToolStripMenuItem.CheckOnClick = true;
+            this.hideOverlayToolStripMenuItem.Name = "hideOverlayToolStripMenuItem";
+            this.hideOverlayToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.hideOverlayToolStripMenuItem.Text = "Hide Overlay";
+            this.hideOverlayToolStripMenuItem.Click += new System.EventHandler(this.HideOverlayToolStripMenuItem_Click);
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.RefreshToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -76,6 +86,7 @@
             // 
             this.MainFormTrayIcon.ContextMenuStrip = this.MainFormContextMenuStrip;
             this.MainFormTrayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("MainFormTrayIcon.Icon")));
+            this.MainFormTrayIcon.Text = "CEF Overlay";
             this.MainFormTrayIcon.Visible = true;
             this.MainFormTrayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MainFormTrayIcon_MouseDoubleClick);
             // 
@@ -94,7 +105,6 @@
             this.urlLabel.Size = new System.Drawing.Size(30, 17);
             this.urlLabel.TabIndex = 2;
             this.urlLabel.Text = "Url:";
-            this.urlLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // MainForm
             // 
@@ -106,7 +116,7 @@
             this.Controls.Add(this.urlBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Opacity = 0D;
@@ -120,7 +130,6 @@
             this.MainFormContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -128,7 +137,8 @@
         private System.Windows.Forms.ContextMenuStrip MainFormContextMenuStrip;
         private System.Windows.Forms.NotifyIcon MainFormTrayIcon;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hideLogosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hideOverlayToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.TextBox urlBox;
         private System.Windows.Forms.Label urlLabel;
