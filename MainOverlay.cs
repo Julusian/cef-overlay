@@ -32,13 +32,14 @@ namespace CEFOverlay
             if (SingleInstance.SingleApplication.Run(MainForm.Instance))
             {
                 var settings = new CefSettings();
+
+#if DEBUG
                 settings.RemoteDebuggingPort = 8088;
+#endif
+
                 settings.CachePath = "cache";
                 settings.MultiThreadedMessageLoop = true;
                 settings.WindowlessRenderingEnabled = true;
-
-                // Disable GPU in WPF and Offscreen examples until #1634 has been resolved
-                settings.CefCommandLineArgs.Add("disable-gpu", "1");
 
                 settings.CefCommandLineArgs.Add("no-proxy-server", "1");
 

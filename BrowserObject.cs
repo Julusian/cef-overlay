@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 using CefSharp;
 using CefSharp.OffScreen;
 
@@ -20,6 +21,10 @@ namespace CEFOverlay
             SetTransparencyToInput();
             
             _browser = new ChromiumWebBrowser(Properties.Settings.Default.url);
+            
+            Rectangle target = Screen.PrimaryScreen.WorkingArea;
+            _browser.Size = new Size(target.Width, target.Height);
+
             _browser.NewScreenshot += ScreenshotEvent;
         }
 

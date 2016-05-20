@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -10,7 +11,8 @@ namespace CEFOverlay
     /// </summary>
     public class BrowserObjectForm : Form
     {
-        private Bitmap _previousBitmap = new Bitmap(1, 1);
+        private Bitmap _previousBitmap;
+        private bool _disposed = true;
 
         public BrowserObjectForm()
         {
@@ -63,7 +65,7 @@ namespace CEFOverlay
         {
             if (bitmap == null)
                 return;
-
+            
             IntPtr hBitmap = IntPtr.Zero;
             IntPtr oldBitmap = IntPtr.Zero;
             IntPtr screenDc = Win32.GetDC(IntPtr.Zero);
@@ -71,7 +73,12 @@ namespace CEFOverlay
 
             try
             {
-                _previousBitmap?.Dispose();
+                if (!_disposed && _previousBitmap != null)
+                {
+                    _previousBitmap.Dispose();
+                    _disposed = true;
+                }
+                _disposed = false;
                 _previousBitmap = bitmap;
 
                 try
@@ -80,14 +87,15 @@ namespace CEFOverlay
                 }
                 catch (Exception)
                 {
-                    _previousBitmap = new Bitmap(1, 1);
-                    hBitmap = _previousBitmap.GetHbitmap(Color.FromArgb(0));
+                    _previousBitmap = null;
+                    _disposed = true;
+                    return;
                 }
 
                 oldBitmap = Win32.SelectObject(memDc, hBitmap);
 
                 Size size = new Size(_previousBitmap.Width, _previousBitmap.Height);
-
+                
                 Point pointSource = new Point(0, 0);
 
                 Win32.BLENDFUNCTION blend = new Win32.BLENDFUNCTION();
@@ -120,6 +128,7 @@ namespace CEFOverlay
 
         #endregion
     }
+
 
     #region "API"
 
