@@ -1,17 +1,4 @@
-﻿// Custom Desktop Logo 1.0 - By: 2008 Eric Wong
-// September 20th, 2008
-// Custom Desktop Logo is open source software licensed under GNU GENERAL PUBLIC LICENSE V3. 
-// Use it as you wish, but you must share your source code under the terms of use of the license.
-
-// Custom Desktop Logo allows you to create custom static and animated logos from PNG images.
-
-// Uses AMS.Profile from http://www.codeproject.com/KB/cs/readwritexmlini.aspx for .ini file operations (Open source, non-specific license)
-// Uses hotkey selector component from http://www.codeproject.com/KB/miscctrl/systemhotkey.aspx (Open source, non-specific license)
-
-// This file contains the entry point for the application and sets the unhandled exception methods that can be helpful for debugging.
-// Only one instance of the program is allowed to run from one folder to prevent two programs from writing into the same settings files at the same time.
-
-using System;
+﻿using System;
 using System.Diagnostics;		
 using System.Windows.Forms;
 using System.Threading;
@@ -32,15 +19,14 @@ namespace CEFOverlay
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Add the event handler for handling UI thread exceptions to the event.
-            Application.ThreadException += new ThreadExceptionEventHandler(Program_UIThreadException);
+            Application.ThreadException += Program_UIThreadException;
 
             // Set the unhandled exception mode to force all Windows Forms errors to go through
             // our handler.
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
 
             // Add the event handler for handling non-UI thread exceptions to the event. 
-            AppDomain.CurrentDomain.UnhandledException +=
-                new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             //Application.Run(new MainForm());
             if (SingleInstance.SingleApplication.Run(MainForm.Instance))
@@ -56,11 +42,8 @@ namespace CEFOverlay
 
                 settings.CefCommandLineArgs.Add("no-proxy-server", "1");
 
-                if (true)
-                {
-                    var architecture = Environment.Is64BitProcess ? "x64" : "x86";
-                    settings.BrowserSubprocessPath = "..\\..\\..\\..\\CefSharp.BrowserSubprocess\\bin\\" + architecture + "\\Debug\\CefSharp.BrowserSubprocess.exe";
-                }
+                var architecture = Environment.Is64BitProcess ? "x64" : "x86";
+                settings.BrowserSubprocessPath = "..\\..\\..\\..\\CefSharp.BrowserSubprocess\\bin\\" + architecture + "\\Debug\\CefSharp.BrowserSubprocess.exe";
 
                 settings.FocusedNodeChangedEnabled = true;
 
@@ -81,7 +64,7 @@ namespace CEFOverlay
                     }
                 };
 
-                if (!Cef.Initialize(settings, shutdownOnProcessExit: true, performDependencyCheck: false))
+                if (!Cef.Initialize(settings, true, false))
                 {
                     throw new Exception("Unable to Initialize Cef");
                 }

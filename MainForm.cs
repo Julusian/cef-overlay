@@ -1,30 +1,8 @@
-﻿// Custom Desktop Logo 2.2 - By: 2008 Eric Wong
-// October 18th, 2008
-// Custom Desktop Logo is open source software licensed under GNU GENERAL PUBLIC LICENSE V3. 
-// Use it as you wish, but you must share your source code under the terms of use of the license.
-
-// Custom Desktop Logo allows you to create custom static and animated logos from PNG images.
-// Version 2.0 adds the drop folder capabilities.
-// Version 2.2 adds the ability to use Windows default move/copy dialogs and fixes the unicode compatibility.
-
-// Copyright (C) 2008 by Eric Wong. 
-// VideoInPicture@gmail.com
-// http://customdesktoplogo.wikidot.com
-// http://easyunicodepaster.wikidot.com
-// http://circledock.wikidot.com
-// http://videoinpicture.wikidot.com
-// http://webcamsignature.wikidot.com
-// http://windowextractor.wikidot.com
-
-// Uses AMS.Profile from http://www.codeproject.com/KB/cs/readwritexmlini.aspx for .ini file operations (Open source, non-specific license)
-// Uses hotkey selector component from http://www.codeproject.com/KB/miscctrl/systemhotkey.aspx (Open source, non-specific license)
-
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 using CefSharp;
 using Hook;
-
 
 namespace CEFOverlay
 {
@@ -36,11 +14,11 @@ namespace CEFOverlay
         /// The browser client object
         /// </summary>
         private static BrowserObject _browserObject;
-        
-        static Hooks windowsHook = new Hooks();
+
+        private static readonly Hooks windowsHook = new Hooks();
 
         // These delegates enables asynchronous calls 
-        delegate void ShowHideCallback();
+        private delegate void ShowHideCallback();
         delegate void CloseLogoCallback();
 
         public static MainForm Instance { get; private set; }
@@ -64,7 +42,7 @@ namespace CEFOverlay
 
             // We require this hook to correct a Windows bug where a topmost window will become not topmost in some cases
             // when other programs refresh the screen.
-            windowsHook.OnForegroundWindowChanged += window_ForegroundChanged;
+            windowsHook.OnForegroundWindowChanged += Window_ForegroundChanged;
             GC.KeepAlive(windowsHook);
         }
 
@@ -100,14 +78,14 @@ namespace CEFOverlay
             Properties.Settings.Default.Save();
         }
 
-        private void ResetOverlay()
+        private static void ResetOverlay()
         {
             if (_browserObject == null)
                 return;
 
             if (_browserObject.InvokeRequired)
             {
-                CloseLogoCallback d = new CloseLogoCallback(ResetOverlay);
+                CloseLogoCallback d = ResetOverlay;
                 _browserObject.Invoke(d, new object[] { });
             }
             else
@@ -127,7 +105,7 @@ namespace CEFOverlay
             hideOverlayToolStripMenuItem.Checked = false;
         }
 
-        private void window_ForegroundChanged(IntPtr hWnd)
+        private void Window_ForegroundChanged(IntPtr hWnd)
         {
             try
             {

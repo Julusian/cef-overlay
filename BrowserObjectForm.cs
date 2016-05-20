@@ -19,7 +19,6 @@ namespace CEFOverlay
         {
             FormBorderStyle = FormBorderStyle.None;
             ShowInTaskbar = false;
-            AllowDrop = false;
             
             EnableDoubleBuffering();
             StartPosition = FormStartPosition.Manual;
@@ -65,6 +64,9 @@ namespace CEFOverlay
         /// <param name="bitmap">The bitmap must be 32ppp with alpha-channel. This is a referenced parameter. Do not dispose of the bitmap before setting this to null.</param>
         public void SetBitmap(Bitmap bitmap)
         {
+            if (bitmap == null)
+                return;
+
             IntPtr hBitmap = IntPtr.Zero;
             IntPtr oldBitmap = IntPtr.Zero;
             IntPtr screenDc = Win32.GetDC(IntPtr.Zero);
@@ -72,17 +74,9 @@ namespace CEFOverlay
 
             try
             {
-                // TODO - disposing of old bitmap, and ensuring old one is valid
-                if (bitmap == null)
-                {
-                    _previousBitmap = new Bitmap(1, 1);
-                }
-                else
-                {
-                    _previousBitmap.Dispose();
-                    _previousBitmap = bitmap;
-                }
-                
+                _previousBitmap?.Dispose();
+                _previousBitmap = bitmap;
+
                 try
                 {
                     hBitmap = _previousBitmap.GetHbitmap(Color.FromArgb(0));
