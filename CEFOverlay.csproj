@@ -102,7 +102,6 @@
     <Compile Include="BrowserObject.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Util\MemoryManagement.cs" />
     <Compile Include="WindowsAPI\Hook.cs" />
     <Compile Include="WindowsAPI\SingleApplication.cs" />
     <Compile Include="WindowsAPI\User32API.cs" />
