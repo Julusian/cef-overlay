@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Timers;
 using CefSharp;
 using CefSharp.OffScreen;
 
@@ -12,7 +11,6 @@ namespace CEFOverlay
     public class BrowserObject : BrowserObjectForm
     {
         private readonly ChromiumWebBrowser _browser;
-        private readonly Timer _timer;
         
         public BrowserObject()
         {
@@ -20,22 +18,14 @@ namespace CEFOverlay
             SetBitmap(new Bitmap(1,1));
             SetZLevel();
             SetTransparencyToInput();
-
-            _timer = new Timer(50);
+            
             _browser = new ChromiumWebBrowser(Properties.Settings.Default.url);
-            _timer.Elapsed += NextFrame;
-            _timer.AutoReset = true;
-            _timer.Enabled = true;
+            _browser.NewScreenshot += ScreenshotEvent;
         }
 
-        private void NextFrame(object source, ElapsedEventArgs e)
+        private void ScreenshotEvent(object source, EventArgs e)
         {
-            //var newBitmap = browser.ScreenshotOrNull();
-            Bitmap bitmap = _browser.ScreenshotOrNull();
-            if (bitmap != null)
-            {
-                SetBitmap(bitmap);
-            }
+            SetBitmap(_browser.ScreenshotOrNull());
         }
 
         public void SetZLevel()
