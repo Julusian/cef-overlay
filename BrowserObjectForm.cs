@@ -11,10 +11,7 @@ namespace CEFOverlay
     public class BrowserObjectForm : Form
     {
         private Bitmap _previousBitmap = new Bitmap(1, 1);
-        
-        /// <summary> 
-        /// PerPixelAlpha is the basis of alpha blended logo objects.
-        /// </summary>
+
         public BrowserObjectForm()
         {
             FormBorderStyle = FormBorderStyle.None;

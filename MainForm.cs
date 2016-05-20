@@ -19,7 +19,7 @@ namespace CEFOverlay
 
         // These delegates enables asynchronous calls 
         private delegate void ShowHideCallback();
-        delegate void CloseLogoCallback();
+        delegate void CloseOverlayCallback();
 
         public static MainForm Instance { get; private set; }
 
@@ -85,7 +85,7 @@ namespace CEFOverlay
 
             if (_browserObject.InvokeRequired)
             {
-                CloseLogoCallback d = ResetOverlay;
+                CloseOverlayCallback d = ResetOverlay;
                 _browserObject.Invoke(d, new object[] { });
             }
             else

@@ -79,14 +79,14 @@ namespace CEFOverlay
             DialogResult result = DialogResult.Cancel;
             try
             {
-                result = ShowThreadExceptionDialog("Custom Desktop Logo: Windows Forms Error", t.Exception);
+                result = ShowThreadExceptionDialog("CEF Overlay: Windows Forms Error", t.Exception);
             }
             catch
             {
                 try
                 {
                     MessageBox.Show("Fatal Windows Forms Error",
-                        "Custom Desktop Logo", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Stop);
+                        "CEF Overlay", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Stop);
                 }
                 finally
                 {
@@ -130,7 +130,7 @@ namespace CEFOverlay
                 try
                 {
                     MessageBox.Show("Fatal Non-UI Error. Could not write the error to the event log. Reason: "
-                        + exc.Message, "Custom Desktop Logo: Current Domain", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        + exc.Message, "CEF Overlay: Current Domain", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 }
                 finally
                 {
